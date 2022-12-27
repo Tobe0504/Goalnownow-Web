@@ -1,0 +1,178 @@
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.leagueHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 1rem 2rem;
+}
+
+.leagueHeaderdata {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.leagueHeaderdata > div:nth-child(1) > img {
+  height: 16px;
+  width: 21px;
+}
+
+.leagueHeaderdata > div:nth-child(2) > span:nth-child(1) {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.leagueHeaderdata > div:nth-child(2) > span:nth-child(2) {
+  font-weight: 400;
+  font-size: 8px;
+  line-height: 12px;
+  opacity: 0.5;
+  display: block;
+}
+
+.leagueRouter {
+  margin-left: auto;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.leagueTableOuter {
+  overflow-y: hidden;
+  transition: all 0.2s ease-in-out;
+}
+
+.leagueTableHead {
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #ffd91b;
+}
+
+.leagueTableHead > div:nth-child(2) {
+  width: 70%;
+}
+
+.leagueTableHead > div:nth-child(1),
+.leagueTableHead > div:nth-child(3),
+.leagueTableHead > div:nth-child(4),
+.leagueTableHead > div:nth-child(5),
+.leagueTableHead > div:nth-child(6),
+.leagueTableHead > div:nth-child(7) {
+  width: 5%;
+}
+
+.leagueTableHead > div:nth-child(3) {
+  margin-left: auto;
+}
+
+.leagueTableData {
+  display: flex;
+  align-items: center;
+  /* gap: 32px; */
+  padding: 6.5px 2rem;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  background: var(--foregroundBlack);
+  margin-bottom: 1rem;
+  border-radius: 2px;
+}
+
+.leagueTableData > div:nth-child(3) {
+  margin-left: auto;
+}
+
+.leagueTableData > div:nth-child(2) {
+  width: 70%;
+}
+
+.leagueTableData > div:nth-child(1),
+.leagueTableData > div:nth-child(3),
+.leagueTableData > div:nth-child(4),
+.leagueTableData > div:nth-child(5),
+.leagueTableData > div:nth-child(6),
+.leagueTableData > div:nth-child(7) {
+  width: 5%;
+}
+
+.index {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.index > span:nth-child(1) {
+  width: 2px;
+  background: #00f175;
+  display: block;
+  visibility: hidden;
+}
+
+.index > span:nth-child(1)::before {
+  content: "";
+  display: block;
+}
+
+.leagueNameData {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.leagueNameData span:nth-child(1) {
+  color: #c91922;
+}
+
+@media screen and (max-width: 767px) {
+  .leagueHeader {
+    padding: 1rem 1rem;
+  }
+
+  .leagueTableHead {
+    padding: 1rem 1rem;
+  }
+
+  .leagueTableHead > div:nth-child(2) {
+    width: 50%;
+  }
+
+  .leagueTableHead > div:nth-child(1),
+  .leagueTableHead > div:nth-child(3),
+  .leagueTableHead > div:nth-child(4),
+  .leagueTableHead > div:nth-child(5),
+  .leagueTableHead > div:nth-child(6),
+  .leagueTableHead > div:nth-child(7) {
+    width: 8.3%;
+  }
+
+  .leagueTableData {
+    padding: 1rem 1rem;
+    gap: 6px;
+  }
+
+  .leagueTableData > div:nth-child(2) {
+    width: 50%;
+  }
+
+  .leagueTableData > div:nth-child(1),
+  .leagueTableData > div:nth-child(3),
+  .leagueTableData > div:nth-child(4),
+  .leagueTableData > div:nth-child(5),
+  .leagueTableData > div:nth-child(6),
+  .leagueTableData > div:nth-child(7) {
+    width: 8.3%;
+  }
+}

@@ -1,0 +1,73 @@
+.container {
+  background: #0c49be;
+  height: 77px;
+  width: 100%;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  display: none;
+}
+
+.imageSection {
+  height: 100%;
+  width: 40%;
+  margin-left: auto;
+  justify-self: flex-end;
+}
+
+.imageSection > img {
+  height: 100%;
+  width: 100%;
+}
+
+.textSection {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 10px 18px;
+  width: 60%;
+}
+
+.textSection > p {
+  font-weight: 400;
+  font-size: 12.428px;
+  /* line-height: 19px; */
+}
+
+.textSection > p > span {
+  font-weight: 900;
+  line-height: 25px;
+  font-size: 14px;
+  display: block;
+  margin: 0;
+}
+
+.textSection > div:nth-child(2) {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-weight: 900;
+  font-size: 9.32103px;
+  line-height: 17px;
+}
+
+.textSection > div:nth-child(2):hover {
+  color: var(--fontWhite);
+}
+
+@media screen and (min-width: 767px) and (max-width: 1023px) {
+  .container {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    display: flex;
+  }
+}
