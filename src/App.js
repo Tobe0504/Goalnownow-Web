@@ -5,7 +5,6 @@ import ScorePageLayout from "./Components/ScorePageLayout/ScorePageLayout";
 import ScorePageMatches from "./Containers/ScorePageMatches/ScorePageMatches";
 import ScorePageMatchByLeague from "./Containers/ScorePageMatchByLeague/ScorePageMatchByLeague";
 import ScorePageTables from "./Containers/ScorePageTables/ScorePageTables";
-import ScorePageMatchLayout from "./Components/ScorePageMatchLayout/ScorePageMatchLayout";
 import ScorePageMatchStatistics from "./Containers/ScorePageMatchStatistics/ScorePageMatchStatistics";
 import ScorePageMatchOdds from "./Containers/ScorePageMatchOdds/ScorePageMatchOdds";
 import ScorePageMatchLineUp from "./Containers/ScorePageMatchLineUp/ScorePageMatchLineUp";

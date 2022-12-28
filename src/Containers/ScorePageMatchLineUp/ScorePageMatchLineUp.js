@@ -45,7 +45,10 @@ const ScorePageMatchLineUp = () => {
                     <div className={classes.homeLineup}>
                       <div className={classes.tableHeader}>
                         <span>
-                          <img src={clubLogoHandler(datums.homeClub)} />
+                          <img
+                            src={clubLogoHandler(datums.homeClub)}
+                            alt="Club Logo"
+                          />
                         </span>
                         <span>{`${datums.homeClub} Lineup`}</span>
                       </div>
@@ -66,7 +69,10 @@ const ScorePageMatchLineUp = () => {
                     <div className={classes.homeLineup}>
                       <div className={classes.tableHeader}>
                         <span>
-                          <img src={clubLogoHandler(datums.awayClub)} />
+                          <img
+                            src={clubLogoHandler(datums.awayClub)}
+                            alt="Club Logo"
+                          />
                         </span>
                         <span>{`${datums.awayClub} Lineup`}</span>
                       </div>
@@ -91,7 +97,10 @@ const ScorePageMatchLineUp = () => {
                     <div className={classes.homeLineup}>
                       <div className={classes.tableHeader}>
                         <span>
-                          <img src={clubLogoHandler(datums.homeClub)} />
+                          <img
+                            src={clubLogoHandler(datums.homeClub)}
+                            alt="Club Logo"
+                          />
                         </span>
                         <span>{`${datums.homeClub}`}</span>
                       </div>
@@ -129,7 +138,10 @@ const ScorePageMatchLineUp = () => {
                     <div className={classes.homeLineup}>
                       <div className={classes.tableHeader}>
                         <span>
-                          <img src={clubLogoHandler(datums.awayClub)} />
+                          <img
+                            src={clubLogoHandler(datums.awayClub)}
+                            alt="Club Logo"
+                          />
                         </span>
                         <span>{`${datums.homeClub}`}</span>
                       </div>

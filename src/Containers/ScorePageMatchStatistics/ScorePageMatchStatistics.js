@@ -31,11 +31,17 @@ const ScorePageMatchStatistics = () => {
               <div className={classes.container}>
                 <div className={classes.statHeader}>
                   <div>
-                    <img src={clubLogoHandler(datums.homeClub)} />
+                    <img
+                      src={clubLogoHandler(datums.homeClub)}
+                      alt="Club Logo"
+                    />
                   </div>
                   <div>Team Statistics</div>
                   <div>
-                    <img src={clubLogoHandler(datums.awayClub)} />
+                    <img
+                      src={clubLogoHandler(datums.awayClub)}
+                      alt="Club Logo"
+                    />
                   </div>
                 </div>
 
