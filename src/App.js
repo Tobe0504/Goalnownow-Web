@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "./Components/Layout/Layout";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import ScorePageLayout from "./Components/ScorePageLayout/ScorePageLayout";
 import ScorePageMatches from "./Containers/ScorePageMatches/ScorePageMatches";
 import ScorePageMatchByLeague from "./Containers/ScorePageMatchByLeague/ScorePageMatchByLeague";
@@ -8,6 +8,12 @@ import ScorePageTables from "./Containers/ScorePageTables/ScorePageTables";
 import ScorePageMatch from "./Containers/ScorePageMatch/ScorePageMatch";
 
 function App() {
+  // const navigate = useNavigate();
+
+  useEffect(() => {
+    // navigate("/scores");
+  }, []);
+
   return (
     <Routes>
       <Route path="/scores" element={<ScorePageLayout />} />
@@ -15,7 +21,7 @@ function App() {
       <Route path="/favourites" element={<Layout />} />
       <Route path="/news" element={<Layout />} />
       <Route path="/get-the-app" element={<Layout />} />
-      <Route path="/" element={<ScorePageMatches />} />
+      <Route path="/scores/matches" element={<ScorePageMatches />} />
       <Route
         path="/scores/matches/:matchId/statistics"
         element={<ScorePageMatch />}

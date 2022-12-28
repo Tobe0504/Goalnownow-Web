@@ -44,7 +44,7 @@ export const scorePageNavItems = [
     id: v4(),
     title: "Matches",
     isActive: false,
-    route: "/",
+    route: "/scores/matches",
   },
   {
     id: v4(),

@@ -1,9 +1,8 @@
-.container {
+/* .container {
   border: 2px solid red;
-}
+} */
 
 .firstSection {
-  border: 2px solid yellow;
   background: var(--foregroundBlack);
 }
 
@@ -130,7 +129,6 @@
 }
 
 .navSection {
-  border: 2px solid red;
   display: flex;
   align-items: stretch;
   padding: 0px 77px;

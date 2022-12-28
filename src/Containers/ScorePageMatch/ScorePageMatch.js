@@ -111,7 +111,7 @@ const ScorePageMatch = () => {
                     <div>Venue: Stadium luzhniki</div>
                   </div>
                   <div className={classes.matchEvents}>
-                    {datums.events.map((event) => {
+                    {datums.events?.map((event) => {
                       return (
                         <div className={classes.matchEvent}>
                           <div>
