@@ -7,6 +7,8 @@ import barcelona from "../../Assets/Images/barcelona.svg";
 import realMadrid from "../../Assets/Images/realmadrid.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFutbol } from "@fortawesome/free-regular-svg-icons";
+import { Link } from "react-router-dom";
+import { v4 } from "uuid";
 
 const ScorePageMatch = () => {
   // params
@@ -21,6 +23,36 @@ const ScorePageMatch = () => {
       return realMadrid;
     }
   };
+
+  const scorePageMatchNavItems = [
+    {
+      id: v4(),
+      title: "Summary",
+      isActive: false,
+      route: `/scores/matches/${matchId}/summary`,
+    },
+
+    {
+      id: v4(),
+      title: "Line Up",
+      isActive: false,
+      route: `/scores/matches/${matchId}/line-up`,
+    },
+
+    {
+      id: v4(),
+      title: "Statistics",
+      isActive: false,
+      route: `/scores/matches/${matchId}/statistics`,
+    },
+
+    {
+      id: v4(),
+      title: "Odds",
+      isActive: false,
+      route: `/scores/matches/${matchId}/odds`,
+    },
+  ];
 
   return (
     <ScorePageLayout>
@@ -39,7 +71,10 @@ const ScorePageMatch = () => {
                   <div className={classes.logoAndScoreSection}>
                     <div>
                       <div>
-                        <img src={clubLogoHandler(datums.homeClub)} />
+                        <img
+                          src={clubLogoHandler(datums.homeClub)}
+                          alt="Club Logo"
+                        />
                       </div>
                       <div>{datums.homeClub}</div>
                     </div>
@@ -62,7 +97,10 @@ const ScorePageMatch = () => {
                     </div>
                     <div>
                       <div>
-                        <img src={clubLogoHandler(datums.awayClub)} />
+                        <img
+                          src={clubLogoHandler(datums.awayClub)}
+                          alt="Club Logo"
+                        />
                       </div>
                       <div>{datums.awayClub}</div>
                     </div>
@@ -88,6 +126,28 @@ const ScorePageMatch = () => {
                       );
                     })}
                   </div>
+                </div>
+                <div className={classes.navSection}>
+                  {scorePageMatchNavItems.map((data) => {
+                    return (
+                      <Link
+                        key={data.id}
+                        to={data.route}
+                        className={
+                          window.location.href.includes(data.route)
+                            ? `${classes.activeNav}`
+                            : undefined
+                        }
+                      >
+                        {window.location.href.includes(data.route) && (
+                          <div className={classes.activeIndicator}></div>
+                        )}
+                        <div className={classes.navItem}>
+                          <div>{data.title}</div>
+                        </div>
+                      </Link>
+                    );
+                  })}
                 </div>
               </div>
             );

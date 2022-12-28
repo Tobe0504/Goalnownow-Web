@@ -41,10 +41,6 @@
   line-height: 24px;
 }
 
-.scoreSection {
-  /* border: 2px solid green; */
-}
-
 .scoreSection > div:nth-child(1) {
   font-weight: 900;
   font-size: 22px;
@@ -131,4 +127,48 @@
   line-height: 18px;
   margin-top: 0.8rem;
   gap: 40px;
+}
+
+.navSection {
+  border: 2px solid red;
+  display: flex;
+  align-items: stretch;
+  padding: 0px 77px;
+  justify-content: space-between;
+  margin-top: 2rem;
+  background: var(--foregroundBlack);
+}
+
+.navSection > a {
+  font-size: 14px;
+  line-height: 21px;
+  height: 100%;
+  display: block;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  height: 100%;
+  transition: all 0.3s ease-in-out;
+  padding: 15px 0;
+}
+
+.activeNav {
+  color: #ffd91b;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.activeIndicator {
+  width: 100%;
+  background-color: #ffd91b;
+  height: 4px;
+  border-radius: 100px;
+  animation: appear 0.3s ease-in-out;
 }

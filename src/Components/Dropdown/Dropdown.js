@@ -8,7 +8,7 @@ import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 
 const Dropdown = (props) => {
   const [isActive, setIsActive] = useState(false);
-  const [keyPressedValue, setKEyPressedValue] = useState("");
+  const [setKEyPressedValue] = useState("");
   const [optionsState, setOptionsState] = useState(props.options);
 
   // ref

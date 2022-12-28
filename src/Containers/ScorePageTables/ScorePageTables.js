@@ -3,7 +3,6 @@ import ScorePageLayout from "../../Components/ScorePageLayout/ScorePageLayout";
 import classes from "./ScorePageTables.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faCaretDown } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
 import { activeTogglerNoFalse } from "../../HelperFunctions/ActiveToggler";
 import { useContext } from "react";
 import { LeagueAndcategoriesContext } from "../../Context/LeagueAndCategoryContext";

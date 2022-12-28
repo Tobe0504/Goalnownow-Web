@@ -8,7 +8,7 @@ import { faStar } from "@fortawesome/free-regular-svg-icons";
 import barcelona from "../../Assets/Images/barcelona.svg";
 import realMadrid from "../../Assets/Images/realmadrid.svg";
 import { MatchesContext } from "../../Context/MatchesContext";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
 
 const ScorePageMatches = () => {
   // context

@@ -5,9 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import LeagueAndCategoryContextprovider from "./Context/LeagueAndCategoryContext";
-import MatchesContextProvider, {
-  MatchesContext,
-} from "./Context/MatchesContext";
+import MatchesContextProvider from "./Context/MatchesContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
