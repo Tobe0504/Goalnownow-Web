@@ -26,6 +26,7 @@ const ScorePageMatchOdds = () => {
       return realMadrid;
     }
   };
+
   return (
     <ScorePageMatchLayout>
       {matches.map((data) => {
@@ -38,41 +39,59 @@ const ScorePageMatchOdds = () => {
               <div className={classes.container}>
                 {betRoutes.map((bet) => {
                   return (
-                    <div className={classes.betRoute} key={bet.id}>
-                      <div>
-                        <img src={bet.companyLogo} alt="Bet Company" />
+                    <div className={classes.outerContainer}>
+                      <div className={classes.betRoute} key={bet.id}>
+                        <div className={classes.clubLogo}>
+                          <img src={bet.companyLogo} alt="Bet Company" />
+                        </div>
+                        <div className={classes.clubDetailCenter}>
+                          <div>
+                            <span>
+                              <img src={clubLogoHandler(datums.homeClub)} />
+                            </span>
+                            <span>{datums.homeClub}</span>
+                          </div>
+                          <div>
+                            <span>
+                              <img src={clubLogoHandler(datums.awayClub)} />
+                            </span>
+                            <span>{datums.awayClub}</span>
+                          </div>
+                        </div>
+                        <div className={classes.oddsCenter}>
+                          <div>
+                            <span>1</span>
+                            <span>{datums.oneOdd}</span>
+                          </div>
+                          <div>
+                            <span>x</span>
+                            <span>{datums.xOdd}</span>
+                          </div>
+                          <div>
+                            <span>2</span>
+                            <span>{datums.twoOdd}</span>
+                          </div>
+                        </div>
+                        <div className={classes.scoreCenter}>
+                          <div>{datums.homeClubScore}</div>
+                          <div>{datums.awayClubScore}</div>
+                        </div>
                       </div>
-                      <div className={classes.clubDetailCenter}>
-                        <div>
-                          <span>
-                            <img src={clubLogoHandler(datums.homeClub)} />
-                          </span>
-                          <span>{datums.homeClub}</span>
+                      <div className={classes.mobileOddSection}>
+                        <div className={classes.oddsSectionMobile}>
+                          <div>
+                            <span>1</span>
+                            <span>{datums.oneOdd}</span>
+                          </div>
+                          <div>
+                            <span>x</span>
+                            <span>{datums.xOdd}</span>
+                          </div>
+                          <div>
+                            <span>2</span>
+                            <span>{datums.twoOdd}</span>
+                          </div>
                         </div>
-                        <div>
-                          <span>
-                            <img src={clubLogoHandler(datums.awayClub)} />
-                          </span>
-                          <span>{datums.awayClub}</span>
-                        </div>
-                      </div>
-                      <div className={classes.oddsCenter}>
-                        <div>
-                          <span>1</span>
-                          <span>{datums.oneOdd}</span>
-                        </div>
-                        <div>
-                          <span>x</span>
-                          <span>{datums.xOdd}</span>
-                        </div>
-                        <div>
-                          <span>2</span>
-                          <span>{datums.twoOdd}</span>
-                        </div>
-                      </div>
-                      <div className={classes.scoreCenter}>
-                        <div>{datums.homeClubScore}</div>
-                        <div>{datums.awayClubScore}</div>
                       </div>
                     </div>
                   );

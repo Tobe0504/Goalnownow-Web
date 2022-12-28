@@ -8,6 +8,7 @@ import ScorePageTables from "./Containers/ScorePageTables/ScorePageTables";
 import ScorePageMatchLayout from "./Components/ScorePageMatchLayout/ScorePageMatchLayout";
 import ScorePageMatchStatistics from "./Containers/ScorePageMatchStatistics/ScorePageMatchStatistics";
 import ScorePageMatchOdds from "./Containers/ScorePageMatchOdds/ScorePageMatchOdds";
+import ScorePageMatchLineUp from "./Containers/ScorePageMatchLineUp/ScorePageMatchLineUp";
 function App() {
   // const navigate = useNavigate();
 
@@ -31,6 +32,10 @@ function App() {
       <Route
         path="/scores/matches/:matchId/odds"
         element={<ScorePageMatchOdds />}
+      />
+      <Route
+        path="/scores/matches/:matchId/line-up"
+        element={<ScorePageMatchLineUp />}
       />
 
       <Route

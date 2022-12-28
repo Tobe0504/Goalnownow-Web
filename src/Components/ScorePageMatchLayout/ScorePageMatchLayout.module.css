@@ -1,10 +1,9 @@
 .container {
-  border: 2px solid red;
+  /* border: 2px solid red; */
 }
 
 .firstSection {
   background: var(--foregroundBlack);
-  /* border: 2px solid red; */
   overflow: auto;
 }
 
@@ -40,6 +39,7 @@
   font-weight: 600;
   font-size: 16px;
   line-height: 24px;
+  text-align: center;
 }
 
 .scoreSection > div:nth-child(1) {
@@ -177,5 +177,33 @@
 @media screen and (max-width: 767px) {
   .navSection {
     padding: 0px 16px;
+  }
+
+  .titleContainer {
+    padding: 1.5rem 1rem;
+  }
+
+  .logoAndScoreSection {
+    gap: 1rem;
+    padding: 1.5rem 1rem;
+  }
+
+  .logoAndScoreSection > div:nth-child(1),
+  .logoAndScoreSection > div:nth-child(3) {
+    width: 20%;
+  }
+
+  .logoAndScoreSection > div:nth-child(2) {
+    width: 50%;
+  }
+
+  .logoAndScoreSection > div > div:nth-child(1) > img {
+    height: 32px;
+    width: 32px;
+  }
+
+  .lineDecoration > div {
+    height: 5px;
+    width: 48px;
   }
 }

@@ -2,17 +2,17 @@
   margin-top: 1.5rem;
 }
 
-.betRoute {
-  display: flex;
-  align-items: center;
-  gap: 24px;
+.outerContainer {
   padding: 0.8rem 1rem;
   background: var(--foregroundBlack);
   border-radius: 8px;
   margin: 0 1rem 0.5rem 1rem;
 }
 
-.clubDetailCenter {
+.betRoute {
+  display: flex;
+  align-items: center;
+  gap: 24px;
 }
 
 .clubDetailCenter > div {
@@ -25,12 +25,12 @@
 }
 
 .oddsCenter {
-  margin-left: auto;
   display: flex;
   align-items: center;
   gap: 16px;
   font-size: 12px;
   line-height: 18px;
+  margin-left: auto;
 }
 
 .oddsCenter > div {
@@ -60,4 +60,62 @@
   font-weight: 400;
   font-size: 12px;
   line-height: 18px;
+}
+
+.mobileOddSection {
+  display: none;
+}
+
+.oddsSectionMobile {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  animation: appear 0.3s ease-in-out;
+  padding: 0.5rem 0;
+}
+
+.oddsSectionMobile > div {
+  text-align: center;
+}
+
+.oddsSectionMobile > div > span:nth-child(1) {
+  opacity: 0.5;
+}
+
+.oddsSectionMobile > div > span:nth-child(2) {
+  display: block;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  opacity: 1;
+  padding: 1px 8px;
+  margin-top: 8px;
+}
+
+@media screen and (max-width: 767px) {
+  .mobileOddSection {
+    display: block;
+  }
+
+  .betRoute {
+    padding-bottom: 1rem;
+  }
+
+  .oddsCenter {
+    display: none;
+  }
+
+  .scoreCenter {
+    margin-left: auto;
+  }
+
+  .clubLogo > img {
+    height: 13.790802001953125px;
+    width: 40px;
+  }
 }
