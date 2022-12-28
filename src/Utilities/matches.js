@@ -21,6 +21,17 @@ export const matches = [
           { goalsBy: "A. rebic", gialTime: "14" },
           { goalsBy: "L. Messi", gialTime: "17" },
         ],
+        statistics: [
+          { id: v4(), title: "Shots on target", home: 9, away: 2 },
+          { id: v4(), title: "Possession", home: 9, away: 2 },
+          { id: v4(), title: "Passes", home: 10, away: 3 },
+          { id: v4(), title: "Pass Accuracy", home: 0, away: 1 },
+          { id: v4(), title: "Fouls", home: 1, away: 0 },
+          { id: v4(), title: "Corners", home: 9, away: 1 },
+          { id: v4(), title: "Offsides", home: 9, away: 2 },
+          { id: v4(), title: "Yellow Cards", home: 15, away: 12 },
+          { id: v4(), title: "Red Cards", home: 4, away: 4 },
+        ],
       },
       {
         id: v4(),

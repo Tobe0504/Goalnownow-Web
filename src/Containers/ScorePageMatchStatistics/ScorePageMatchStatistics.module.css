@@ -1,0 +1,81 @@
+.statHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 82px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.statHeader > div > img {
+  height: 34px;
+  width: 34px;
+}
+
+.statistic {
+  display: flex;
+  padding: 1rem 82px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.statistic > div:nth-child(1),
+.statistic > div:nth-child(3) {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.nameAndBarSection {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  align-self: center;
+  text-align: center;
+  width: 70%;
+}
+
+.nameAndBarSection > div:nth-child(2) {
+  height: 12px;
+  width: 100;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2px;
+}
+
+.nameAndBarSection > div:nth-child(2) > div:nth-child(1) {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.nameAndBarSection > div:nth-child(2) > div:nth-child(1) > div {
+  background: #f14b51;
+  height: 100%;
+}
+
+.nameAndBarSection > div:nth-child(2) > div:nth-child(2) {
+  height: 100%;
+  width: 50%;
+}
+
+.nameAndBarSection > div:nth-child(2) > div:nth-child(2) > div {
+  background: #1c75bc;
+  height: 100%;
+}
+
+@media screen and (max-width: 767px) {
+  .statHeader {
+    padding: 1.5rem 24px;
+  }
+
+  .statistic {
+    padding: 1rem 24px;
+  }
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./ScorePageMatch.module.css";
+import classes from "./ScorePageMatchLayout.module.css";
 import ScorePageLayout from "../../Components/ScorePageLayout/ScorePageLayout";
 import { useParams } from "react-router-dom";
 import { matches } from "../../Utilities/matches";
@@ -10,7 +10,7 @@ import { faFutbol } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
 import { v4 } from "uuid";
 
-const ScorePageMatch = () => {
+const ScorePageMatchLayout = (props) => {
   // params
   const { matchId } = useParams();
 
@@ -149,6 +149,7 @@ const ScorePageMatch = () => {
                     );
                   })}
                 </div>
+                <div>{props.children}</div>
               </div>
             );
           });
@@ -157,4 +158,4 @@ const ScorePageMatch = () => {
   );
 };
 
-export default ScorePageMatch;
+export default ScorePageMatchLayout;
