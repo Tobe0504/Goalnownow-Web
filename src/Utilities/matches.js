@@ -17,6 +17,10 @@ export const matches = [
         oneOdd: "2.50",
         xOdd: "3.25",
         twoOdd: "2.90",
+        events: [
+          { goalsBy: "A. rebic", gialTime: "14" },
+          { goalsBy: "L. Messi", gialTime: "17" },
+        ],
       },
       {
         id: v4(),

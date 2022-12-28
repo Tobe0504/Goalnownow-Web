@@ -1,0 +1,134 @@
+.container {
+  border: 2px solid red;
+}
+
+.firstSection {
+  border: 2px solid yellow;
+  background: var(--foregroundBlack);
+}
+
+.titleContainer {
+  border-bottom: 1px solid #1c1c1c;
+  padding: 1.5rem 2rem;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.logoAndScoreSection {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 4rem;
+  padding: 1.5rem 0;
+}
+
+.logoAndScoreSection > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.logoAndScoreSection > div > div:nth-child(1) > img {
+  height: 80px;
+  width: 80px;
+}
+
+.logoAndScoreSection > div > div:nth-child(2) {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.scoreSection {
+  /* border: 2px solid green; */
+}
+
+.scoreSection > div:nth-child(1) {
+  font-weight: 900;
+  font-size: 22px;
+  line-height: 33px;
+}
+
+.scoreSection > div:nth-child(2) {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  margin-top: 1rem;
+}
+
+.scoreSection > div:nth-child(3) {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  color: #00f175;
+  margin-top: 0.5rem;
+}
+
+.lineDecoration {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-top: 1.5rem;
+}
+
+.lineDecoration > div {
+  height: 5px;
+  width: 128px;
+  display: flex;
+  align-items: center;
+}
+
+.lineDecoration > div:nth-child(1) > div:nth-child(1),
+.lineDecoration > div:nth-child(2) > div:nth-child(2) {
+  background: #1c75bc;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.lineDecoration > div:nth-child(1) > div:nth-child(2),
+.lineDecoration > div:nth-child(2) > div:nth-child(1) {
+  background: #ffffff;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.lineDecoration > div > div:first-child {
+  border-radius: 4px 0px 0px 0px;
+}
+
+.lineDecoration > div > div:last-child {
+  border-radius: 0px 4px 0px 0px;
+}
+
+.audioCommentry {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.audioCommentry > div:nth-child(3) {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  opacity: 0.7;
+}
+
+.matchEvents {
+  margin-top: 1.5rem;
+}
+
+.matchEvent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  margin-top: 0.8rem;
+  gap: 40px;
+}

@@ -8,7 +8,7 @@ import { faStar } from "@fortawesome/free-regular-svg-icons";
 import barcelona from "../../Assets/Images/barcelona.svg";
 import realMadrid from "../../Assets/Images/realmadrid.svg";
 import { MatchesContext } from "../../Context/MatchesContext";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 const ScorePageMatches = () => {
   // context
@@ -34,7 +34,7 @@ const ScorePageMatches = () => {
               <div
                 className={classes.leagueHeader}
                 onClick={() => {
-                  navigate(`/scores/matches/${data.leagueTitle}`);
+                  navigate(`/scores/matches/${data.leagueTitle}/statistics`);
                 }}
               >
                 <div className={classes.leagueHeaderdata}>
@@ -57,7 +57,13 @@ const ScorePageMatches = () => {
               <div className={classes.leagueGames}>
                 {data.leagueMatches.map((datum) => {
                   return (
-                    <div className={classes.leagueGamesOuter} key={datum.id}>
+                    <div
+                      className={classes.leagueGamesOuter}
+                      key={datum.id}
+                      onClick={() => {
+                        navigate(`/scores/matches/${datum.id}/statistics`);
+                      }}
+                    >
                       <div className={classes.leagueGame}>
                         <div className={classes.time}>{datum.time}</div>
                         <div className={classes.clubNameSection}>

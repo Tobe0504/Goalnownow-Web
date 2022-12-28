@@ -5,6 +5,7 @@ import ScorePageLayout from "./Components/ScorePageLayout/ScorePageLayout";
 import ScorePageMatches from "./Containers/ScorePageMatches/ScorePageMatches";
 import ScorePageMatchByLeague from "./Containers/ScorePageMatchByLeague/ScorePageMatchByLeague";
 import ScorePageTables from "./Containers/ScorePageTables/ScorePageTables";
+import ScorePageMatch from "./Containers/ScorePageMatch/ScorePageMatch";
 
 function App() {
   return (
@@ -15,6 +16,11 @@ function App() {
       <Route path="/news" element={<Layout />} />
       <Route path="/get-the-app" element={<Layout />} />
       <Route path="/scores/matches" element={<ScorePageMatches />} />
+      <Route
+        path="/scores/matches/:matchId/statistics"
+        element={<ScorePageMatch />}
+      />
+
       <Route
         path="/scores/matches/:league"
         element={<ScorePageMatchByLeague />}
