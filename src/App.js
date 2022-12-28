@@ -15,7 +15,7 @@ function App() {
       <Route path="/favourites" element={<Layout />} />
       <Route path="/news" element={<Layout />} />
       <Route path="/get-the-app" element={<Layout />} />
-      <Route path="/scores/matches" element={<ScorePageMatches />} />
+      <Route path="/" element={<ScorePageMatches />} />
       <Route
         path="/scores/matches/:matchId/statistics"
         element={<ScorePageMatch />}

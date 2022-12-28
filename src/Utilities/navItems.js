@@ -44,42 +44,12 @@ export const scorePageNavItems = [
     id: v4(),
     title: "Matches",
     isActive: false,
-    route: "/scores/matches",
+    route: "/",
   },
   {
     id: v4(),
     title: "Tables",
     isActive: false,
     route: "/scores/tables",
-  },
-];
-
-export const scorePageMatchNavItems = [
-  {
-    id: v4(),
-    title: "Summary",
-    isActive: false,
-    route: "/scores/matches/:matchId/summary",
-  },
-
-  {
-    id: v4(),
-    title: "Line Up",
-    isActive: false,
-    route: "/scores/matches/:matchId/line-up",
-  },
-
-  {
-    id: v4(),
-    title: "Statistics",
-    isActive: false,
-    route: "/scores/matches/:matchId/statistics",
-  },
-
-  {
-    id: v4(),
-    title: "Odds",
-    isActive: false,
-    route: "/scores/matches/:matchId/odds",
   },
 ];
