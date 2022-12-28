@@ -16,6 +16,7 @@ function App() {
 
   return (
     <Routes>
+      <Route path="/" element={<ScorePageLayout />} />
       <Route path="/scores" element={<ScorePageLayout />} />
       <Route path="/scores/tables" element={<ScorePageTables />} />
       <Route path="/favourites" element={<Layout />} />
