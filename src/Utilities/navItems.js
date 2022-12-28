@@ -14,7 +14,7 @@ export const navItems = [
     title: "Scores",
     icon: <FontAwesomeIcon icon={faFutbol} />,
     isActive: false,
-    route: "/scores",
+    route: "/scores/matches",
   },
   {
     id: v4(),
