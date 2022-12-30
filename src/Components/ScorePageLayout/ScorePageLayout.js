@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../Layout/Layout";
 import ScoreAdSection from "./ScoreAdSection";
 import ScoreMobileAdSection from "./ScoreMobileAdSection";
@@ -12,9 +12,11 @@ const ScorePageLayout = (props) => {
         <div className={classes.adSection}>
           <ScoreAdSection />
         </div>
-        <div>
-          <ScorePageNav />
-        </div>
+        {props.showNavSection && (
+          <div className={classes.navSection}>
+            <ScorePageNav />
+          </div>
+        )}
         <div className={classes.mobileAdSection}>
           <ScoreMobileAdSection />
         </div>

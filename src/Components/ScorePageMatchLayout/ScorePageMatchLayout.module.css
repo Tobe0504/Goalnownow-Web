@@ -5,6 +5,8 @@
 .firstSection {
   background: var(--foregroundBlack);
   overflow: auto;
+  margin-top: 1rem;
+  border-radius: 8px 8px 0px 0px;
 }
 
 .titleContainer {

@@ -33,7 +33,7 @@ const ScorePageTables = () => {
   };
 
   return (
-    <ScorePageLayout>
+    <ScorePageLayout showNavSection={true}>
       <div className={classes.container}>
         {leagueTablesByLeague.map((data, j) => {
           return (

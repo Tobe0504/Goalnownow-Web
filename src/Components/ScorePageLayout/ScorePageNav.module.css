@@ -57,7 +57,23 @@
 
 .date {
   color-scheme: dark;
-  /* display: none; */
+  width: 20px;
+  height: 34px;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.date::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  width: 20px;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+  margin-top: 10px;
+}
+
+.date::placeholder {
+  display: none;
 }
 
 .container > div:nth-child(3) {

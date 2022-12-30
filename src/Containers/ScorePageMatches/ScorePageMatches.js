@@ -26,17 +26,12 @@ const ScorePageMatches = () => {
   //   navigate
   const navigate = useNavigate();
   return (
-    <ScorePageLayout>
+    <ScorePageLayout showNavSection={true}>
       <div className={classes.container}>
         {matches.map((data) => {
           return (
             <div key={data.id} className={classes.leagueData}>
-              <div
-                className={classes.leagueHeader}
-                onClick={() => {
-                  navigate(`/scores/matches/${data.leagueTitle}/summary`);
-                }}
-              >
+              <div className={classes.leagueHeader}>
                 <div className={classes.leagueHeaderdata}>
                   <div>
                     <img
