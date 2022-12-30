@@ -17,15 +17,13 @@ const Header = () => {
   const date = new Date();
   const hour = date.getHours();
   const minute = date.getMinutes();
-  const stringDate = date.toString().split(" ");
-  const gmt = stringDate[stringDate.length - 5];
+  // const stringDate = date.toString().split(" ");
+  // const gmt = stringDate[stringDate.length - 5];
 
   // States
 
   const [country, setCountry] = useState("");
-  const [currentTime, setCurrentTime] = useState(
-    `${hour} : ${minute} (${gmt})`
-  );
+  const [currentTime, setCurrentTime] = useState(`${hour} : ${minute}`);
 
   return (
     <div className={classes.container}>
@@ -46,19 +44,6 @@ const Header = () => {
                   ? `${classes.activeNav}`
                   : undefined
               }
-              // onClick={() => {
-              //   axios
-              //     .get(
-              //       // `http://eapi.enetpulse.com/tournament_template/list/?sportFK=1&username=${enetPulseUsername}&token=${enetPulseTokenId}`
-              //       `http://eapi.enetpulse.com/sport/list/?username=${enetPulseUsername}&token=${enetPulseTokenId}`
-              //     )
-              //     .then((res) => {
-              //       console.log(res);
-              //     })
-              //     .catch((err) => {
-              //       console.log(err);
-              //     });
-              // }}
             >
               {window.location.href.includes(data.route) && (
                 <div className={classes.activeIndicator}></div>
