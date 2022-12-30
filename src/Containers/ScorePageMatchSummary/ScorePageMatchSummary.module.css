@@ -1,0 +1,142 @@
+.container {
+  min-height: 70vh;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.layeredContainer {
+  position: relative;
+  width: 100%;
+  margin: auto;
+}
+
+.divider {
+  padding: 1rem 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  height: 100%;
+  width: 6px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.time {
+  text-align: center;
+  margin: 1rem 0;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.redCard {
+  height: 16px;
+  width: 12px;
+  border-radius: 2px;
+  background: #f50100;
+}
+
+.yellowCard {
+  height: 16px;
+  width: 12px;
+  border-radius: 2px;
+  background: #ffd91b;
+}
+
+.ownGoal {
+  position: relative;
+}
+
+.ownGoal > span:nth-child(1) {
+  position: relative;
+  height: 6px;
+  width: 6px;
+  font-weight: 400;
+  font-size: 2px;
+  line-height: 3px;
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.ownGoalIndicator {
+  background: #f50100;
+}
+
+.ownGoal > span:nth-child(2) {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.penalty {
+  background: #11d36f;
+}
+
+.summaryContainerOuter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
+}
+
+.summaryContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 14px auto;
+  width: 330px;
+}
+.summaryHome {
+  justify-content: flex-start;
+  transform: rotateY(360deg);
+}
+
+.summaryAway {
+  justify-content: flex-end;
+}
+
+.summaryFirstOuter {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 40px;
+  padding: 4px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  background: #0b0809;
+}
+
+.summaryFirst {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 0.5rem 10px;
+  border: 1px solid #ffd91b;
+  border-radius: 40px;
+}
+
+.summarySecond > div:nth-child(1) {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.summarySecond > div:nth-child(2) {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 15px;
+}

@@ -36,7 +36,7 @@ const ScorePageMatchOdds = () => {
           })
           .map((datums) => {
             return (
-              <div className={classes.container}>
+              <div className={classes.container} key={datums.id}>
                 {betRoutes.map((bet) => {
                   return (
                     <div className={classes.outerContainer}>

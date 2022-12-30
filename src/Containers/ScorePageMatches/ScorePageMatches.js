@@ -34,7 +34,7 @@ const ScorePageMatches = () => {
               <div
                 className={classes.leagueHeader}
                 onClick={() => {
-                  navigate(`/scores/matches/${data.leagueTitle}/statistics`);
+                  navigate(`/scores/matches/${data.leagueTitle}/summary`);
                 }}
               >
                 <div className={classes.leagueHeaderdata}>
@@ -61,7 +61,7 @@ const ScorePageMatches = () => {
                       className={classes.leagueGamesOuter}
                       key={datum.id}
                       onClick={() => {
-                        navigate(`/scores/matches/${datum.id}/statistics`);
+                        navigate(`/scores/matches/${datum.id}/summary`);
                       }}
                     >
                       <div className={classes.leagueGame}>

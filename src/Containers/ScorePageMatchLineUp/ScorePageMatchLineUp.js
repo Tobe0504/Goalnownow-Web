@@ -35,7 +35,7 @@ const ScorePageMatchLineUp = () => {
           })
           .map((datums) => {
             return (
-              <div className={classes.outerCountainerß}>
+              <div className={classes.outerCountainer} key={datums.id}>
                 <div className={classes.container}>
                   <div className={classes.formationSection}>
                     <img src={formation} alt="Formation" />

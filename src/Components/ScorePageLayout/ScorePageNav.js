@@ -26,9 +26,10 @@ const ScorePageNav = () => {
           </i>
         </div>
         <div>
-          <i>
+          <label htmlFor="date" data-provide="datepicker">
             <FontAwesomeIcon icon={faCalendarWeek} />
-          </i>
+            {/* <input type="date" className={classes.date} id="date" /> */}
+          </label>
           <div>
             <span>Today</span>
             <span>02 Dec</span>

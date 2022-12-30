@@ -46,6 +46,19 @@ const Header = () => {
                   ? `${classes.activeNav}`
                   : undefined
               }
+              // onClick={() => {
+              //   axios
+              //     .get(
+              //       // `http://eapi.enetpulse.com/tournament_template/list/?sportFK=1&username=${enetPulseUsername}&token=${enetPulseTokenId}`
+              //       `http://eapi.enetpulse.com/sport/list/?username=${enetPulseUsername}&token=${enetPulseTokenId}`
+              //     )
+              //     .then((res) => {
+              //       console.log(res);
+              //     })
+              //     .catch((err) => {
+              //       console.log(err);
+              //     });
+              // }}
             >
               {window.location.href.includes(data.route) && (
                 <div className={classes.activeIndicator}></div>
