@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Layout from "../Layout/Layout";
 import ScoreAdSection from "./ScoreAdSection";
 import ScoreMobileAdSection from "./ScoreMobileAdSection";
