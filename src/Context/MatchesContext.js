@@ -19,7 +19,7 @@ const MatchesContextProvider = (props) => {
     console.time("Timer");
     axios
       .get(
-        `http://eapi.enetpulse.com/tournament_template/list/?sportFK=1&username=${enetPulseUsername}&token=${enetPulseTokenId}`
+        `https://eapi.enetpulse.com/tournament_template/list/?sportFK=1&username=${enetPulseUsername}&token=${enetPulseTokenId}`
       )
       .then((res) => {
         console.timeEnd("Timer");
@@ -40,7 +40,7 @@ const MatchesContextProvider = (props) => {
     console.time("timer");
     axios
       .get(
-        `http://eapi.enetpulse.com/tournament/list/?tournament_templateFK=${id}&username=${enetPulseUsername}&token=${enetPulseTokenId}`
+        `https://eapi.enetpulse.com/tournament/list/?tournament_templateFK=${id}&username=${enetPulseUsername}&token=${enetPulseTokenId}`
       )
       .then((res) => {
         console.timeEnd("timer");
@@ -62,7 +62,7 @@ const MatchesContextProvider = (props) => {
     setLeagues([]);
     axios
       .get(
-        `http://eapi.enetpulse.com/tournament_stage/list/?tournamentFK=${presentTournamentId}&username=${enetPulseUsername}&token=${enetPulseTokenId}`
+        `https://eapi.enetpulse.com/tournament_stage/list/?tournamentFK=${presentTournamentId}&username=${enetPulseUsername}&token=${enetPulseTokenId}`
       )
       .then((res) => {
         setLeagues(Object.values(res.data.tournament_stages));
