@@ -64,6 +64,7 @@ export const countries = [
   { name: "Ecuador", code: "EC" },
   { name: "Egypt", code: "EG" },
   { name: "El Salvador", code: "SV" },
+  { name: "England", code: "GB" },
   { name: "Equatorial Guinea", code: "GQ" },
   { name: "Eritrea", code: "ER" },
   { name: "Estonia", code: "EE" },

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import classes from "./Header.module.css";
 import goalNowNowLogo from "../../Assets/Images/goalNowNowLogo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import Dropdown from "../../Components/Dropdown/Dropdown";
 import { countries } from "../../Utilities/countries";
 import { navItems } from "../../Utilities/navItems";
+import { MatchesContext } from "../../Context/MatchesContext";
 
 // Description
 // This component basically houses the top section nav of the web app
@@ -24,6 +25,8 @@ const Header = () => {
 
   const [country, setCountry] = useState("");
   const [currentTime, setCurrentTime] = useState(`${hour} : ${minute}`);
+
+  const { fetchTournaents } = useContext(MatchesContext);
 
   return (
     <div className={classes.container}>
@@ -44,6 +47,9 @@ const Header = () => {
                   ? `${classes.activeNav}`
                   : undefined
               }
+              onClick={() => {
+                fetchTournaents();
+              }}
             >
               {window.location.href.includes(data.route) && (
                 <div className={classes.activeIndicator}></div>

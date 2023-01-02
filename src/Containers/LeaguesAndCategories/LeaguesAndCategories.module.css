@@ -89,3 +89,8 @@
   font-size: 12px;
   line-height: 18px;
 }
+
+.progress {
+  text-align: center;
+  padding: 1rem 0;
+}
