@@ -43,7 +43,7 @@ const MatchesContextProvider = (props) => {
         `https://eapi.enetpulse.com/tournament/list/?tournament_templateFK=${id}&username=${enetPulseUsername}&token=${enetPulseTokenId}`
       )
       .then((res) => {
-        console.timeEnd("timer");
+        console.log(res);
         setTournaments(
           Object.values(res.data.tournaments).filter((present) => {
             return present.name === "2022/2023";
@@ -82,6 +82,22 @@ const MatchesContextProvider = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [presentTournamentId]);
 
+  // fetch tournament events
+  const fetchLeagueEvents = (id) => {
+    console.log(id, enetPulseTokenId);
+    axios
+      .get(
+        `http://eapi.enetpulse.com/tournament_stage/participants/?id=${id}&includeProperties=yes&includeParticipantProperties=yes&includeCountries=yes&includeCountryCodes=yes&tz=Africa/Lagos&username=${enetPulseUsername}&token=${enetPulseTokenId}`
+      )
+      .then((res) => {
+        console.log(res.data.tournament_stages, "original");
+        console.log(Object.values(res.data.tournament_stages));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <MatchesContext.Provider
       value={{
@@ -99,6 +115,7 @@ const MatchesContextProvider = (props) => {
         leagueLoading,
         setCountryNameFlag,
         countryAbbreviation,
+        fetchLeagueEvents,
       }}
     >
       {props.children}

@@ -21,6 +21,7 @@ const LeaguesAndCategories = () => {
     leagueLoading,
     setCountryNameFlag,
     countryAbbreviation,
+    fetchLeagueEvents,
   } = useContext(MatchesContext);
 
   // const { leagueAndCategories, setLeagueAndCategory } = useContext(
@@ -103,6 +104,8 @@ const LeaguesAndCategories = () => {
                             id="categoryOption"
                             onClick={() => {
                               fetchTournamentStage(datum.id);
+                              console.log(datum.id);
+                              fetchLeagueEvents(datum.id);
                             }}
                           >
                             <span>
