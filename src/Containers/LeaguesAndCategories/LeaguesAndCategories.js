@@ -6,6 +6,8 @@ import { faSearch, faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { activeToggler } from "../../HelperFunctions/ActiveToggler";
 import { MatchesContext } from "../../Context/MatchesContext";
 import { CircularProgress, LinearProgress } from "@mui/material";
+import { useNavigate } from "react-router";
+import { MatchesContextAlt } from "../../Context/MatchesContextAlt";
 
 const LeaguesAndCategories = () => {
   // Context
@@ -22,15 +24,18 @@ const LeaguesAndCategories = () => {
     setCountryNameFlag,
     countryAbbreviation,
     fetchLeagueEvents,
+    fetchLeagueMatchesDataAndEvents,
   } = useContext(MatchesContext);
 
-  // const { leagueAndCategories, setLeagueAndCategory } = useContext(
-  //   LeagueAndcategoriesContext
-  // );
+  // const { fetchCompetitions } = useContext(MatchesContextAlt);
+
+  // navigate
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchTournaents();
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // fetchCompetitions();
   }, []);
 
   // Test data
@@ -89,12 +94,13 @@ const LeaguesAndCategories = () => {
                 <div
                   className={classes.categoryOptions}
                   style={
-                    data.isActive
+                    data?.isActive
                       ? { maxHeight: "154vh" }
-                      : { maxHeight: "0px" }
+                      : { maxHeight: "0vh" }
                   }
+                  // { height: "4rem" } : { height: "0rem" }
                 >
-                  {!leagueLoading && tournaments.length > 0 ? (
+                  {!leagueLoading ? (
                     <>
                       {leagues?.map((datum) => {
                         return (
@@ -103,9 +109,10 @@ const LeaguesAndCategories = () => {
                             className={classes.categoryOption}
                             id="categoryOption"
                             onClick={() => {
-                              fetchTournamentStage(datum.id);
-                              console.log(datum.id);
-                              fetchLeagueEvents(datum.id);
+                              // fetchTournamentStage(datum.id);
+                              // fetchLeagueMatchesDataAndEvents(datum.id);
+                              fetchLeagueEvents(datum.tournament_templateFK);
+                              // navigate("/scores/tables");
                             }}
                           >
                             <span>

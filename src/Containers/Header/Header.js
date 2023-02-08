@@ -9,22 +9,17 @@ import Dropdown from "../../Components/Dropdown/Dropdown";
 import { countries } from "../../Utilities/countries";
 import { navItems } from "../../Utilities/navItems";
 import { MatchesContext } from "../../Context/MatchesContext";
+import { timezones } from "../../Utilities/timezones";
 
 // Description
 // This component basically houses the top section nav of the web app
 
 const Header = () => {
   //   Utils
-  const date = new Date();
-  const hour = date.getHours();
-  const minute = date.getMinutes();
-  // const stringDate = date.toString().split(" ");
-  // const gmt = stringDate[stringDate.length - 5];
 
-  // States
-
-  const [country, setCountry] = useState("");
-  const [currentTime, setCurrentTime] = useState(`${hour} : ${minute}`);
+  // Context
+  const { country, setCountry, currentTime, setCurrentTime } =
+    useContext(MatchesContext);
 
   const { fetchTournaents } = useContext(MatchesContext);
 
@@ -83,7 +78,13 @@ const Header = () => {
           />
         </div>
         <div>
-          <Dropdown selected={currentTime} setSelected={setCurrentTime} />
+          <Dropdown
+            selected={currentTime}
+            setSelected={setCurrentTime}
+            options={timezones.map((data) => {
+              return data.name;
+            })}
+          />
         </div>
       </div>
       <div className={classes.searchSection}>

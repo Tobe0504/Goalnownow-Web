@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Layout from "./Components/Layout/Layout";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import ScorePageLayout from "./Components/ScorePageLayout/ScorePageLayout";
 import ScorePageMatches from "./Containers/ScorePageMatches/ScorePageMatches";
 import ScorePageMatchByLeague from "./Containers/ScorePageMatchByLeague/ScorePageMatchByLeague";
@@ -9,46 +9,38 @@ import ScorePageMatchStatistics from "./Containers/ScorePageMatchStatistics/Scor
 import ScorePageMatchOdds from "./Containers/ScorePageMatchOdds/ScorePageMatchOdds";
 import ScorePageMatchLineUp from "./Containers/ScorePageMatchLineUp/ScorePageMatchLineUp";
 import ScorePageMatchSummary from "./Containers/ScorePageMatchSummary/ScorePageMatchSummary";
+import Favourites from "./Containers/Favourites/Favourites";
 function App() {
   // const navigate = useNavigate();
 
-  useEffect(() => {
-    // navigate("/scores");
-  }, []);
-
   return (
     <Routes>
-      <Route path="/" element={<ScorePageLayout showNavSection={true} />} />
-      <Route
+      {/* <Route
         path="/scores"
         element={<ScorePageLayout showNavSection={true} />}
-      />
+      /> */}
+      <Route path="/" element={<Navigate replace to="/scores" />} />
+
       <Route path="/scores/tables" element={<ScorePageTables />} />
-      <Route path="/favourites" element={<Layout />} />
+      <Route path="/favourites" element={<Favourites />} />
       <Route path="/news" element={<Layout />} />
       <Route path="/get-the-app" element={<Layout />} />
-      <Route path="/scores/matches" element={<ScorePageMatches />} />
+      <Route path="/scores" element={<ScorePageMatches />} />
       <Route
-        path="/scores/matches/:matchId/statistics"
+        path="/scores/:matchId/statistics"
         element={<ScorePageMatchStatistics />}
       />
+      <Route path="/scores/:matchId/odds" element={<ScorePageMatchOdds />} />
       <Route
-        path="/scores/matches/:matchId/odds"
-        element={<ScorePageMatchOdds />}
-      />
-      <Route
-        path="/scores/matches/:matchId/line-up"
+        path="/scores/:matchId/line-up"
         element={<ScorePageMatchLineUp />}
       />
       <Route
-        path="/scores/matches/:matchId/summary"
+        path="/scores/:matchId/summary"
         element={<ScorePageMatchSummary />}
       />
 
-      <Route
-        path="/scores/matches/:league"
-        element={<ScorePageMatchByLeague />}
-      />
+      <Route path="/scores/:league" element={<ScorePageMatchByLeague />} />
     </Routes>
   );
 }

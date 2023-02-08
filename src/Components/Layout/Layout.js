@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Footer from "../../Containers/Footer/Footer";
 import Header from "../../Containers/Header/Header";
 import LeaguesAndCategories from "../../Containers/LeaguesAndCategories/LeaguesAndCategories";
 import NewsAndLiveMatches from "../../Containers/NewsAndLiveMatches/NewsAndLiveMatches";
+import { MatchesContext } from "../../Context/MatchesContext";
 import classes from "./Layout.module.css";
 
 const Layout = (props) => {
+  const { fetchTournamentEvents } = useContext(MatchesContext);
+
+  useEffect(() => {
+    fetchTournamentEvents();
+  }, []);
+
   return (
     <div className={classes.container}>
       <div className={classes.header}>

@@ -93,6 +93,7 @@
   font-size: 12px;
   line-height: 18px;
   animation: appear 0.3s ease-in-out;
+  border: 2px solid green;
 }
 
 .oddsSection > div {

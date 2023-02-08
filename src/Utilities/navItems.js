@@ -14,7 +14,7 @@ export const navItems = [
     title: "Scores",
     icon: <FontAwesomeIcon icon={faFutbol} />,
     isActive: false,
-    route: "/scores/matches",
+    route: "/scores",
   },
   {
     id: v4(),
@@ -44,7 +44,7 @@ export const scorePageNavItems = [
     id: v4(),
     title: "Matches",
     isActive: false,
-    route: "/scores/matches",
+    route: "/scores",
   },
   {
     id: v4(),

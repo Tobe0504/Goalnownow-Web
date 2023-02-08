@@ -4,14 +4,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { scorePageNavItems } from "../../Utilities/navItems";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { MatchesContext } from "../../Context/MatchesContext";
 
 const ScorePageNav = () => {
-  const { showOdds, setShowOdds } = useContext(MatchesContext);
-
   // State
+  const { showOdds, setShowOdds, setRequiredDate, requiredDate } =
+    useContext(MatchesContext);
   const [date, setDate] = useState("2022-1-12");
+
+  // navigation
+  const location = useLocation();
 
   let dateArr = date?.split("-");
   let month = dateArr[1];
@@ -72,8 +75,10 @@ const ScorePageNav = () => {
               type="date"
               className={classes.date}
               id="date"
+              // value={requiredDate}
               onChange={(e) => {
-                setDate(e.target.value);
+                // setDate(e.target.value);
+                setRequiredDate(e.target.value);
               }}
             />
           </label>
@@ -90,12 +95,12 @@ const ScorePageNav = () => {
                 key={data.id}
                 to={data.route}
                 className={
-                  window.location.href.includes(data.route)
+                  location.pathname === data.route
                     ? `${classes.activeNav}`
                     : undefined
                 }
               >
-                {window.location.href.includes(data.route) && (
+                {location.pathname === data.route && (
                   <div className={classes.activeIndicator}></div>
                 )}
                 <div className={classes.navItem}>
@@ -126,12 +131,12 @@ const ScorePageNav = () => {
                 key={data.id}
                 to={data.route}
                 className={
-                  window.location.href.includes(data.route)
+                  location.pathname === data.route
                     ? `${classes.activeNav}`
                     : undefined
                 }
               >
-                {window.location.href.includes(data.route) && (
+                {location.pathname === data.route && (
                   <div className={classes.activeIndicator}></div>
                 )}
                 <div className={classes.navItem}>

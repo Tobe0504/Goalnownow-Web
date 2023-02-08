@@ -29,28 +29,28 @@ const ScorePageMatchLayout = (props) => {
       id: v4(),
       title: "Summary",
       isActive: false,
-      route: `/scores/matches/${matchId}/summary`,
+      route: `/scores/${matchId}/summary`,
     },
 
     {
       id: v4(),
       title: "Line Up",
       isActive: false,
-      route: `/scores/matches/${matchId}/line-up`,
+      route: `/scores/${matchId}/line-up`,
     },
 
     {
       id: v4(),
       title: "Statistics",
       isActive: false,
-      route: `/scores/matches/${matchId}/statistics`,
+      route: `/scores/${matchId}/statistics`,
     },
 
     {
       id: v4(),
       title: "Odds",
       isActive: false,
-      route: `/scores/matches/${matchId}/odds`,
+      route: `/scores/${matchId}/odds`,
     },
   ];
 
