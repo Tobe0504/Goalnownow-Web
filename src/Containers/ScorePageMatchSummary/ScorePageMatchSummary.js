@@ -1,14 +1,24 @@
-import React, { useRef, useState, useLayoutEffect } from "react";
+import React, { useRef, useState, useLayoutEffect, useEffect } from "react";
 import ScorePageMatchLayout from "../../Components/ScorePageMatchLayout/ScorePageMatchLayout";
 import classes from "./ScorePageMatchSummary.module.css";
 import { matches } from "../../Utilities/matches";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFutbol } from "@fortawesome/free-regular-svg-icons";
+import { useContext } from "react";
+import { MatchesContext } from "../../Context/MatchesContext";
 
 const ScorePageMatchSummary = () => {
   // params
   const { matchId } = useParams();
+
+  // context
+  const { fetchEventDetails } = useContext(MatchesContext);
+
+  // useEffect
+  useEffect(() => {
+    fetchEventDetails(matchId);
+  }, []);
 
   const iconHandler = (event) => {
     if (event === "Goal") {

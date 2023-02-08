@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
-import classes from "./ScorePageMatches.module.css";
+import React from "react";
+import classes from "../ScorePageMatches/ScorePageMatches.module.css";
+import { MatchesContext } from "../../Context/MatchesContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
@@ -7,9 +8,8 @@ import barcelona from "../../Assets/Images/barcelona.svg";
 import realMadrid from "../../Assets/Images/realmadrid.svg";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { MatchesContext } from "../../Context/MatchesContext";
 
-const LeagueMatchContainer = (props) => {
+const FavoritedMatchContainer = (props) => {
   // Context
   const { showOdds } = useContext(MatchesContext);
 
@@ -25,14 +25,13 @@ const LeagueMatchContainer = (props) => {
   //   navigate
   const navigate = useNavigate();
 
-  // // utils
-  // useEffect(() => {
-  //   console.log(premierLeagueevents);
-  // }, [premierLeagueevents]);
+  const favoritedMatch = props?.leagueEvent?.filter((data) => {
+    return data.isFavourited;
+  });
 
   return (
     <>
-      {props?.leagueEvent?.length > 0 && (
+      {favoritedMatch.length > 0 && (
         <div className={classes.leagueData}>
           <div className={classes.leagueHeader}>
             <div className={classes.leagueHeaderdata}>
@@ -60,7 +59,7 @@ const LeagueMatchContainer = (props) => {
                   className={classes.leagueGamesOuter}
                   key={datum.id}
                   onClick={() => {
-                    navigate(`/scores/${datum.id}/summary`);
+                    // navigate(`/scores/matches/${datum.id}/summary`);
                   }}
                 >
                   <div className={classes.leagueGame}>
@@ -159,4 +158,4 @@ const LeagueMatchContainer = (props) => {
   );
 };
 
-export default LeagueMatchContainer;
+export default FavoritedMatchContainer;

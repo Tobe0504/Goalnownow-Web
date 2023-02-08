@@ -6,47 +6,48 @@ import { scorePageNavItems } from "../../Utilities/navItems";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link, useLocation } from "react-router-dom";
 import { MatchesContext } from "../../Context/MatchesContext";
+import moment from "moment";
 
 const ScorePageNav = () => {
   // State
   const { showOdds, setShowOdds, setRequiredDate, requiredDate } =
     useContext(MatchesContext);
-  const [date, setDate] = useState("2022-1-12");
+  const [dateCounter, setDateCounter] = useState(0);
 
   // navigation
   const location = useLocation();
 
-  let dateArr = date?.split("-");
+  let dateArr = requiredDate?.split("-");
   let month = dateArr[1];
   let day = dateArr[2];
 
   let wordMonth;
 
-  if (month === "1") {
+  if (month === "01") {
     wordMonth = "Jan";
   }
-  if (month === "2") {
+  if (month === "02") {
     wordMonth = "Feb";
   }
-  if (month === "3") {
+  if (month === "03") {
     wordMonth = "Mar";
   }
-  if (month === "4") {
+  if (month === "04") {
     wordMonth = "Apr";
   }
-  if (month === "5") {
+  if (month === "05") {
     wordMonth = "May";
   }
-  if (month === "6") {
+  if (month === "06") {
     wordMonth = "Jun";
   }
-  if (month === "7") {
+  if (month === "07") {
     wordMonth = "Jul";
   }
-  if (month === "8") {
+  if (month === "08") {
     wordMonth = "Aug";
   }
-  if (month === "9") {
+  if (month === "09") {
     wordMonth = "Sep";
   }
   if (month === "10") {
@@ -62,10 +63,28 @@ const ScorePageNav = () => {
     <div className={classes.outerContainer}>
       <div className={classes.container}>
         <div>
-          <i>
+          <i
+            onClick={() => {
+              setRequiredDate(
+                moment(requiredDate)
+                  .subtract(1, "days")
+                  .format(moment.HTML5_FMT.DATE),
+                "formattt"
+              );
+            }}
+          >
             <FontAwesomeIcon icon={faAngleLeft} />
           </i>
-          <i>
+          <i
+            onClick={() => {
+              setRequiredDate(
+                moment(requiredDate)
+                  .add(1, "days")
+                  .format(moment.HTML5_FMT.DATE),
+                "formattt"
+              );
+            }}
+          >
             <FontAwesomeIcon icon={faAngleRight} />
           </i>
         </div>
@@ -75,7 +94,7 @@ const ScorePageNav = () => {
               type="date"
               className={classes.date}
               id="date"
-              // value={requiredDate}
+              value={requiredDate}
               onChange={(e) => {
                 // setDate(e.target.value);
                 setRequiredDate(e.target.value);
@@ -83,7 +102,7 @@ const ScorePageNav = () => {
             />
           </label>
           <div>
-            <span>Today</span>
+            <span>{moment(requiredDate).calendar()}</span>
             <span>{`${day} ${wordMonth}`}</span>
           </div>
         </div>

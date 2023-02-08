@@ -13,6 +13,7 @@ import { LinearProgress } from "@mui/material";
 const ScorePageMatches = () => {
   // context
   const {
+    fetchTournamentEvents,
     showOdds,
     leagueMatches,
     premierLeagueevents,
@@ -55,7 +56,9 @@ const ScorePageMatches = () => {
 
   // utils
 
-  console.log(premierLeagueevents, "league events");
+  useEffect(() => {
+    fetchTournamentEvents();
+  }, []);
 
   return (
     <ScorePageLayout showNavSection={true}>

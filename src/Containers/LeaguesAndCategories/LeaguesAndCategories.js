@@ -7,7 +7,6 @@ import { activeToggler } from "../../HelperFunctions/ActiveToggler";
 import { MatchesContext } from "../../Context/MatchesContext";
 import { CircularProgress, LinearProgress } from "@mui/material";
 import { useNavigate } from "react-router";
-import { MatchesContextAlt } from "../../Context/MatchesContextAlt";
 
 const LeaguesAndCategories = () => {
   // Context
@@ -26,8 +25,6 @@ const LeaguesAndCategories = () => {
     fetchLeagueEvents,
     fetchLeagueMatchesDataAndEvents,
   } = useContext(MatchesContext);
-
-  // const { fetchCompetitions } = useContext(MatchesContextAlt);
 
   // navigate
   const navigate = useNavigate();
@@ -109,9 +106,9 @@ const LeaguesAndCategories = () => {
                             className={classes.categoryOption}
                             id="categoryOption"
                             onClick={() => {
-                              // fetchTournamentStage(datum.id);
+                              fetchTournamentStage(datum.id);
                               // fetchLeagueMatchesDataAndEvents(datum.id);
-                              fetchLeagueEvents(datum.tournament_templateFK);
+                              // fetchLeagueEvents(datum.tournament_templateFK);
                               // navigate("/scores/tables");
                             }}
                           >

@@ -23,6 +23,7 @@ const MatchesContextProvider = (props) => {
   );
   const [country, setCountry] = useState("");
   const [currentTime, setCurrentTime] = useState("Africa/Lagos");
+  const [eventsDetails, setEventsDetails] = useState([]);
 
   // Major leaguue events and fixtures
   const [premierLeagueevents, setPremierLeagueEvents] = useState([]);
@@ -104,8 +105,7 @@ const MatchesContextProvider = (props) => {
         console.log(res, "tournaments");
       })
       .catch((err) => {
-        console.log(err);
-        // setLeagueMatches([err.response])
+        console.log(err, "tournaments");
       });
   };
 
@@ -118,14 +118,21 @@ const MatchesContextProvider = (props) => {
     setChampionsLeagueIsLoading(true);
     setEuropaLeagueIsLoading(true);
     setFaCupIsLoading(true);
-
+    setPremierLeagueEvents([]);
+    setSpanishLeague([]);
+    setFrenchLeague([]);
+    setGermanLeague([]);
+    setItalianLeague([]);
+    setChampionsLeague([]);
+    setEuropaLeague([]);
+    setFaCup([]);
     // Premier league
     axios
       .get(
         `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}&live=yes&includeVenue=yes&status_type=notstarted&includeEventProperties=yes&includeCountryCodes=no&tournament_templateFK=47&username=${enetPulseUsername}&token=${enetPulseTokenId}`
       )
       .then((res) => {
-        // console.log(res);
+        console.log(res.data.events, "EPL");
         setPremierLeagueEvents(
           Object.values(res.data.events).map((data) => {
             return { ...data, isFavourited: false };
@@ -187,7 +194,6 @@ const MatchesContextProvider = (props) => {
         `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}&live=yes&includeVenue=yes&status_type=notstarted&includeEventProperties=yes&includeCountryCodes=no&tournament_templateFK=55&username=${enetPulseUsername}&token=${enetPulseTokenId}`
       )
       .then((res) => {
-        console.log(res, "Italian");
         setItalianLeague(Object.values(res.data.events));
         setItalianLeagueIsLoading(false);
       })
@@ -202,7 +208,6 @@ const MatchesContextProvider = (props) => {
         `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}&live=yes&includeVenue=yes&status_type=notstarted&includeEventProperties=yes&includeCountryCodes=no&tournament_templateFK=42&username=${enetPulseUsername}&token=${enetPulseTokenId}`
       )
       .then((res) => {
-        console.log(res, "champions");
         setChampionsLeague(Object.values(res.data.events));
         setChampionsLeagueIsLoading(false);
       })
@@ -217,7 +222,6 @@ const MatchesContextProvider = (props) => {
         `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}&live=yes&includeVenue=yes&status_type=notstarted&includeEventProperties=yes&includeCountryCodes=no&tournament_templateFK=73&username=${enetPulseUsername}&token=${enetPulseTokenId}`
       )
       .then((res) => {
-        console.log(res, "Italian");
         setEuropaLeague(Object.values(res.data.events));
         setEuropaLeagueIsLoading(false);
       })
@@ -232,7 +236,6 @@ const MatchesContextProvider = (props) => {
         `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}&live=yes&includeVenue=yes&status_type=notstarted&includeEventProperties=yes&includeCountryCodes=no&tournament_templateFK=132&username=${enetPulseUsername}&token=${enetPulseTokenId}`
       )
       .then((res) => {
-        console.log(res, "Italian");
         setFaCup(Object.values(res.data.events));
         setFaCupIsLoading(false);
       })
@@ -245,6 +248,21 @@ const MatchesContextProvider = (props) => {
   useEffect(() => {
     fetchTournamentEvents();
   }, [formattedDate]);
+
+  // get live events data
+  const fetchEventDetails = (id) => {
+    axios
+      .get(
+        `https://eapi.enetpulse.com/event/details/?id=${id}&includeLineups=yes&includeEventProperties=yes&includeTeamProperties=yes&includeIncidents=yes&includeExtendedResults=yes&includeProperties=yes&includeLivestats=yes&includeVenue=yes&includeCountryCodes=yes&includeDeleted=no&includeReference=yes&includeObjectParticipants=yes&includeEventIncidentRelation=yes&username=${enetPulseUsername}&token=${enetPulseTokenId}`
+      )
+      .then((res) => {
+        // setEventsDetails(Object.values(res.data.events));
+        console.log(res, "it workeddd broski");
+      })
+      .catch((err) => {
+        console.log(err, "it didnt work broski");
+      });
+  };
 
   // Comment
   // because we are now grting to get the id of each current season (which should always be an array of one element based on the filter we did)
@@ -266,7 +284,7 @@ const MatchesContextProvider = (props) => {
       )
       .then((res) => {
         // res.data is transformed to an array
-
+        console.log(res);
         setLeagues(Object.values(res.data.tournament_stages));
 
         // the loading state is then set to false if we have a sucessful fetch
@@ -408,6 +426,7 @@ const MatchesContextProvider = (props) => {
         faCup,
         faCupIsLoading,
         setFaCup,
+        fetchEventDetails,
       }}
     >
       {props.children}

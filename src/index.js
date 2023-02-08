@@ -6,12 +6,11 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import LeagueAndCategoryContextprovider from "./Context/LeagueAndCategoryContext";
 import MatchesContextProvider from "./Context/MatchesContext";
-import MatchesContextAltProvider from "./Context/MatchesContextAlt";
-
+import TablesContextProvider from "./Context/TablesContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <MatchesContextAltProvider>
+    <TablesContextProvider>
       <LeagueAndCategoryContextprovider>
         <MatchesContextProvider>
           <React.StrictMode>
@@ -19,7 +18,7 @@ root.render(
           </React.StrictMode>
         </MatchesContextProvider>
       </LeagueAndCategoryContextprovider>
-    </MatchesContextAltProvider>
+    </TablesContextProvider>
   </BrowserRouter>
 );
 

@@ -7,12 +7,6 @@ import { MatchesContext } from "../../Context/MatchesContext";
 import classes from "./Layout.module.css";
 
 const Layout = (props) => {
-  const { fetchTournamentEvents } = useContext(MatchesContext);
-
-  useEffect(() => {
-    fetchTournamentEvents();
-  }, []);
-
   return (
     <div className={classes.container}>
       <div className={classes.header}>
