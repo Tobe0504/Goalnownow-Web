@@ -335,7 +335,7 @@ const MatchesContextProvider = (props) => {
     console.log(
       eventParticipants,
       "event participants",
-      firstParticipantResult,
+      firstParticipantLineup,
       secondParticipantResult,
       "resultssss",
       firstParticipantScopeResult
@@ -541,7 +541,8 @@ const MatchesContextProvider = (props) => {
         eventsDetails,
         eventParticipants,
         participants,
-        // firstParticipantLineUp,
+        firstParticipantLineup,
+        secondParticipantLineup,
       }}
     >
       {props.children}
