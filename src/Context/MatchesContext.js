@@ -24,6 +24,8 @@ const MatchesContextProvider = (props) => {
   const [country, setCountry] = useState("");
   const [currentTime, setCurrentTime] = useState("Africa/Lagos");
   const [eventsDetails, setEventsDetails] = useState([]);
+  const [eventParticipants, setEventParticipants] = useState([]);
+  const [participants, setParticipants] = useState([]);
 
   // Major leaguue events and fixtures
   const [premierLeagueevents, setPremierLeagueEvents] = useState([]);
@@ -129,7 +131,7 @@ const MatchesContextProvider = (props) => {
     // Premier league
     axios
       .get(
-        `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}&live=yes&includeVenue=yes&status_type=notstarted&includeEventProperties=yes&includeCountryCodes=no&tournament_templateFK=47&username=${enetPulseUsername}&token=${enetPulseTokenId}`
+        `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tz=${currentTime}&tournament_templateFK=47&username=${enetPulseUsername}&token=${enetPulseTokenId}`
       )
       .then((res) => {
         console.log(res.data.events, "EPL");
@@ -138,6 +140,7 @@ const MatchesContextProvider = (props) => {
             return { ...data, isFavourited: false };
           })
         );
+        console.log(res.data, "prem,prem");
         setPremierLeagueIsLoading(false);
       })
       .catch((err) => {
@@ -256,13 +259,120 @@ const MatchesContextProvider = (props) => {
         `https://eapi.enetpulse.com/event/details/?id=${id}&includeLineups=yes&includeEventProperties=yes&includeTeamProperties=yes&includeIncidents=yes&includeExtendedResults=yes&includeProperties=yes&includeLivestats=yes&includeVenue=yes&includeCountryCodes=yes&includeDeleted=no&includeReference=yes&includeObjectParticipants=yes&includeEventIncidentRelation=yes&username=${enetPulseUsername}&token=${enetPulseTokenId}`
       )
       .then((res) => {
-        // setEventsDetails(Object.values(res.data.events));
+        setEventsDetails(Object.values(res.data.event));
+        setEventParticipants(
+          Object.values(res.data.event[id].event_participants)
+        );
         console.log(res, "it workeddd broski");
       })
       .catch((err) => {
         console.log(err, "it didnt work broski");
       });
   };
+
+  useEffect(() => {
+    fetchTournamentEvents();
+  }, [currentTime]);
+
+  // Match lineups
+  let firstParticipantLineup = [];
+  let secondParticipantLineup = [];
+
+  // First participants results keys
+  let firstParticipantResultKeys = [];
+  let secondParticipantResultKeys = [];
+
+  // Results
+  let firstParticipantResult = [];
+  let secondParticipantResult = [];
+
+  // Scope results (if its a two legged knockout staged match)
+  let firstParticipantScopeResultKey = [];
+  let secondParticipantScopeResultKey = [];
+
+  let firstParticipantScopeResult;
+  let secondParticipantScopeResult;
+
+  if (eventParticipants.length > 0) {
+    firstParticipantLineup = Object.values(eventParticipants[0]?.lineup);
+    secondParticipantLineup = Object.values(eventParticipants[1]?.lineup);
+
+    //  results
+    firstParticipantResultKeys = Object.keys(eventParticipants[0]?.result);
+
+    for (let i = 0; i < firstParticipantResultKeys.length; i++) {
+      const currentResult =
+        eventParticipants[0]?.result[firstParticipantResultKeys[i]];
+      firstParticipantResult.push(currentResult);
+    }
+    secondParticipantResultKeys = Object.keys(eventParticipants[1]?.result);
+
+    for (let i = 0; i < secondParticipantResultKeys.length; i++) {
+      const currentResult =
+        eventParticipants[1]?.result[secondParticipantResultKeys[i]];
+      secondParticipantResult.push(currentResult);
+    }
+
+    // scope result
+    firstParticipantScopeResultKey = Object.keys(
+      eventParticipants[0]?.scope_result
+    );
+
+    for (let i = 0; i < firstParticipantScopeResultKey.length; i++) {
+      firstParticipantScopeResult =
+        eventParticipants[0]?.scope_result[firstParticipantScopeResultKey[i]];
+    }
+    secondParticipantScopeResultKey = Object.keys(
+      eventParticipants[1]?.scope_result
+    );
+    for (let i = 0; i < secondParticipantScopeResultKey.length; i++) {
+      secondParticipantScopeResult =
+        eventParticipants[0]?.scope_result[secondParticipantScopeResultKey[i]];
+    }
+  }
+
+  useEffect(() => {
+    console.log(
+      eventParticipants,
+      "event participants",
+      firstParticipantResult,
+      secondParticipantResult,
+      "resultssss",
+      firstParticipantScopeResult
+    );
+  }, [eventParticipants]);
+
+  // if (eventsDetails.length > 0) {
+  //   setParticipants(
+  //     Object.keys(eventsDetails[0]?.event_participants).map((key) => {
+  //       return eventsDetails[0]?.event_participants[key];
+  //     })
+  //   );
+
+  //   console.log(participants, "burst my head");
+  // }
+
+  // const firstParticipantLineUp = () => {
+  //   for (let i = 0; i < participants?.length; i++) {
+  //     const arr = [];
+  //     Object.keys(participants[i].lineup).map((data) => {
+  //       console.log(data);
+  //       arr.push(participants[i].lineup[data]);
+  //     });
+  //     return arr;
+  //   }
+  // };
+
+  console.log(
+    // firstParticipantLineUp(),
+    participants,
+    "participants"
+  );
+
+  useEffect(() => {
+    // console.log(eventsDetails, "event details");
+    // console.log(eventParticipants, "Who dey bleat");
+  }, [eventsDetails, eventParticipants]);
 
   // Comment
   // because we are now grting to get the id of each current season (which should always be an array of one element based on the filter we did)
@@ -300,6 +410,7 @@ const MatchesContextProvider = (props) => {
 
   useEffect(() => {
     fetchTournamentStage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentTime]);
 
   // get country flag
@@ -427,6 +538,10 @@ const MatchesContextProvider = (props) => {
         faCupIsLoading,
         setFaCup,
         fetchEventDetails,
+        eventsDetails,
+        eventParticipants,
+        participants,
+        // firstParticipantLineUp,
       }}
     >
       {props.children}

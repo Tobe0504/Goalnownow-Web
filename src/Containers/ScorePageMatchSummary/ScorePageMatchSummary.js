@@ -13,12 +13,45 @@ const ScorePageMatchSummary = () => {
   const { matchId } = useParams();
 
   // context
-  const { fetchEventDetails } = useContext(MatchesContext);
+  const { fetchEventDetails, eventsDetails, eventParticipants } =
+    useContext(MatchesContext);
 
   // useEffect
   useEffect(() => {
     fetchEventDetails(matchId);
+    console.log(eventsDetails);
   }, []);
+
+  if (eventsDetails.length > 0) {
+    const participants = Object.keys(eventsDetails[0]?.event_participants).map(
+      (key) => {
+        return eventsDetails[0]?.event_participants[key];
+      }
+    );
+
+    console.log(participants, "burst my head");
+
+    const firstParticipantLineUp = () => {
+      for (let i = 0; i < participants?.length; i++) {
+        const arr = [];
+        Object.keys(participants[i].lineup).map((data) => {
+          console.log(data);
+          arr.push(participants[i].lineup[data]);
+        });
+        return arr;
+      }
+    };
+    console.log(
+      firstParticipantLineUp(),
+      "lineups",
+      participants,
+      "participants"
+    );
+  }
+  // lineups
+  // const eventParticipant1Lineups = Object.values(eventsDetails[0]?.lineup);
+  // const eventParticipant2Lineups = Object.values(eventsDetails[1]?.lineup);
+  // console.log(Object.keys(eventsDetails[0]?.event_participants), "hmm");
 
   const iconHandler = (event) => {
     if (event === "Goal") {

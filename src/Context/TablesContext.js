@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import {
   apiAltKey,
   enetPulseTokenId,
@@ -31,13 +31,123 @@ const TablesContextProvider = (props) => {
     useState(false);
 
   const fetchAllLeagueTables = () => {
+    // Set states
+    setPremierLeagueTable([]);
+    setGermanLeagueTable([]);
+    setFrenchLeagueTable([]);
+    setItalianLeagueTable([]);
+    setGermanLeagueTable([]);
+
+    // Loading states
+    setpremierLeagueTableIsLoading(true);
+    setGermanLeagueIsLoading(true);
+    setItalianLeagueIsLoading(true);
+    setFrenchLeagueIsLoading(true);
+    setSpanishLeagueIsLoading(true);
+
     // premier league
     axios
       .get(
-        `http://demo.eapi.enetpulse.com/standing/leaguetable/?object=tournament_stage&objectFK=879290&limit=20&offset=0&includeStandingParticipants=yes&includeStandingParticipantsProperties=yes&includeStandingData=yes&includeCountryCodes=no&tf=Y-m-d H:i:s&&username=${enetPulseUsername}&token=${enetPulseTokenId}`
+        `https://eapi.enetpulse.com//standing/liveleaguetable//?object=tournament_stage&objectFK=879290&limit=20&offset=0&includeStandingParticipants=yes&includeStandingParticipantsProperties=yes&includeStandingData=yes&includeCountryCodes=no&username=${enetPulseUsername}&token=${enetPulseTokenId}`
       )
       .then((res) => {
-        console.log(res);
+        setPremierLeagueTable(
+          Object.values(res.data.standings[391022].standing_participants)
+        );
+        setpremierLeagueTableIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // spanish league
+    axios
+      .get(
+        `https://eapi.enetpulse.com//standing/liveleaguetable//?object=tournament_stage&objectFK=880043&limit=20&offset=0&includeStandingParticipants=yes&includeStandingParticipantsProperties=yes&includeStandingData=yes&includeCountryCodes=no&username=${enetPulseUsername}&token=${enetPulseTokenId}`
+      )
+      .then((res) => {
+        setSpanishLeagueTable(
+          Object.values(res.data.standings[393834].standing_participants)
+        );
+        setSpanishLeagueIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // french league
+    axios
+      .get(
+        `https://eapi.enetpulse.com//standing/liveleaguetable//?object=tournament_stage&objectFK=879865&limit=20&offset=0&includeStandingParticipants=yes&includeStandingParticipantsProperties=yes&includeStandingData=yes&includeCountryCodes=no&username=${enetPulseUsername}&token=${enetPulseTokenId}`
+      )
+      .then((res) => {
+        setFrenchLeagueTable(
+          Object.values(res.data.standings[393198].standing_participants)
+        );
+        setFrenchLeagueIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // German League
+    axios
+      .get(
+        `https://eapi.enetpulse.com//standing/liveleaguetable/?object=tournament_stage&objectFK=879853&limit=20&offset=0&includeStandingParticipants=yes&includeStandingParticipantsProperties=yes&includeStandingData=yes&includeCountryCodes=no&username=${enetPulseUsername}&token=${enetPulseTokenId}`
+      )
+      .then((res) => {
+        setGermanLeagueTable(
+          Object.values(res.data.standings[393092].standing_participants)
+        );
+        setGermanLeagueIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // Italian League
+    axios
+      .get(
+        `https://eapi.enetpulse.com//standing/liveleaguetable/?object=tournament_stage&objectFK=880067&limit=20&offset=0&includeStandingParticipants=yes&includeStandingParticipantsProperties=yes&includeStandingData=yes&includeCountryCodes=no&username=${enetPulseUsername}&token=${enetPulseTokenId}`
+      )
+      .then((res) => {
+        console.log(res, "tables");
+        setItalianLeagueTable(
+          Object.values(res.data.standings[394010].standing_participants)
+        );
+        setItalianLeagueIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // Champions League
+    axios
+      .get(
+        `https://eapi.enetpulse.com//standing/liveleaguetable/?object=tournament_stage&objectFK=880067&limit=20&offset=0&includeStandingParticipants=yes&includeStandingParticipantsProperties=yes&includeStandingData=yes&includeCountryCodes=no&username=${enetPulseUsername}&token=${enetPulseTokenId}`
+      )
+      .then((res) => {
+        console.log(res, "tables");
+        setItalianLeagueTable(
+          Object.values(res.data.standings[394010].standing_participants)
+        );
+        setItalianLeagueIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // Champions League
+    axios
+      .get(
+        ` http://eapi.enetpulse.com/image/team_logo/?teamFK=8564&username=${enetPulseUsername}&token=${enetPulseTokenId}`
+      )
+      .then((res) => {
+        console.log(res, "logo");
+        setItalianLeagueTable(
+          Object.values(res.data.standings[394010].standing_participants)
+        );
+        setItalianLeagueIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -45,7 +155,21 @@ const TablesContextProvider = (props) => {
   };
 
   return (
-    <TablesContext.Provider value={{ fetchAllLeagueTables }}>
+    <TablesContext.Provider
+      value={{
+        fetchAllLeagueTables,
+        premierLeagueTable,
+        spanishLeagueTable,
+        frenchLeagueTable,
+        germanLeagueTable,
+        italianLeagueTable,
+        premierLeagueTableIsLoading,
+        spanishLeagueTableIsLoading,
+        germanLeagueTableIsLoading,
+        frenchLeagueTableIsLoading,
+        italianLeagueTableIsLoading,
+      }}
+    >
       {props.children}
     </TablesContext.Provider>
   );
