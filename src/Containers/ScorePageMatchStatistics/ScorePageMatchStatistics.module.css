@@ -45,6 +45,9 @@
   align-items: center;
   justify-content: space-between;
   gap: 2px;
+  /* border: 10px solid red; */
+  /* width: 0; */
+  transition: all 0.3s ease-in-out;
 }
 
 .nameAndBarSection > div:nth-child(2) > div:nth-child(1) {

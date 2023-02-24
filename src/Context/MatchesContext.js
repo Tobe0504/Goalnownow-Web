@@ -368,27 +368,32 @@ const MatchesContextProvider = (props) => {
     const awayTeamIndex = 1;
 
     const codesToInclude = [
-      "shoton",
-      "possession",
-      "foulcommit",
-      "corner",
-      "offside",
-      "yellow_cards",
-      "red_cards",
-      "shotoff",
-      "saves",
-      "goal_attempt",
+      { code: "shoton", name: "Shots on target" },
+      { code: "possession", name: "Possession" },
+      { code: "foulcommit", name: "Fouls" },
+      { code: "corner", name: "Corners" },
+      { code: "offside", name: "Offsides" },
+      { code: "yellow_cards", name: "Yellow Cards" },
+      { code: "red_cards", name: "Red Cards" },
+      { code: "shotoff", name: "Shots off target" },
+      { code: "saves", name: "Saves" },
+      { code: "goal_attempt", name: "Attempts on goal" },
     ];
 
     const resultArray = codesToInclude.map((code) => {
       const homeTeamValue = matchStatistics[homeTeamIndex]?.standing_data.find(
-        (data) => data.code === code
+        (data) => data.code === code.code
       )?.value;
       const awayTeamValue = matchStatistics[awayTeamIndex]?.standing_data.find(
-        (data) => data.code === code
+        (data) => data.code === code.code
       )?.value;
 
-      return { code, homeValue: homeTeamValue, awayValue: awayTeamValue };
+      return {
+        code: code.code,
+        homeValue: homeTeamValue,
+        awayValue: awayTeamValue,
+        name: code.name,
+      };
     });
     setMatchDataCombinedToFit(resultArray);
 

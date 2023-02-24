@@ -43,31 +43,40 @@ const ScorePageMatchStatistics = () => {
 
         <div className={classes.statBody}>
           {matchDataCombinedToFit?.map((statistic) => {
+            console.log(
+              (
+                (Number(statistic.awayValue) /
+                  (Number(statistic.homeValue) + Number(statistic.awayValue)) ||
+                  0) * 100
+              ).toFixed(0),
+              statistic.name
+            );
+
             return (
               <div key={statistic.code} className={classes.statistic}>
                 <div>{statistic.homeValue}</div>
                 <div className={classes.nameAndBarSection}>
-                  <p>{statistic.code}</p>
+                  <p>{statistic.name}</p>
                   <div>
                     <div>
                       <div
                         style={{
-                          width: `${
-                            (statistic.homeValue /
-                              (statistic.homeValue + statistic.awayValue)) *
-                            100
-                          }%`,
+                          width: `${(
+                            (Number(statistic.homeValue) /
+                              (Number(statistic.homeValue) +
+                                Number(statistic.awayValue)) || 0) * 100
+                          ).toFixed(0)}%`,
                         }}
                       ></div>
                     </div>
                     <div>
                       <div
                         style={{
-                          width: `${
-                            (statistic.awayValue /
-                              (statistic.homeValue + statistic.awayValue)) *
-                            100
-                          }%`,
+                          width: `${(
+                            (Number(statistic.awayValue) /
+                              (Number(statistic.homeValue) +
+                                Number(statistic.awayValue)) || 0) * 100
+                          ).toFixed(0)}%`,
                         }}
                       ></div>
                     </div>
