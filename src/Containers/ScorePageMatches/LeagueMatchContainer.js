@@ -25,10 +25,41 @@ const LeagueMatchContainer = (props) => {
   //   navigate
   const navigate = useNavigate();
 
-  // // utils
-  // useEffect(() => {
-  //   console.log(premierLeagueevents);
-  // }, [premierLeagueevents]);
+  // utils
+  useEffect(() => {
+    console.log(props.leagueEvent, "leagueEvent");
+  }, [props.leagueEvent]);
+
+  const getUserResults = (umbrellaArray) => {
+    let firstParticipantResult = [];
+    let secondParticipantResult = [];
+
+    if (umbrellaArray && props.leagueEvent) {
+      let eventParticipants = Object.values(umbrellaArray?.event_participants);
+
+      //  results
+      let firstParticipantResultKeys = Object.keys(
+        eventParticipants[0]?.result
+      );
+
+      for (let i = 0; i < firstParticipantResultKeys.length; i++) {
+        const currentResult =
+          eventParticipants[0]?.result[firstParticipantResultKeys[i]];
+        firstParticipantResult.push(currentResult);
+      }
+      let secondParticipantResultKeys = Object.keys(
+        eventParticipants[1]?.result
+      );
+
+      for (let i = 0; i < secondParticipantResultKeys.length; i++) {
+        const currentResult =
+          eventParticipants[1]?.result[secondParticipantResultKeys[i]];
+        secondParticipantResult.push(currentResult);
+      }
+
+      return { firstParticipantResult, secondParticipantResult };
+    }
+  };
 
   return (
     <>
@@ -55,6 +86,7 @@ const LeagueMatchContainer = (props) => {
           </div>
           <div className={classes.leagueGames}>
             {props.leagueEvent?.map((datum, i) => {
+              const results = getUserResults(datum);
               return (
                 <div
                   className={classes.leagueGamesOuter}
@@ -104,12 +136,17 @@ const LeagueMatchContainer = (props) => {
                       </div>
                     )}
                     <div className={classes.scoresAndFavorites}>
-                      {!props.leagueEvent?.status_type === "notstarted" && (
+                      {datum.status_type !== "notstarted" && (
                         <div>
-                          <span>1</span>
-                          <span>1</span>
+                          <span>
+                            {results?.firstParticipantResult[1].value}
+                          </span>
+                          <span>
+                            {results?.secondParticipantResult[1].value}
+                          </span>
                         </div>
                       )}
+
                       <div>
                         <FontAwesomeIcon
                           icon={faStar}

@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ScorePageMatchLayout from "../../Components/ScorePageMatchLayout/ScorePageMatchLayout";
 import classes from "./ScorePageMatchStatistics.module.css";
 import { matches } from "../../Utilities/matches";
 import barcelona from "../../Assets/Images/barcelona.svg";
 import realMadrid from "../../Assets/Images/realmadrid.svg";
+import { MatchesContext } from "../../Context/MatchesContext";
 
 const ScorePageMatchStatistics = () => {
   // params
   const { matchId } = useParams();
+
+  const { fetchMatchStatistics, matchDataCombinedToFit } =
+    useContext(MatchesContext);
+
+  // utils
+  useEffect(() => {
+    fetchMatchStatistics(matchId);
+  }, []);
 
   const clubLogoHandler = (club) => {
     if (club === "Barcelona") {
@@ -21,71 +30,55 @@ const ScorePageMatchStatistics = () => {
 
   return (
     <ScorePageMatchLayout>
-      {matches.map((data) => {
-        return data.leagueMatches
-          .filter((datum) => {
-            return datum.id === matchId;
-          })
-          .map((datums) => {
-            return (
-              <div className={classes.container}>
-                <div className={classes.statHeader}>
-                  <div>
-                    <img
-                      src={clubLogoHandler(datums.homeClub)}
-                      alt="Club Logo"
-                    />
-                  </div>
-                  <div>Team Statistics</div>
-                  <div>
-                    <img
-                      src={clubLogoHandler(datums.awayClub)}
-                      alt="Club Logo"
-                    />
-                  </div>
-                </div>
+      <div className={classes.container}>
+        <div className={classes.statHeader}>
+          <div>
+            <img src={clubLogoHandler(null)} alt="Club Logo" />
+          </div>
+          <div>Team Statistics</div>
+          <div>
+            <img src={clubLogoHandler(null)} alt="Club Logo" />
+          </div>
+        </div>
 
-                <div className={classes.statBody}>
-                  {datums.statistics?.map((statistic) => {
-                    return (
-                      <div key={statistic.id} className={classes.statistic}>
-                        <div>{statistic.home}</div>
-                        <div className={classes.nameAndBarSection}>
-                          <p>{statistic.title}</p>
-                          <div>
-                            <div>
-                              <div
-                                style={{
-                                  width: `${
-                                    (statistic.home /
-                                      (statistic.home + statistic.away)) *
-                                    100
-                                  }%`,
-                                }}
-                              ></div>
-                            </div>
-                            <div>
-                              <div
-                                style={{
-                                  width: `${
-                                    (statistic.away /
-                                      (statistic.home + statistic.away)) *
-                                    100
-                                  }%`,
-                                }}
-                              ></div>
-                            </div>
-                          </div>
-                        </div>
-                        <div>{statistic.away}</div>
-                      </div>
-                    );
-                  })}
+        <div className={classes.statBody}>
+          {matchDataCombinedToFit?.map((statistic) => {
+            return (
+              <div key={statistic.code} className={classes.statistic}>
+                <div>{statistic.homeValue}</div>
+                <div className={classes.nameAndBarSection}>
+                  <p>{statistic.code}</p>
+                  <div>
+                    <div>
+                      <div
+                        style={{
+                          width: `${
+                            (statistic.homeValue /
+                              (statistic.homeValue + statistic.awayValue)) *
+                            100
+                          }%`,
+                        }}
+                      ></div>
+                    </div>
+                    <div>
+                      <div
+                        style={{
+                          width: `${
+                            (statistic.awayValue /
+                              (statistic.homeValue + statistic.awayValue)) *
+                            100
+                          }%`,
+                        }}
+                      ></div>
+                    </div>
+                  </div>
                 </div>
+                <div>{statistic.awayValue}</div>
               </div>
             );
-          });
-      })}
+          })}
+        </div>
+      </div>
     </ScorePageMatchLayout>
   );
 };
