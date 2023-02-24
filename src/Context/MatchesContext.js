@@ -28,6 +28,8 @@ const MatchesContextProvider = (props) => {
   const [participants, setParticipants] = useState([]);
   const [matchStatistics, setMatchStatistics] = useState([]);
   const [matchDataCombinedToFit, setMatchDataCombinedToFit] = useState([]);
+  const [isloadingMatchStatistics, setIsLoadingMatchStatistics] =
+    useState(false);
 
   // Major leaguue events and fixtures
   const [premierLeagueevents, setPremierLeagueEvents] = useState([]);
@@ -337,6 +339,7 @@ const MatchesContextProvider = (props) => {
 
   // fetch match statistics
   const fetchMatchStatistics = (id) => {
+    setIsLoadingMatchStatistics(true);
     setMatchStatistics([]);
     setMatchDataCombinedToFit([]);
     axios
@@ -355,9 +358,11 @@ const MatchesContextProvider = (props) => {
             )
           );
         }
+        setIsLoadingMatchStatistics(false);
       })
       .catch((err) => {
         console.log(err, "statistics");
+        setIsLoadingMatchStatistics(false);
       });
   };
 
@@ -571,6 +576,7 @@ const MatchesContextProvider = (props) => {
         secondParticipantLineup,
         fetchMatchStatistics,
         matchDataCombinedToFit,
+        isloadingMatchStatistics,
       }}
     >
       {props.children}

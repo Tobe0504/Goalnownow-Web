@@ -6,13 +6,17 @@ import { matches } from "../../Utilities/matches";
 import barcelona from "../../Assets/Images/barcelona.svg";
 import realMadrid from "../../Assets/Images/realmadrid.svg";
 import { MatchesContext } from "../../Context/MatchesContext";
+import { LinearProgress } from "@mui/material";
 
 const ScorePageMatchStatistics = () => {
   // params
   const { matchId } = useParams();
 
-  const { fetchMatchStatistics, matchDataCombinedToFit } =
-    useContext(MatchesContext);
+  const {
+    fetchMatchStatistics,
+    matchDataCombinedToFit,
+    isloadingMatchStatistics,
+  } = useContext(MatchesContext);
 
   // utils
   useEffect(() => {
@@ -30,64 +34,71 @@ const ScorePageMatchStatistics = () => {
 
   return (
     <ScorePageMatchLayout>
-      <div className={classes.container}>
-        <div className={classes.statHeader}>
-          <div>
-            <img src={clubLogoHandler(null)} alt="Club Logo" />
+      {isloadingMatchStatistics ? (
+        <LinearProgress
+          color="inherit"
+          style={{ color: "#ffd91b", height: ".1rem" }}
+        />
+      ) : (
+        <div className={classes.container}>
+          <div className={classes.statHeader}>
+            <div>
+              <img src={clubLogoHandler(null)} alt="Club Logo" />
+            </div>
+            <div>Team Statistics</div>
+            <div>
+              <img src={clubLogoHandler(null)} alt="Club Logo" />
+            </div>
           </div>
-          <div>Team Statistics</div>
-          <div>
-            <img src={clubLogoHandler(null)} alt="Club Logo" />
-          </div>
-        </div>
 
-        <div className={classes.statBody}>
-          {matchDataCombinedToFit?.map((statistic) => {
-            console.log(
-              (
-                (Number(statistic.awayValue) /
-                  (Number(statistic.homeValue) + Number(statistic.awayValue)) ||
-                  0) * 100
-              ).toFixed(0),
-              statistic.name
-            );
+          <div className={classes.statBody}>
+            {matchDataCombinedToFit?.map((statistic) => {
+              console.log(
+                (
+                  (Number(statistic.awayValue) /
+                    (Number(statistic.homeValue) +
+                      Number(statistic.awayValue)) || 0) * 100
+                ).toFixed(0),
+                statistic.name
+              );
 
-            return (
-              <div key={statistic.code} className={classes.statistic}>
-                <div>{statistic.homeValue}</div>
-                <div className={classes.nameAndBarSection}>
-                  <p>{statistic.name}</p>
-                  <div>
+              return (
+                <div key={statistic.code} className={classes.statistic}>
+                  <div>{statistic.homeValue}</div>
+                  <div className={classes.nameAndBarSection}>
+                    <p>{statistic.name}</p>
                     <div>
-                      <div
-                        style={{
-                          width: `${(
-                            (Number(statistic.homeValue) /
-                              (Number(statistic.homeValue) +
-                                Number(statistic.awayValue)) || 0) * 100
-                          ).toFixed(0)}%`,
-                        }}
-                      ></div>
-                    </div>
-                    <div>
-                      <div
-                        style={{
-                          width: `${(
-                            (Number(statistic.awayValue) /
-                              (Number(statistic.homeValue) +
-                                Number(statistic.awayValue)) || 0) * 100
-                          ).toFixed(0)}%`,
-                        }}
-                      ></div>
+                      <div>
+                        <div
+                          style={{
+                            width: `${(
+                              (Number(statistic.homeValue) /
+                                (Number(statistic.homeValue) +
+                                  Number(statistic.awayValue)) || 0) * 100
+                            ).toFixed(0)}%`,
+                          }}
+                        ></div>
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            width: `${(
+                              (Number(statistic.awayValue) /
+                                (Number(statistic.homeValue) +
+                                  Number(statistic.awayValue)) || 0) * 100
+                            ).toFixed(0)}%`,
+                          }}
+                        ></div>
+                      </div>
                     </div>
                   </div>
+                  <div>{statistic.awayValue}</div>
                 </div>
-                <div>{statistic.awayValue}</div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
     </ScorePageMatchLayout>
   );
 };
