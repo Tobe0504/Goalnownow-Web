@@ -30,6 +30,8 @@ const MatchesContextProvider = (props) => {
   const [matchDataCombinedToFit, setMatchDataCombinedToFit] = useState([]);
   const [isloadingMatchStatistics, setIsLoadingMatchStatistics] =
     useState(false);
+  const [specificMatchData, setSpecificmatchData] = useState([]);
+  const [isSendingRequest, setIsSendingRequest] = useState(false);
 
   // Major leaguue events and fixtures
   const [premierLeagueevents, setPremierLeagueEvents] = useState([]);
@@ -258,6 +260,12 @@ const MatchesContextProvider = (props) => {
     fetchTournamentEvents();
   }, [formattedDate]);
 
+  //State
+
+  const [firstParticipantLineup, setFirstParticipantLineup] = useState([]);
+  const [secondParticipantLineup, setSecondParticipantLineup] = useState([]);
+  const [firstParticipantResult, setFirstParticipantResult] = useState([]);
+  const [secondParticipantResult, setSecondParticipantResult] = useState([]);
   // get live events data
   const fetchEventDetails = (id) => {
     axios
@@ -269,7 +277,71 @@ const MatchesContextProvider = (props) => {
         setEventParticipants(
           Object.values(res.data.event[id].event_participants)
         );
-        console.log(res, "it workeddd broski");
+
+        // Operations
+
+        if (res.data.event[id].event_participants.length > 0) {
+          setFirstParticipantLineup(
+            Object.values(res.data.event[id].event_participants[0]?.lineup)
+          );
+          setSecondParticipantLineup(
+            Object.values(res.data.event[id].event_participants[1]?.lineup)
+          );
+
+          let firstParticipantResultKeys = [];
+          let secondParticipantResultKeys = [];
+
+          // Results
+
+          // Scope results (if its a two legged knockout staged match)
+          let firstParticipantScopeResultKey = [];
+          let secondParticipantScopeResultKey = [];
+
+          //  results
+          firstParticipantResultKeys = Object.keys(
+            res.data.event[id].event_participants[0]?.result
+          );
+
+          for (let i = 0; i < firstParticipantResultKeys.length; i++) {
+            const currentResult =
+              res.data.event[id].event_participants[0]?.result[
+                firstParticipantResultKeys[i]
+              ];
+            setFirstParticipantResult(currentResult);
+          }
+          secondParticipantResultKeys = Object.keys(
+            eventParticipants[1]?.result
+          );
+
+          for (let i = 0; i < secondParticipantResultKeys.length; i++) {
+            const currentResult =
+              res.data.event[id].event_participants[1]?.result[
+                secondParticipantResultKeys[i]
+              ];
+            setSecondParticipantResult(currentResult);
+          }
+
+          // scope result
+          firstParticipantScopeResultKey = Object.keys(
+            eventParticipants[0]?.scope_result
+          );
+
+          for (let i = 0; i < firstParticipantScopeResultKey.length; i++) {
+            firstParticipantScopeResult =
+              res.data.event[id].event_participants[0]?.scope_result[
+                firstParticipantScopeResultKey[i]
+              ];
+          }
+          secondParticipantScopeResultKey = Object.keys(
+            res.data.event[id].event_participants[1]?.scope_result
+          );
+          for (let i = 0; i < secondParticipantScopeResultKey.length; i++) {
+            secondParticipantScopeResult =
+              res.data.event[id].event_participants[0]?.scope_result[
+                secondParticipantScopeResultKey[i]
+              ];
+          }
+        }
       })
       .catch((err) => {
         console.log(err, "it didnt work broski");
@@ -281,61 +353,101 @@ const MatchesContextProvider = (props) => {
   }, [currentTime]);
 
   // Match lineups
-  let firstParticipantLineup = [];
-  let secondParticipantLineup = [];
 
   // First participants results keys
-  let firstParticipantResultKeys = [];
-  let secondParticipantResultKeys = [];
-
-  // Results
-  let firstParticipantResult = [];
-  let secondParticipantResult = [];
-
-  // Scope results (if its a two legged knockout staged match)
-  let firstParticipantScopeResultKey = [];
-  let secondParticipantScopeResultKey = [];
 
   let firstParticipantScopeResult;
   let secondParticipantScopeResult;
 
-  if (eventParticipants.length > 0) {
-    firstParticipantLineup = Object.values(eventParticipants[0]?.lineup);
-    secondParticipantLineup = Object.values(eventParticipants[1]?.lineup);
+  const [firstParticipantResults, setFirstParticipantResults] = useState([]);
+  const [secondParticipantResults, setSecondParticipantResults] = useState([]);
 
-    //  results
-    firstParticipantResultKeys = Object.keys(eventParticipants[0]?.result);
+  const [stadium, setStadium] = useState("");
 
-    for (let i = 0; i < firstParticipantResultKeys.length; i++) {
-      const currentResult =
-        eventParticipants[0]?.result[firstParticipantResultKeys[i]];
-      firstParticipantResult.push(currentResult);
-    }
-    secondParticipantResultKeys = Object.keys(eventParticipants[1]?.result);
+  const fetchSpecificMatchEvents = (id) => {
+    setIsSendingRequest(true);
+    setEventParticipants([]);
+    setFirstParticipantResults([]);
+    setSecondParticipantResults([]);
+    axios
+      .get(
+        `https://eapi.enetpulse.com/event/details/?id=${id}&includeLineups=yes&includeEventProperties=yes&includeTeamProperties=yes&includeIncidents=yes&includeExtendedResults=yes&includeProperties=yes&includeLivestats=yes&includeVenue=yes&includeCountryCodes=yes&includeFirstLastName=no&includeReference=yes&includeObjectParticipants=yes&includeEventIncidentRelation=yes&username=${enetPulseUsername}&token=${enetPulseTokenId}`
+      )
+      .then((res) => {
+        console.log(res, "specific match data");
+        setSpecificmatchData(res.data.event[id]);
+        setEventParticipants(
+          Object.values(res.data.event[id].event_participants)
+        );
 
-    for (let i = 0; i < secondParticipantResultKeys.length; i++) {
-      const currentResult =
-        eventParticipants[1]?.result[secondParticipantResultKeys[i]];
-      secondParticipantResult.push(currentResult);
-    }
+        // First participants results keys
+        let firstParticipantResultKeys = [];
+        let secondParticipantResultKeys = [];
 
-    // scope result
-    firstParticipantScopeResultKey = Object.keys(
-      eventParticipants[0]?.scope_result
-    );
+        // Scope results (if its a two legged knockout staged match)
+        let firstParticipantScopeResultKey = [];
+        let secondParticipantScopeResultKey = [];
 
-    for (let i = 0; i < firstParticipantScopeResultKey.length; i++) {
-      firstParticipantScopeResult =
-        eventParticipants[0]?.scope_result[firstParticipantScopeResultKey[i]];
-    }
-    secondParticipantScopeResultKey = Object.keys(
-      eventParticipants[1]?.scope_result
-    );
-    for (let i = 0; i < secondParticipantScopeResultKey.length; i++) {
-      secondParticipantScopeResult =
-        eventParticipants[0]?.scope_result[secondParticipantScopeResultKey[i]];
-    }
-  }
+        // stadium
+        setStadium(Object.values(res.data.event[id].venue)[0].name);
+
+        //  results
+        firstParticipantResultKeys = Object.keys(
+          Object.values(res.data.event[id].event_participants)[0]?.result
+        );
+
+        for (let i = 0; i < firstParticipantResultKeys.length; i++) {
+          const currentResult = Object.values(
+            res.data.event[id].event_participants
+          )[0]?.result[firstParticipantResultKeys[i]];
+          setFirstParticipantResults((prevState) => [
+            ...prevState,
+            currentResult,
+          ]);
+        }
+
+        secondParticipantResultKeys = Object.keys(
+          Object.values(res.data.event[id].event_participants)[1]?.result
+        );
+
+        for (let i = 0; i < secondParticipantResultKeys.length; i++) {
+          const currentResult = Object.values(
+            res.data.event[id].event_participants
+          )[1]?.result[secondParticipantResultKeys[i]];
+          setSecondParticipantResults((prevState) => [
+            ...prevState,
+            currentResult,
+          ]);
+        }
+
+        // scope result
+        firstParticipantScopeResultKey = Object.keys(
+          eventParticipants[0]?.scope_result
+        );
+
+        for (let i = 0; i < firstParticipantScopeResultKey.length; i++) {
+          firstParticipantScopeResult =
+            eventParticipants[0]?.scope_result[
+              firstParticipantScopeResultKey[i]
+            ];
+        }
+        secondParticipantScopeResultKey = Object.keys(
+          eventParticipants[1]?.scope_result
+        );
+        for (let i = 0; i < secondParticipantScopeResultKey.length; i++) {
+          secondParticipantScopeResult =
+            eventParticipants[0]?.scope_result[
+              secondParticipantScopeResultKey[i]
+            ];
+        }
+
+        setIsSendingRequest(false);
+      })
+      .catch((err) => {
+        console.log(err, "specific match data");
+        setIsSendingRequest(false);
+      });
+  };
 
   // fetch match statistics
   const fetchMatchStatistics = (id) => {
@@ -367,8 +479,6 @@ const MatchesContextProvider = (props) => {
   };
 
   useEffect(() => {
-    console.log(matchStatistics, "statustucs");
-
     const homeTeamIndex = 0;
     const awayTeamIndex = 1;
 
@@ -421,7 +531,6 @@ const MatchesContextProvider = (props) => {
     axios
       .get(
         `https://eapi.enetpulse.com/tournament_stage/list/?tournamentFK=${presentTournamentId}&username=${enetPulseUsername}&token=${enetPulseTokenId}`
-        // `https://eapi.enetpulse.com/tournament_stage/list/?tournamentFK=17664&includeVenue=yes&includeCountries=yes&includeProperties=yes&includeReference=yes&includeCountryCodes=no&tf=Y-m-dH:i:s&tz=${currentTime}&&username=${enetPulseUsername}&token=${enetPulseTokenId}`
       )
       .then((res) => {
         // res.data is transformed to an array
@@ -487,9 +596,7 @@ const MatchesContextProvider = (props) => {
   const fetchLeagueMatchesDataAndEvents = (id) => {
     axios
       .get(
-        `http://eapi.enetpulse.com//event/list/?date=2023-01-19&live=no&includeVenue=yes&status_type=notstarted&includeEventProperties=yes&includeCountryCodes=no&includeFirstLastName=yes&includeDeleted=yes&tf=Y-m-dH:i:s&tz=Africa/Accra&tournament_stageFK=17664&username=${enetPulseUsername}&token=${enetPulseTokenId}
-        
-        // event/list/?includeEventProperties=yes&tournament_stageFK=${id}&username=${enetPulseUsername}&token=${enetPulseTokenId}`
+        `http://eapi.enetpulse.com//event/list/?date=2023-01-19&live=no&includeVenue=yes&status_type=notstarted&includeEventProperties=yes&includeCountryCodes=no&includeFirstLastName=yes&includeDeleted=yes&tf=Y-m-dH:i:s&tz=Africa/Accra&tournament_stageFK=17664&username=${enetPulseUsername}&token=${enetPulseTokenId}`
       )
       .then((res) => {
         console.log(res, 5000);
@@ -577,6 +684,12 @@ const MatchesContextProvider = (props) => {
         fetchMatchStatistics,
         matchDataCombinedToFit,
         isloadingMatchStatistics,
+        fetchSpecificMatchEvents,
+        specificMatchData,
+        isSendingRequest,
+        firstParticipantResults,
+        secondParticipantResults,
+        stadium,
       }}
     >
       {props.children}
