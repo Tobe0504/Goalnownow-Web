@@ -53,15 +53,6 @@ const ScorePageMatchStatistics = () => {
 
           <div className={classes.statBody}>
             {matchDataCombinedToFit?.map((statistic) => {
-              console.log(
-                (
-                  (Number(statistic.awayValue) /
-                    (Number(statistic.homeValue) +
-                      Number(statistic.awayValue)) || 0) * 100
-                ).toFixed(0),
-                statistic.name
-              );
-
               return (
                 <div key={statistic.code} className={classes.statistic}>
                   <div>{statistic.homeValue}</div>

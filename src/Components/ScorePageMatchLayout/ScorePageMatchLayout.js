@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import classes from "./ScorePageMatchLayout.module.css";
 import ScorePageLayout from "../../Components/ScorePageLayout/ScorePageLayout";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { matches } from "../../Utilities/matches";
 import barcelona from "../../Assets/Images/barcelona.svg";
 import realMadrid from "../../Assets/Images/realmadrid.svg";
@@ -12,6 +12,8 @@ import { v4 } from "uuid";
 import { MatchesContext } from "../../Context/MatchesContext";
 import { useState } from "react";
 import { LinearProgress } from "@mui/material";
+import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import TeamLogo from "../TeamLogo/TeamLogo";
 
 const ScorePageMatchLayout = (props) => {
   // params
@@ -26,28 +28,22 @@ const ScorePageMatchLayout = (props) => {
     firstParticipantResults,
     secondParticipantResults,
     stadium,
+    eventIncidents,
+    getTeamImageAndLogo,
   } = useContext(MatchesContext);
-
-  // states
-  // const [eventParticipants, setEventParticipants] = useState([]);
-
-  // effecfs
-  useEffect(() => {
-    fetchSpecificMatchEvents(matchId);
-  }, []);
 
   // utils
 
-  useEffect(() => {
-    // console.log(specificMatchData, "specific match data in the layout");
-
-    console.log(
-      specificMatchData,
-      firstParticipantResults,
-      secondParticipantResults,
-      "resultsss"
-    );
-  }, [specificMatchData]);
+  useEffect(
+    () => {
+      // console.log(specificMatchData, "specific match data in the layout");
+      getTeamImageAndLogo("8586");
+      console.log(getTeamImageAndLogo("8586"), "Imagesss");
+      console.log(eventParticipants, specificMatchData, "resultsss");
+    },
+    [specificMatchData],
+    getTeamImageAndLogo
+  );
 
   //   utils
   const clubLogoHandler = (club) => {
@@ -89,105 +85,126 @@ const ScorePageMatchLayout = (props) => {
     },
   ];
 
+  // Navigate
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(eventIncidents, "incidentssss haaaaa");
+  }, []);
+
   return (
     <ScorePageLayout>
-      {isSendingRequest ? (
-        <LinearProgress
-          color="inherit"
-          style={{ color: "#ffd91b", height: ".1rem" }}
-        />
-      ) : (
-        <>
-          <div className={classes.container}>
-            <div className={classes.firstSection}>
-              <div className={classes.titleContainer}>
-                {specificMatchData?.tournament_stage_name}
-              </div>
-              <div className={classes.logoAndScoreSection}>
-                <div>
-                  <div>
-                    <img src={clubLogoHandler(null)} alt="Club Logo" />
-                  </div>
-                  <div>{specificMatchData?.name?.split("-")[0]}</div>
-                </div>
-
-                <div className={classes.scoreSection}>
-                  <div>{`${firstParticipantResults[1]?.value} : ${secondParticipantResults[1]?.value}`}</div>
-                  <div>
-                    {specificMatchData.status_type === "finished"
-                      ? "FT"
-                      : `First Half`}
-                  </div>
-                  {!specificMatchData.status_type === "finished" && (
-                    <div>21’</div>
-                  )}
-                  <div className={classes.lineDecoration}>
-                    <div>
-                      <div></div>
-                      <div></div>
-                    </div>
-
-                    <div>
-                      <div></div>
-                      <div></div>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <div>
-                    <img src={clubLogoHandler(null)} alt="Club Logo" />
-                  </div>
-                  <div>{specificMatchData?.name?.split("-")[1]}</div>
-                </div>
-              </div>
-              <div className={classes.audioCommentry}>
-                <div></div>
-                <div></div>
-                {stadium && <div>Venue: {stadium}</div>}
-              </div>
-              {/* <div className={classes.matchEvents}>
-                        {datums.events?.map((event) => {
-                          return (
-                            <div className={classes.matchEvent}>
-                              <div>
-                                <FontAwesomeIcon
-                                  icon={faFutbol}
-                                  color="#FFD91B"
-                                  fontSize="1.5rem"
-                                />
-                              </div>
-                              <div>{`${event.gialTime} ${event.goalsBy}`}</div>
-                            </div>
-                          );
-                        })}
-                      </div> */}
+      <div className={classes.container}>
+        <div className={classes.firstSection}>
+          <div
+            className={classes.titleContainer}
+            onClick={() => {
+              navigate("/scores");
+            }}
+          >
+            <span>
+              <FontAwesomeIcon icon={faAngleLeft} color="#CCD1D9" />
+            </span>
+            <span>{specificMatchData?.tournament_stage_name}</span>
+          </div>
+          <div className={classes.logoAndScoreSection}>
+            <div>
+              <TeamLogo
+                id={
+                  Object.values(specificMatchData.event_participants)[0]
+                    ?.participantFK
+                }
+                width="80px"
+                height="80px"
+              />
+              <div>{specificMatchData?.name?.split("-")[0]}</div>
             </div>
-            <div className={classes.navSection}>
-              {scorePageMatchNavItems.map((data) => {
+
+            <div className={classes.scoreSection}>
+              <div>{`${firstParticipantResults[1]?.value || "-"} : ${
+                secondParticipantResults[1]?.value || "-"
+              }`}</div>
+              <div>
+                {specificMatchData.status_type === "finished"
+                  ? "FT"
+                  : `First Half`}
+              </div>
+              {!specificMatchData.status_type === "finished" && <div>21’</div>}
+              <div className={classes.lineDecoration}>
+                <div>
+                  <div></div>
+                  <div></div>
+                </div>
+
+                <div>
+                  <div></div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <TeamLogo
+                id={
+                  Object.values(specificMatchData.event_participants)[1]
+                    ?.participantFK
+                }
+                width="80px"
+                height="80px"
+              />
+
+              <div>{specificMatchData?.name?.split("-")[1] || ""}</div>
+            </div>
+          </div>
+          <div className={classes.audioCommentry}>
+            <div></div>
+            <div></div>
+            {stadium && <div>Venue: {stadium}</div>}
+          </div>
+          <div className={classes.matchEvents}>
+            {eventIncidents
+              ?.filter((data) => {
+                return data.incident_typeFK === "7";
+              })
+              ?.map((event) => {
                 return (
-                  <Link
-                    key={data.id}
-                    to={data.route}
-                    className={
-                      window.location.href.includes(data.route)
-                        ? `${classes.activeNav}`
-                        : undefined
-                    }
-                  >
-                    {window.location.href.includes(data.route) && (
-                      <div className={classes.activeIndicator}></div>
-                    )}
-                    <div className={classes.navItem}>
-                      <div>{data.title}</div>
+                  <div className={classes.matchEvent}>
+                    <div>
+                      <FontAwesomeIcon
+                        icon={faFutbol}
+                        color="#FFD91B"
+                        fontSize="1.5rem"
+                      />
                     </div>
-                  </Link>
+                    <div>{`${event?.elapsed} ${event.participant.name}`}</div>
+                  </div>
                 );
               })}
-            </div>
-            <div>{props.children}</div>
           </div>
-        </>
-      )}
+        </div>
+        <div className={classes.navSection}>
+          {scorePageMatchNavItems.map((data) => {
+            return (
+              <Link
+                key={data.id}
+                to={data.route}
+                className={
+                  window.location.href.includes(data.route)
+                    ? `${classes.activeNav}`
+                    : undefined
+                }
+              >
+                {window.location.href.includes(data.route) && (
+                  <div className={classes.activeIndicator}></div>
+                )}
+                <div className={classes.navItem}>
+                  <div>{data.title}</div>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+        <div>{props.children}</div>
+      </div>
     </ScorePageLayout>
   );
 };

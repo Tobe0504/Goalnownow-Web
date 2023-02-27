@@ -99,7 +99,7 @@
   align-items: center;
   gap: 1rem;
   margin: 14px auto;
-  width: 330px;
+  width: 380px;
 }
 .summaryHome {
   justify-content: flex-start;
@@ -127,6 +127,10 @@
   padding: 0.5rem 10px;
   border: 1px solid #ffd91b;
   border-radius: 40px;
+}
+
+.summarySecond {
+  width: 100px;
 }
 
 .summarySecond > div:nth-child(1) {
