@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { enetPulseTokenId, enetPulseUsername } from "../../Utilities/global";
 import axios from "axios";
+import { CircularProgress } from "@mui/material";
 
 const TeamLogo = (props) => {
   const [logo, setLogo] = useState(null);
@@ -22,7 +23,15 @@ const TeamLogo = (props) => {
   }, [props.id]);
 
   if (!logo) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <CircularProgress
+          size="1rem"
+          color="inherit"
+          style={{ color: "#ffd91b" }}
+        />
+      </div>
+    );
   }
 
   return (

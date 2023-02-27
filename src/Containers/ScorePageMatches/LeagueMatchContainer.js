@@ -8,6 +8,7 @@ import realMadrid from "../../Assets/Images/realmadrid.svg";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { MatchesContext } from "../../Context/MatchesContext";
+import TeamLogo from "../../Components/TeamLogo/TeamLogo";
 
 const LeagueMatchContainer = (props) => {
   // Context
@@ -68,10 +69,11 @@ const LeagueMatchContainer = (props) => {
           <div className={classes.leagueHeader}>
             <div className={classes.leagueHeaderdata}>
               <div>
-                <img
-                  alt={null}
-                  src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/${null}.svg`}
-                  className={classes.hmm}
+                <TeamLogo
+                  id={
+                    Object.values(props.leagueEvent[0].event_participants)[0]
+                      .tournament_templateFK
+                  }
                 />
               </div>
 
@@ -86,6 +88,7 @@ const LeagueMatchContainer = (props) => {
           </div>
           <div className={classes.leagueGames}>
             {props.leagueEvent?.map((datum, i) => {
+              console.log(props.leagueEvent);
               const results = getUserResults(datum);
               return (
                 <div
@@ -102,18 +105,22 @@ const LeagueMatchContainer = (props) => {
                     <div className={classes.clubNameSection}>
                       <div>
                         <span>
-                          <img
-                            src={clubLogoHandler("Barcelona")}
-                            alt={datum.name.split("-")[0]}
+                          <TeamLogo
+                            id={
+                              Object.values(datum.event_participants)[0]
+                                .participantFK
+                            }
                           />
                         </span>
                         <span>{datum.name.split("-")[0]}</span>
                       </div>
                       <div>
                         <span>
-                          <img
-                            src={clubLogoHandler("Barcelona")}
-                            alt={datum.name.split("-")[1]}
+                          <TeamLogo
+                            id={
+                              Object.values(datum.event_participants)[1]
+                                .participantFK
+                            }
                           />
                         </span>
                         <span>{datum.name.split("-")[1]}</span>

@@ -33,7 +33,7 @@ const MatchesContextProvider = (props) => {
   const [matchDataCombinedToFit, setMatchDataCombinedToFit] = useState([]);
   const [isloadingMatchStatistics, setIsLoadingMatchStatistics] =
     useState(false);
-  const [specificMatchData, setSpecificmatchData] = useState([]);
+  const [specificMatchData, setSpecificmatchData] = useState();
   const [eventStaticDataType, setEventStaticDataType] = useState([]);
   const [firstParticipantIncidents, setFirstParticipantsIncident] = useState(
     []

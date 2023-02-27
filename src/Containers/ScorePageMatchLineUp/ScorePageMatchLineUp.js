@@ -11,6 +11,7 @@ import {
   faCircleArrowLeft,
   faCircleArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
+import TeamLogo from "../../Components/TeamLogo/TeamLogo";
 import { MatchesContext } from "../../Context/MatchesContext";
 
 const ScorePageMatchLineUp = () => {
@@ -24,6 +25,8 @@ const ScorePageMatchLineUp = () => {
     fetchEventDetails,
     eventsDetails,
     eventProperties,
+    fetchSpecificMatchEvents,
+    specificMatchData,
   } = useContext(MatchesContext);
 
   //   utils
@@ -40,9 +43,10 @@ const ScorePageMatchLineUp = () => {
 
   useEffect(() => {
     fetchEventDetails(matchId);
+    fetchSpecificMatchEvents(matchId);
   }, []);
 
-  console.log(eventProperties, eventsDetails, "Lineuppp");
+  console.log(firstParticipantLineup, "Lineuppp");
 
   const matchStartedState = eventProperties?.filter((data) => {
     return data.name === "LineupConfirmed";
@@ -52,20 +56,35 @@ const ScorePageMatchLineUp = () => {
     <ScorePageMatchLayout>
       <div className={classes.outerCountainer} key={datums.id}>
         <div className={classes.container}>
-          <div className={classes.formationSection}>
+          {/* <div className={classes.formationSection}>
             <img src={formation} alt="Formation" />
-          </div>
+          </div> */}
           <div className={classes.header}>
             Line up{" "}
             {matchStartedState[0]?.value === "no" && <span>(probable)</span>}
           </div>
+
           <div className={classes.lineUpTable}>
             <div className={classes.homeLineup}>
               <div className={classes.tableHeader}>
                 <span>
-                  <img src={clubLogoHandler("Baercelona")} alt="Club Logo" />
+                  {specificMatchData && (
+                    <TeamLogo
+                      id={
+                        Object.values(specificMatchData?.event_participants)[0]
+                          ?.participantFK
+                      }
+                      width="16px"
+                      height="16px"
+                    />
+                  )}
                 </span>
-                <span>{`${eventParticipants[0]?.participant.name} Lineup`}</span>
+                {specificMatchData && (
+                  <span>{`${
+                    Object.values(specificMatchData?.event_participants)[0]
+                      ?.participant.name
+                  } Lineup`}</span>
+                )}
               </div>
               {firstParticipantLineup
                 ?.sort((a, b) => {
@@ -87,13 +106,26 @@ const ScorePageMatchLineUp = () => {
                   );
                 })}
             </div>
-
             <div className={classes.homeLineup}>
               <div className={classes.tableHeader}>
                 <span>
-                  <img src={clubLogoHandler("Baercelona")} alt="Club Logo" />
+                  {specificMatchData && (
+                    <TeamLogo
+                      id={
+                        Object.values(specificMatchData?.event_participants)[1]
+                          ?.participantFK
+                      }
+                      width="16px"
+                      height="16px"
+                    />
+                  )}
                 </span>
-                <span>{`${eventParticipants[1]?.participant.name} Lineup`}</span>
+                {specificMatchData && (
+                  <span>{`${
+                    Object.values(specificMatchData?.event_participants)[1]
+                      ?.participant?.name
+                  } Lineup`}</span>
+                )}
               </div>
               {secondParticipantLineup
                 ?.sort((a, b) => {
@@ -117,60 +149,83 @@ const ScorePageMatchLineUp = () => {
             </div>
           </div>
         </div>
-        <div className={classes.substitutes}>
-          <div className={classes.header}>Substitutes</div>
-          <div className={classes.lineUpTable}>
-            <div className={classes.homeLineup}>
-              <div className={classes.tableHeader}>
-                <span>
-                  <img src={clubLogoHandler("Baercelona")} alt="Club Logo" />
-                </span>
-                <span>{`${eventParticipants[0]?.participant.name}`}</span>
-              </div>
-              {firstParticipantLineup
-                ?.filter((data) => {
-                  return Number(data.lineup_typeFK) === 5;
-                })
-                .map((lineUp) => {
-                  return (
-                    <div className={classes.players} key={lineUp.id}>
-                      <div className={classes.time}>{lineUp.shirt_number}</div>
-                      <div className={classes.player}>
-                        <span></span>
-                        <span>{lineUp?.participant?.name}</span>
-                      </div>
-                      <div className={classes.details}></div>
-                    </div>
-                  );
-                })}
-            </div>
+        {!matchStartedState[0]?.value === "no" ||
+          (specificMatchData.status_type === "finished" && (
+            <div className={classes.substitutes}>
+              <div className={classes.header}>Substitutes</div>
+              <div className={classes.lineUpTable}>
+                <div className={classes.homeLineup}>
+                  <div className={classes.tableHeader}>
+                    <span>
+                      <TeamLogo
+                        id={
+                          Object.values(
+                            specificMatchData?.event_participants
+                          )[0]?.participantFK
+                        }
+                        width="16px"
+                        height="16px"
+                      />
+                    </span>
+                    <span>{`${eventParticipants[0]?.participant?.name}`}</span>
+                  </div>
+                  {firstParticipantLineup
+                    ?.filter((data) => {
+                      return Number(data.lineup_typeFK) === 5;
+                    })
+                    .map((lineUp) => {
+                      return (
+                        <div className={classes.players} key={lineUp.id}>
+                          <div className={classes.time}>
+                            {lineUp.shirt_number}
+                          </div>
+                          <div className={classes.player}>
+                            <span></span>
+                            <span>{lineUp?.participant?.name}</span>
+                          </div>
+                          <div className={classes.details}></div>
+                        </div>
+                      );
+                    })}
+                </div>
 
-            <div className={classes.homeLineup}>
-              <div className={classes.tableHeader}>
-                <span>
-                  <img src={clubLogoHandler(datums.awayClub)} alt="Club Logo" />
-                </span>
-                <span>{`${eventParticipants[1]?.participant.name} `}</span>
+                <div className={classes.homeLineup}>
+                  <div className={classes.tableHeader}>
+                    <span>
+                      <TeamLogo
+                        id={
+                          Object.values(
+                            specificMatchData?.event_participants
+                          )[1]?.participantFK
+                        }
+                        width="16px"
+                        height="16px"
+                      />
+                    </span>
+                    <span>{`${eventParticipants[1]?.participant.name} `}</span>
+                  </div>
+                  {secondParticipantLineup
+                    ?.filter((data) => {
+                      return Number(data.lineup_typeFK) === 5;
+                    })
+                    .map((lineUp) => {
+                      return (
+                        <div className={classes.players} key={lineUp.id}>
+                          <div className={classes.time}>
+                            {lineUp.shirt_number}
+                          </div>
+                          <div className={classes.player}>
+                            <span></span>
+                            <span>{lineUp?.participant?.name}</span>
+                          </div>
+                          <div className={classes.details}></div>
+                        </div>
+                      );
+                    })}
+                </div>
               </div>
-              {secondParticipantLineup
-                ?.filter((data) => {
-                  return Number(data.lineup_typeFK) === 5;
-                })
-                .map((lineUp) => {
-                  return (
-                    <div className={classes.players} key={lineUp.id}>
-                      <div className={classes.time}>{lineUp.shirt_number}</div>
-                      <div className={classes.player}>
-                        <span></span>
-                        <span>{lineUp?.participant?.name}</span>
-                      </div>
-                      <div className={classes.details}></div>
-                    </div>
-                  );
-                })}
             </div>
-          </div>
-        </div>
+          ))}
         <div className={classes.additionalInformation}>
           <div className={classes.header}>Additional Infomation</div>
           {/* {datums.additionalInfo.map((info) => {

@@ -38,22 +38,15 @@ const ScorePageMatchLayout = (props) => {
     () => {
       // console.log(specificMatchData, "specific match data in the layout");
       getTeamImageAndLogo("8586");
+      // fetchSpecificMatchEvents(matchId);
       console.log(getTeamImageAndLogo("8586"), "Imagesss");
-      console.log(eventParticipants, specificMatchData, "resultsss");
+      console.log(specificMatchData, "resultsss");
     },
     [specificMatchData],
     getTeamImageAndLogo
   );
 
   //   utils
-  const clubLogoHandler = (club) => {
-    if (club === "Barcelona") {
-      return barcelona;
-    }
-    if (club === "Real Madrid") {
-      return realMadrid;
-    }
-  };
 
   const scorePageMatchNavItems = [
     {
@@ -109,14 +102,17 @@ const ScorePageMatchLayout = (props) => {
           </div>
           <div className={classes.logoAndScoreSection}>
             <div>
-              <TeamLogo
-                id={
-                  Object.values(specificMatchData.event_participants)[0]
-                    ?.participantFK
-                }
-                width="80px"
-                height="80px"
-              />
+              {specificMatchData && (
+                <TeamLogo
+                  id={
+                    Object.values(specificMatchData?.event_participants)[0]
+                      ?.participantFK
+                  }
+                  width="80px"
+                  height="80px"
+                />
+              )}
+
               <div>{specificMatchData?.name?.split("-")[0]}</div>
             </div>
 
@@ -124,12 +120,14 @@ const ScorePageMatchLayout = (props) => {
               <div>{`${firstParticipantResults[1]?.value || "-"} : ${
                 secondParticipantResults[1]?.value || "-"
               }`}</div>
-              <div>
-                {specificMatchData.status_type === "finished"
-                  ? "FT"
-                  : `First Half`}
-              </div>
-              {!specificMatchData.status_type === "finished" && <div>21’</div>}
+              {specificMatchData?.status_type && (
+                <div>
+                  {specificMatchData?.status_type === "finished"
+                    ? "FT"
+                    : `First Half`}
+                </div>
+              )}
+              {!specificMatchData?.status_type === "finished" && <div>21’</div>}
               <div className={classes.lineDecoration}>
                 <div>
                   <div></div>
@@ -143,14 +141,16 @@ const ScorePageMatchLayout = (props) => {
               </div>
             </div>
             <div>
-              <TeamLogo
-                id={
-                  Object.values(specificMatchData.event_participants)[1]
-                    ?.participantFK
-                }
-                width="80px"
-                height="80px"
-              />
+              {specificMatchData && (
+                <TeamLogo
+                  id={
+                    Object.values(specificMatchData?.event_participants)[1]
+                      ?.participantFK
+                  }
+                  width="80px"
+                  height="80px"
+                />
+              )}
 
               <div>{specificMatchData?.name?.split("-")[1] || ""}</div>
             </div>

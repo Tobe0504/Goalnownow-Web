@@ -7,6 +7,7 @@ import barcelona from "../../Assets/Images/barcelona.svg";
 import realMadrid from "../../Assets/Images/realmadrid.svg";
 import { MatchesContext } from "../../Context/MatchesContext";
 import { LinearProgress } from "@mui/material";
+import TeamLogo from "../../Components/TeamLogo/TeamLogo";
 
 const ScorePageMatchStatistics = () => {
   // params
@@ -16,6 +17,7 @@ const ScorePageMatchStatistics = () => {
     fetchMatchStatistics,
     matchDataCombinedToFit,
     isloadingMatchStatistics,
+    specificMatchData,
   } = useContext(MatchesContext);
 
   // utils
@@ -43,11 +45,29 @@ const ScorePageMatchStatistics = () => {
         <div className={classes.container}>
           <div className={classes.statHeader}>
             <div>
-              <img src={clubLogoHandler(null)} alt="Club Logo" />
+              {specificMatchData && (
+                <TeamLogo
+                  id={
+                    Object.values(specificMatchData?.event_participants)[0]
+                      ?.participantFK
+                  }
+                  width="16px"
+                  height="16px"
+                />
+              )}
             </div>
             <div>Team Statistics</div>
             <div>
-              <img src={clubLogoHandler(null)} alt="Club Logo" />
+              {specificMatchData && (
+                <TeamLogo
+                  id={
+                    Object.values(specificMatchData?.event_participants)[1]
+                      ?.participantFK
+                  }
+                  width="16px"
+                  height="16px"
+                />
+              )}
             </div>
           </div>
 
