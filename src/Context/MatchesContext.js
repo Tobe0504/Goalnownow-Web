@@ -76,7 +76,6 @@ const MatchesContextProvider = (props) => {
 
   // formatted with moment
   const formattedDate = moment(requiredDate).format(moment.HTML5_FMT.DATE);
-  console.log(formattedDate);
 
   // Comments
   // fetch tournament template
@@ -387,8 +386,6 @@ const MatchesContextProvider = (props) => {
     return eventDescription;
   };
 
-  console.log(getEventDescriptionType("7").name, "rtatt");
-
   const fetchSpecificMatchEvents = (id) => {
     setIsSendingRequest(true);
     setEventParticipants([]);
@@ -440,7 +437,6 @@ const MatchesContextProvider = (props) => {
             currentResult,
           ]);
         }
-
         for (let i = 0; i < firstParticipantIncidentKeys.length; i++) {
           const currentResult = Object.values(
             res.data.event[id].event_participants
@@ -802,6 +798,7 @@ const MatchesContextProvider = (props) => {
         firstParticipantResults,
         secondParticipantResults,
         eventIncidents,
+        setEventIncidents,
         stadium,
         getSummaryStatisEventType,
         eventStaticDataType,

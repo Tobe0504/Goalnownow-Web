@@ -1,16 +1,27 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import classes from "./LiveTables.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { leaguesTable } from "../../Utilities/leagueTable";
 import { SocialIcon } from "react-social-icons";
+import { useEffect } from "react";
+import { TablesContext } from "../../Context/TablesContext";
 
 const LiveTables = () => {
   let [tableState, setTableState] = useState(0);
 
-  const [table, setTable] = useState(
-    leaguesTable[tableState].leagueTable.slice(0, 4)
-  );
+  const { premierLeagueTable, fetchAllLeagueTables } =
+    useContext(TablesContext);
+
+  useEffect(() => {
+    fetchAllLeagueTables();
+  }, []);
+
+  const [table, setTable] = useState(premierLeagueTable?.slice(0, 4));
+
+  useEffect(() => {
+    console.log(premierLeagueTable);
+  }, [premierLeagueTable]);
 
   const tableStateIncrease = () => {
     setTableState(tableState + 1);
@@ -36,16 +47,16 @@ const LiveTables = () => {
         <div>Live Table</div>
         <div>
           <i
-            onClick={tableStateDecrease}
+            // onClick={tableStateDecrease}
             style={
               tableState <= 0 ? { cursor: "disable" } : { cursor: "pointer" }
             }
           >
             <FontAwesomeIcon icon={faAngleLeft} />
           </i>
-          <span>La Liga</span>
+          <span>Premier League</span>
           <i
-            onClick={tableStateIncrease}
+            // onClick={tableStateIncrease}
             style={
               tableState >= leaguesTable.length
                 ? { pointerEvents: "none" }
@@ -65,23 +76,28 @@ const LiveTables = () => {
         <div>Pts</div>
       </div>
       <div className={classes.liveTableContent}>
-        {table.map((data) => {
-          return (
-            <div className={classes.liveTableBody} key={data.id}>
-              <div>
-                {data.clubName.length > 12
-                  ? `${data.clubName.slice(0, 10)}...`
-                  : `${data.clubName}`}
-              </div>
+        {premierLeagueTable
+          ?.sort((a, b) => {
+            return a.rank - b.rank;
+          })
+          ?.slice(0, 4)
+          ?.map((data) => {
+            return (
+              <div className={classes.liveTableBody} key={data.id}>
+                <div>
+                  {data.participant?.name.length > 12
+                    ? `${data.participant?.name.slice(0, 10)}...`
+                    : `${data.participant?.name}`}
+                </div>
 
-              <div>{data.draws}</div>
-              <div>{data.losses}</div>
-              <div>{data.goalsAgainst}</div>
-              <div>{data.goalsAgainst}</div>
-              <div>{data.points}</div>
-            </div>
-          );
-        })}
+                <div>{data?.standing_data[4].value}</div>
+                <div>{data?.standing_data[5].value}</div>
+                <div>{data?.standing_data[6].value}</div>
+                <div>{data?.standing_data[3].value}</div>
+                <div>{data?.standing_data[0].value}</div>
+              </div>
+            );
+          })}
       </div>
       <div className={classes.viewFull}>
         <div>

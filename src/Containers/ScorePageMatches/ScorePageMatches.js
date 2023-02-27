@@ -87,25 +87,35 @@ const ScorePageMatches = () => {
           <LeagueMatchContainer
             leagueEvent={premierLeagueevents}
             setLegueEvent={setPremierLeagueEvents}
+            leagueAbbv={"GB"}
           />
 
           <LeagueMatchContainer
             leagueEvent={spanishLeague}
             setLegueEvent={setSpanishLeague}
+            leagueAbbv={"ES"}
           />
           <LeagueMatchContainer
             leagueEvent={frenchLeague}
             setLegueEvent={setFrenchLeague}
+            leagueAbbv={"FR"}
           />
           <LeagueMatchContainer
             leagueEvent={germanLeague}
             setLegueEvent={setGermanLeague}
+            leagueAbbv={"DE"}
           />
           <LeagueMatchContainer
             leagueEvent={italianLeague}
             setLegueEvent={setItalianLeague}
+            leagueAbbv={"IT"}
           />
-          <LeagueMatchContainer leagueEvent={faCup} setLegueEvent={setFaCup} />
+
+          <LeagueMatchContainer
+            leagueEvent={faCup}
+            setLegueEvent={setFaCup}
+            leagueAbbv={"GB"}
+          />
         </div>
       )}
     </ScorePageLayout>

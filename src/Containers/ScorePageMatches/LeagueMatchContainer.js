@@ -69,11 +69,10 @@ const LeagueMatchContainer = (props) => {
           <div className={classes.leagueHeader}>
             <div className={classes.leagueHeaderdata}>
               <div>
-                <TeamLogo
-                  id={
-                    Object.values(props.leagueEvent[0].event_participants)[0]
-                      .tournament_templateFK
-                  }
+                <img
+                  alt={props?.leagueEvent[0]?.tournament_stage_name}
+                  src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/${props.leagueAbbv}.svg`}
+                  className={classes.hmm}
                 />
               </div>
 

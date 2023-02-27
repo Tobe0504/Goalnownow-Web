@@ -29,6 +29,7 @@ const ScorePageMatchLayout = (props) => {
     secondParticipantResults,
     stadium,
     eventIncidents,
+    setEventIncidents,
     getTeamImageAndLogo,
   } = useContext(MatchesContext);
 
@@ -83,6 +84,23 @@ const ScorePageMatchLayout = (props) => {
 
   useEffect(() => {
     console.log(eventIncidents, "incidentssss haaaaa");
+  }, [eventIncidents]);
+
+  useEffect(() => {
+    setEventIncidents((prevState) => {
+      const filteredIncidents = [];
+      prevState.forEach((incident) => {
+        const foundIncident = filteredIncidents.find(
+          (filtered) => filtered.incident_id === incident.incident_id
+        );
+        if (!foundIncident) {
+          incident.tag = "home";
+          incident.newFrontendId = v4();
+          filteredIncidents.push(incident);
+        }
+      });
+      return filteredIncidents;
+    });
   }, []);
 
   return (
@@ -122,12 +140,16 @@ const ScorePageMatchLayout = (props) => {
               }`}</div>
               {specificMatchData?.status_type && (
                 <div>
-                  {specificMatchData?.status_type === "finished"
-                    ? "FT"
-                    : `First Half`}
+                  {specificMatchData?.status_type === "finished" && "FT"}
                 </div>
               )}
-              {!specificMatchData?.status_type === "finished" && <div>21’</div>}
+              {!specificMatchData?.status_type === "finished" &&
+                Object.values(specificMatchData?.elapsed)[0]?.elapsed !==
+                  "90" && (
+                  <div>
+                    {Object.values(specificMatchData?.elapsed)[0]?.elapsed}
+                  </div>
+                )}
               <div className={classes.lineDecoration}>
                 <div>
                   <div></div>
@@ -167,7 +189,13 @@ const ScorePageMatchLayout = (props) => {
               })
               ?.map((event) => {
                 return (
-                  <div className={classes.matchEvent}>
+                  <div
+                    className={
+                      event.tag === "away"
+                        ? classes.matchEventAway
+                        : classes.matchEvent
+                    }
+                  >
                     <div>
                       <FontAwesomeIcon
                         icon={faFutbol}
