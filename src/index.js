@@ -8,19 +8,22 @@ import LeagueAndCategoryContextprovider from "./Context/LeagueAndCategoryContext
 import MatchesContextProvider from "./Context/MatchesContext";
 import TablesContextProvider from "./Context/TablesContext";
 import FixturesContextProvider from "./Context/FixturesContext";
+import MatchesContextAltProvider from "./Context/MatchesContextAlt";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <MatchesContextProvider>
-      <TablesContextProvider>
-        <LeagueAndCategoryContextprovider>
-          <FixturesContextProvider>
-            <React.StrictMode>
-              <App />
-            </React.StrictMode>
-          </FixturesContextProvider>
-        </LeagueAndCategoryContextprovider>
-      </TablesContextProvider>
+      <MatchesContextAltProvider>
+        <TablesContextProvider>
+          <LeagueAndCategoryContextprovider>
+            <FixturesContextProvider>
+              <React.StrictMode>
+                <App />
+              </React.StrictMode>
+            </FixturesContextProvider>
+          </LeagueAndCategoryContextprovider>
+        </TablesContextProvider>
+      </MatchesContextAltProvider>
     </MatchesContextProvider>
   </BrowserRouter>
 );

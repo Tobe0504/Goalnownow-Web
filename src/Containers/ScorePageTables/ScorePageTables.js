@@ -1,12 +1,6 @@
 import React, { useEffect } from "react";
 import ScorePageLayout from "../../Components/ScorePageLayout/ScorePageLayout";
-import classes from "./ScorePageTables.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown, faCaretDown } from "@fortawesome/free-solid-svg-icons";
-import { activeTogglerNoFalse } from "../../HelperFunctions/ActiveToggler";
 import { useContext } from "react";
-import { LeagueAndcategoriesContext } from "../../Context/LeagueAndCategoryContext";
-import { MatchesContext } from "../../Context/MatchesContext";
 import { LinearProgress } from "@mui/material";
 import { TablesContext } from "../../Context/TablesContext";
 import ScorePageTablesContainer from "./ScorePageTablesContainer";
@@ -29,6 +23,7 @@ const ScorePageTables = () => {
 
   useEffect(() => {
     fetchAllLeagueTables();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

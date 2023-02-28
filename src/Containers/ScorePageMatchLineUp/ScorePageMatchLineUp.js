@@ -1,18 +1,9 @@
 import React, { useContext, useEffect } from "react";
 import classes from "./ScorePageMatchLineUp.module.css";
-import { matches } from "../../Utilities/matches";
-import formation from "../../Assets/Images/formation.svg";
-import { useParams } from "react-router-dom";
-import barcelona from "../../Assets/Images/barcelona.svg";
 import ScorePageMatchLayout from "../../Components/ScorePageMatchLayout/ScorePageMatchLayout";
-import realMadrid from "../../Assets/Images/realmadrid.svg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCircleArrowLeft,
-  faCircleArrowRight,
-} from "@fortawesome/free-solid-svg-icons";
 import TeamLogo from "../../Components/TeamLogo/TeamLogo";
 import { MatchesContext } from "../../Context/MatchesContext";
+import { useParams } from "react-router-dom";
 
 const ScorePageMatchLineUp = () => {
   const { matchId } = useParams();
@@ -23,30 +14,16 @@ const ScorePageMatchLineUp = () => {
     secondParticipantLineup,
     eventParticipants,
     fetchEventDetails,
-    eventsDetails,
     eventProperties,
-    fetchSpecificMatchEvents,
     specificMatchData,
   } = useContext(MatchesContext);
-
-  //   utils
-  const clubLogoHandler = (club) => {
-    if (club === "Barcelona") {
-      return barcelona;
-    }
-    if (club === "Real Madrid") {
-      return realMadrid;
-    }
-  };
 
   let datums = [];
 
   useEffect(() => {
     fetchEventDetails(matchId);
-    fetchSpecificMatchEvents(matchId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  console.log(firstParticipantLineup, "Lineuppp");
 
   const matchStartedState = eventProperties?.filter((data) => {
     return data.name === "LineupConfirmed";

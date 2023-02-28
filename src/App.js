@@ -1,7 +1,6 @@
 import React from "react";
 import Layout from "./Components/Layout/Layout";
 import { Routes, Route, Navigate } from "react-router-dom";
-import ScorePageLayout from "./Components/ScorePageLayout/ScorePageLayout";
 import ScorePageMatches from "./Containers/ScorePageMatches/ScorePageMatches";
 import ScorePageMatchByLeague from "./Containers/ScorePageMatchByLeague/ScorePageMatchByLeague";
 import ScorePageTables from "./Containers/ScorePageTables/ScorePageTables";

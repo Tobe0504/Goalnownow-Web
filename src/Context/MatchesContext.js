@@ -28,19 +28,13 @@ const MatchesContextProvider = (props) => {
   const [eventsDetails, setEventsDetails] = useState([]);
   const [eventProperties, setEventProperties] = useState([]);
   const [eventParticipants, setEventParticipants] = useState([]);
-  const [participants, setParticipants] = useState([]);
   const [matchStatistics, setMatchStatistics] = useState([]);
   const [matchDataCombinedToFit, setMatchDataCombinedToFit] = useState([]);
   const [isloadingMatchStatistics, setIsLoadingMatchStatistics] =
     useState(false);
   const [specificMatchData, setSpecificmatchData] = useState();
   const [eventStaticDataType, setEventStaticDataType] = useState([]);
-  const [firstParticipantIncidents, setFirstParticipantsIncident] = useState(
-    []
-  );
-  const [secondParticipantIncidents, setSecondParticipantsIncident] = useState(
-    []
-  );
+
   const [eventIncidents, setEventIncidents] = useState([]);
   const [isSendingRequest, setIsSendingRequest] = useState(false);
 
@@ -70,10 +64,6 @@ const MatchesContextProvider = (props) => {
   const [faCup, setFaCup] = useState([]);
   const [faCupIsLoading, setFaCupIsLoading] = useState(false);
 
-  //Get todays date
-  const date = new Date();
-  // console.log(date, "idk");
-
   // formatted with moment
   const formattedDate = moment(requiredDate).format(moment.HTML5_FMT.DATE);
 
@@ -93,7 +83,6 @@ const MatchesContextProvider = (props) => {
             return { ...data, isActive: false };
           })
         );
-        console.log(res, "tournaments template");
       })
       // we catch any error
       .catch((err) => {
@@ -120,7 +109,6 @@ const MatchesContextProvider = (props) => {
             return present.name === "2022/2023" || present.name === "2023";
           })
         );
-        console.log(res, "tournaments");
       })
       .catch((err) => {
         console.log(err, "tournaments");
@@ -147,16 +135,14 @@ const MatchesContextProvider = (props) => {
     // Premier league
     axios
       .get(
-        `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tz=${currentTime}&tournament_templateFK=47&username=${enetPulseUsername}&token=${enetPulseTokenId}`
+        `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tz=${currentTime}&tournament_templateFK=47&username=${enetPulseUsername}&token=${enetPulseTokenId}&tz=${currentTime}`
       )
       .then((res) => {
-        console.log(res.data.events, "EPL");
         setPremierLeagueEvents(
           Object.values(res.data.events).map((data) => {
             return { ...data, isFavourited: false };
           })
         );
-        console.log(res.data, "prem,prem");
 
         setPremierLeagueIsLoading(false);
       })
@@ -168,10 +154,9 @@ const MatchesContextProvider = (props) => {
     // Spanish league
     axios
       .get(
-        `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tournament_templateFK=87&username=${enetPulseUsername}&token=${enetPulseTokenId}`
+        `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tournament_templateFK=87&username=${enetPulseUsername}&token=${enetPulseTokenId}&tz=${currentTime}`
       )
       .then((res) => {
-        // console.log(res);
         setSpanishLeague(Object.values(res.data.events));
         setSpanishLeagueIsLoading(false);
       })
@@ -183,7 +168,7 @@ const MatchesContextProvider = (props) => {
     // French Leagues
     axios
       .get(
-        `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tournament_templateFK=53&username=${enetPulseUsername}&token=${enetPulseTokenId}`
+        `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tournament_templateFK=53&username=${enetPulseUsername}&token=${enetPulseTokenId}&tz=${currentTime}`
       )
       .then((res) => {
         setFrenchLeague(Object.values(res.data.events));
@@ -197,7 +182,7 @@ const MatchesContextProvider = (props) => {
     // German Leagues
     axios
       .get(
-        `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tournament_templateFK=54&username=${enetPulseUsername}&token=${enetPulseTokenId}`
+        `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tournament_templateFK=54&username=${enetPulseUsername}&token=${enetPulseTokenId}&tz=${currentTime}`
       )
       .then((res) => {
         setGermanLeague(Object.values(res.data.events));
@@ -211,7 +196,7 @@ const MatchesContextProvider = (props) => {
     // italian league
     axios
       .get(
-        `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tournament_templateFK=55&username=${enetPulseUsername}&token=${enetPulseTokenId}`
+        `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tournament_templateFK=55&username=${enetPulseUsername}&token=${enetPulseTokenId}&tz=${currentTime}`
       )
       .then((res) => {
         setItalianLeague(Object.values(res.data.events));
@@ -225,7 +210,7 @@ const MatchesContextProvider = (props) => {
     // champions league
     axios
       .get(
-        `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tournament_templateFK=42&username=${enetPulseUsername}&token=${enetPulseTokenId}`
+        `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tournament_templateFK=42&username=${enetPulseUsername}&token=${enetPulseTokenId}&tz=${currentTime}`
       )
       .then((res) => {
         setChampionsLeague(Object.values(res.data.events));
@@ -239,12 +224,11 @@ const MatchesContextProvider = (props) => {
     // europa league
     axios
       .get(
-        `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tournament_templateFK=73&username=${enetPulseUsername}&token=${enetPulseTokenId}`
+        `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tournament_templateFK=73&username=${enetPulseUsername}&token=${enetPulseTokenId}&tz=${currentTime}`
       )
       .then((res) => {
         setEuropaLeague(Object.values(res.data.events));
         setEuropaLeagueIsLoading(false);
-        console.log(res, "europa");
       })
       .catch((err) => {
         console.log(err, "italian");
@@ -254,7 +238,7 @@ const MatchesContextProvider = (props) => {
     // fa cup
     axios
       .get(
-        `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tournament_templateFK=132&username=${enetPulseUsername}&token=${enetPulseTokenId}`
+        `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tournament_templateFK=132&username=${enetPulseUsername}&token=${enetPulseTokenId}&tz=${currentTime}`
       )
       .then((res) => {
         setFaCup(Object.values(res.data.events));
@@ -268,22 +252,25 @@ const MatchesContextProvider = (props) => {
 
   useEffect(() => {
     fetchTournamentEvents();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formattedDate]);
 
   //State
 
   const [firstParticipantLineup, setFirstParticipantLineup] = useState([]);
   const [secondParticipantLineup, setSecondParticipantLineup] = useState([]);
-  const [firstParticipantResult, setFirstParticipantResult] = useState([]);
-  const [secondParticipantResult, setSecondParticipantResult] = useState([]);
+  // const [firstParticipantResult, setFirstParticipantResult] = useState([]);
+  // const [secondParticipantResult, setSecondParticipantResult] = useState([]);
   // get live events data
+
+  // let firstParticipantScopeResult;
+  // let secondParticipantScopeResult;
   const fetchEventDetails = (id) => {
     axios
       .get(
-        `https://eapi.enetpulse.com/event/details/?id=${id}&includeLineups=yes&includeEventProperties=yes&includeTeamProperties=yes&includeIncidents=yes&includeExtendedResults=yes&includeProperties=yes&includeLivestats=yes&includeVenue=yes&includeCountryCodes=yes&includeDeleted=no&includeReference=yes&includeObjectParticipants=yes&includeEventIncidentRelation=yes&username=${enetPulseUsername}&token=${enetPulseTokenId}`
+        `https://eapi.enetpulse.com/event/details/?id=${id}&includeLineups=yes&includeEventProperties=yes&includeTeamProperties=yes&includeIncidents=yes&includeExtendedResults=yes&includeProperties=yes&includeLivestats=yes&includeVenue=yes&includeCountryCodes=yes&includeDeleted=no&includeReference=yes&includeObjectParticipants=yes&includeEventIncidentRelation=yes&username=${enetPulseUsername}&token=${enetPulseTokenId}&tz=${currentTime}`
       )
       .then((res) => {
-        console.log(res, "EVENT DETAILS");
         setEventsDetails(Object.values(res.data.event));
         setEventParticipants(
           Object.values(res.data.event[id].event_participants)
@@ -306,57 +293,57 @@ const MatchesContextProvider = (props) => {
           )
         );
 
-        let firstParticipantResultKeys = [];
-        let secondParticipantResultKeys = [];
+        // let firstParticipantResultKeys = [];
+        // let secondParticipantResultKeys = [];
 
         // Results
 
         // Scope results (if its a two legged knockout staged match)
-        let firstParticipantScopeResultKey = [];
-        let secondParticipantScopeResultKey = [];
+        // let firstParticipantScopeResultKey = [];
+        // let secondParticipantScopeResultKey = [];
 
         //  results
-        firstParticipantResultKeys = Object.keys(
-          res.data.event[id].event_participants[0]?.result
-        );
+        // firstParticipantResultKeys = Object.keys(
+        //   res.data.event[id].event_participants[0]?.result
+        // );
 
-        for (let i = 0; i < firstParticipantResultKeys.length; i++) {
-          const currentResult =
-            res.data.event[id].event_participants[0]?.result[
-              firstParticipantResultKeys[i]
-            ];
-          setFirstParticipantResult(currentResult);
-        }
-        secondParticipantResultKeys = Object.keys(eventParticipants[1]?.result);
+        // for (let i = 0; i < firstParticipantResultKeys.length; i++) {
+        //   const currentResult =
+        //     res.data.event[id].event_participants[0]?.result[
+        //       firstParticipantResultKeys[i]
+        //     ];
+        //   setFirstParticipantResult(currentResult);
+        // }
+        // secondParticipantResultKeys = Object.keys(eventParticipants[1]?.result);
 
-        for (let i = 0; i < secondParticipantResultKeys.length; i++) {
-          const currentResult =
-            res.data.event[id].event_participants[1]?.result[
-              secondParticipantResultKeys[i]
-            ];
-          setSecondParticipantResult(currentResult);
-        }
+        // for (let i = 0; i < secondParticipantResultKeys.length; i++) {
+        //   const currentResult =
+        //     res.data.event[id].event_participants[1]?.result[
+        //       secondParticipantResultKeys[i]
+        //     ];
+        //   setSecondParticipantResult(currentResult);
+        // }
 
         // scope result
-        firstParticipantScopeResultKey = Object.keys(
-          eventParticipants[0]?.scope_result
-        );
+        // firstParticipantScopeResultKey = Object.keys(
+        //   eventParticipants[0]?.scope_result
+        // );
 
-        for (let i = 0; i < firstParticipantScopeResultKey.length; i++) {
-          firstParticipantScopeResult =
-            res.data.event[id].event_participants[0]?.scope_result[
-              firstParticipantScopeResultKey[i]
-            ];
-        }
-        secondParticipantScopeResultKey = Object.keys(
-          res.data.event[id].event_participants[1]?.scope_result
-        );
-        for (let i = 0; i < secondParticipantScopeResultKey.length; i++) {
-          secondParticipantScopeResult =
-            res.data.event[id].event_participants[0]?.scope_result[
-              secondParticipantScopeResultKey[i]
-            ];
-        }
+        // for (let i = 0; i < firstParticipantScopeResultKey.length; i++) {
+        //   firstParticipantScopeResult =
+        //     res.data.event[id].event_participants[0]?.scope_result[
+        //       firstParticipantScopeResultKey[i]
+        //     ];
+        // }
+        // secondParticipantScopeResultKey = Object.keys(
+        //   res.data.event[id].event_participants[1]?.scope_result
+        // );
+        // for (let i = 0; i < secondParticipantScopeResultKey.length; i++) {
+        //   secondParticipantScopeResult =
+        //     res.data.event[id].event_participants[0]?.scope_result[
+        //       secondParticipantScopeResultKey[i]
+        //     ];
+        // }
       })
       .catch((err) => {
         console.log(err, "it didnt work broski");
@@ -365,14 +352,12 @@ const MatchesContextProvider = (props) => {
 
   useEffect(() => {
     fetchTournamentEvents();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentTime]);
 
   // Match lineups
 
   // First participants results keys
-
-  let firstParticipantScopeResult;
-  let secondParticipantScopeResult;
 
   const [firstParticipantResults, setFirstParticipantResults] = useState([]);
   const [secondParticipantResults, setSecondParticipantResults] = useState([]);
@@ -392,12 +377,15 @@ const MatchesContextProvider = (props) => {
     setFirstParticipantResults([]);
     setSecondParticipantResults([]);
     setEventIncidents([]);
+
+    let firstParticipantIncidents = [];
+    let secondParticipantIncidents = [];
+
     axios
       .get(
-        `https://eapi.enetpulse.com/event/details/?id=${id}&includeLineups=yes&includeEventProperties=yes&includeTeamProperties=yes&includeIncidents=yes&includeExtendedResults=yes&includeProperties=yes&includeLivestats=yes&includeVenue=yes&includeCountryCodes=yes&includeFirstLastName=no&includeReference=yes&includeObjectParticipants=yes&includeEventIncidentRelation=yes&username=${enetPulseUsername}&token=${enetPulseTokenId}`
+        `https://eapi.enetpulse.com/event/details/?id=${id}&includeLineups=yes&includeEventProperties=yes&includeTeamProperties=yes&includeIncidents=yes&includeExtendedResults=yes&includeProperties=yes&includeLivestats=yes&includeVenue=yes&includeCountryCodes=yes&includeFirstLastName=no&includeReference=yes&includeObjectParticipants=yes&includeEventIncidentRelation=yes&username=${enetPulseUsername}&token=${enetPulseTokenId}&tz=${currentTime}`
       )
       .then((res) => {
-        console.log(res, "specific match data");
         setSpecificmatchData(res.data.event[id]);
         setEventParticipants(
           Object.values(res.data.event[id].event_participants)
@@ -407,13 +395,9 @@ const MatchesContextProvider = (props) => {
         let firstParticipantResultKeys = [];
         let secondParticipantResultKeys = [];
 
-        // Incidents
-        let firstParticipantIncidentKeys = [];
-        let secondParticipantIncidentKeys = [];
-
         // Scope results (if its a two legged knockout staged match)
-        let firstParticipantScopeResultKey = [];
-        let secondParticipantScopeResultKey = [];
+        // let firstParticipantScopeResultKey = [];
+        // let secondParticipantScopeResultKey = [];
 
         // stadium
         setStadium(Object.values(res.data.event[id].venue)[0].name);
@@ -424,9 +408,6 @@ const MatchesContextProvider = (props) => {
         );
 
         // incidents
-        firstParticipantIncidentKeys = Object.keys(
-          Object.values(res.data.event[id].event_participants)[0].incident
-        );
 
         for (let i = 0; i < firstParticipantResultKeys.length; i++) {
           const currentResult = Object.values(
@@ -437,21 +418,28 @@ const MatchesContextProvider = (props) => {
             currentResult,
           ]);
         }
-        for (let i = 0; i < firstParticipantIncidentKeys.length; i++) {
-          const currentResult = Object.values(
-            res.data.event[id].event_participants
-          )[0]?.incident[firstParticipantIncidentKeys[i]];
-          currentResult.tag = "home";
-          currentResult.newFrontendId = v4();
-          setEventIncidents((prevState) => [...prevState, currentResult]);
-        }
+
+        firstParticipantIncidents = Object.values(
+          Object.values(
+            Object.values(res?.data?.event)[0]?.event_participants
+          )[0]?.incident || []
+        ).map((data) => {
+          return { ...data, tag: "home", newFrontendId: v4() };
+        });
+        secondParticipantIncidents = Object.values(
+          Object.values(Object.values(res.data.event)[0]?.event_participants)[1]
+            ?.incident || []
+        )?.map((data) => {
+          return { ...data, tag: "away", newFrontendId: v4() };
+        });
+
+        setEventIncidents([
+          ...firstParticipantIncidents,
+          ...secondParticipantIncidents,
+        ]);
 
         secondParticipantResultKeys = Object.keys(
           Object.values(res.data.event[id].event_participants)[1]?.result
-        );
-
-        secondParticipantIncidentKeys = Object.keys(
-          Object.values(res.data.event[id].event_participants)[1].incident
         );
 
         for (let i = 0; i < secondParticipantResultKeys.length; i++) {
@@ -464,41 +452,32 @@ const MatchesContextProvider = (props) => {
           ]);
         }
 
-        for (let i = 0; i < secondParticipantIncidentKeys.length; i++) {
-          const currentResult = Object.values(
-            res.data.event[id].event_participants
-          )[1]?.incident[secondParticipantIncidentKeys[i]];
-          currentResult.tag = "away";
-          currentResult.newFrontendId = v4();
-          setEventIncidents((prevState) => [...prevState, currentResult]);
-        }
+        // if (
+        //   Object.values(res.data.event[id].event_participants)[0]?.scope_result
+        // ) {
+        //   // scope result
+        //   firstParticipantScopeResultKey = Object.keys(
+        //     Object.values(res.data.event[id].event_participants)[0]
+        //       ?.scope_result
+        //   );
 
-        if (
-          Object.values(res.data.event[id].event_participants)[0]?.scope_result
-        ) {
-          // scope result
-          firstParticipantScopeResultKey = Object.keys(
-            Object.values(res.data.event[id].event_participants)[0]
-              ?.scope_result
-          );
-
-          for (let i = 0; i < firstParticipantScopeResultKey?.length; i++) {
-            firstParticipantScopeResult =
-              eventParticipants[0]?.scope_result[
-                firstParticipantScopeResultKey[i]
-              ];
-          }
-          secondParticipantScopeResultKey = Object.keys(
-            Object.values(res.data.event[id].event_participants)[1]
-              ?.scope_result
-          );
-          for (let i = 0; i < secondParticipantScopeResultKey.length; i++) {
-            secondParticipantScopeResult =
-              eventParticipants[0]?.scope_result[
-                secondParticipantScopeResultKey[i]
-              ];
-          }
-        }
+        //   for (let i = 0; i < firstParticipantScopeResultKey?.length; i++) {
+        //     firstParticipantScopeResult =
+        //       eventParticipants[0]?.scope_result[
+        //         firstParticipantScopeResultKey[i]
+        //       ];
+        //   }
+        //   secondParticipantScopeResultKey = Object.keys(
+        //     Object.values(res.data.event[id].event_participants)[1]
+        //       ?.scope_result
+        //   );
+        //   for (let i = 0; i < secondParticipantScopeResultKey.length; i++) {
+        //     secondParticipantScopeResult =
+        //       eventParticipants[0]?.scope_result[
+        //         secondParticipantScopeResultKey[i]
+        //       ];
+        //   }
+        // }
 
         setIsSendingRequest(false);
       })
@@ -507,22 +486,6 @@ const MatchesContextProvider = (props) => {
         setIsSendingRequest(false);
       });
   };
-
-  // elete later
-  useEffect(() => {
-    console.log(
-      eventIncidents,
-      firstParticipantIncidents,
-      secondParticipantIncidents,
-      "INCIDENTS",
-      7777777
-    );
-
-    const uniqueState = [...new Set(eventIncidents?.map(JSON.stringify))].map(
-      JSON.parse
-    );
-    console.log(uniqueState, "uniquestate");
-  }, [eventIncidents]);
 
   // fetch match statistics
   const fetchMatchStatistics = (id) => {
@@ -535,7 +498,6 @@ const MatchesContextProvider = (props) => {
       )
       .then((res) => {
         setMatchStatistics([]);
-        console.log(res, "statistics");
         const standingsKey = Object.keys(res.data.standings);
 
         for (let i = 0; i < standingsKey.length; i++) {
@@ -571,10 +533,10 @@ const MatchesContextProvider = (props) => {
     ];
 
     const resultArray = codesToInclude.map((code) => {
-      const homeTeamValue = matchStatistics[homeTeamIndex]?.standing_data.find(
+      const homeTeamValue = matchStatistics[homeTeamIndex]?.standing_data?.find(
         (data) => data.code === code.code
       )?.value;
-      const awayTeamValue = matchStatistics[awayTeamIndex]?.standing_data.find(
+      const awayTeamValue = matchStatistics[awayTeamIndex]?.standing_data?.find(
         (data) => data.code === code.code
       )?.value;
 
@@ -587,7 +549,7 @@ const MatchesContextProvider = (props) => {
     });
     setMatchDataCombinedToFit(resultArray);
 
-    console.log(matchDataCombinedToFit, "combined");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [matchStatistics]);
 
   // get static data type for events
@@ -597,7 +559,6 @@ const MatchesContextProvider = (props) => {
         `http://eapi.enetpulse.com/static/incident_type/?username=${enetPulseUsername}&token=${enetPulseTokenId}`
       )
       .then((res) => {
-        console.log(res, "incident data");
         setEventStaticDataType(Object.values(res.data.incident_type));
       })
       .catch((err) => {
@@ -631,9 +592,7 @@ const MatchesContextProvider = (props) => {
     setLeagueLoading(true);
 
     // leagues is set to an empty array at first then we are fetching based on the unique id's of each array
-    setLeagues([]);
-
-    console.log(tournaments[0]?.id);
+    // setLeagues([]);
 
     axios
       .get(
@@ -641,10 +600,7 @@ const MatchesContextProvider = (props) => {
       )
       .then((res) => {
         // res.data is transformed to an array
-        console.log(res);
         setLeagues(Object.values(res.data.tournament_stages));
-
-        // the loading state is then set to false if we have a sucessful fetch
         setLeagueLoading(false);
       })
       .catch((err) => {
@@ -676,19 +632,16 @@ const MatchesContextProvider = (props) => {
   const fetchLeagueEvents = (id) => {
     setLeagueParticipant([]);
     setLeagueTableLoading(true);
-    // console.log(leagues, id);
     let activeLeagueFilter = leagues?.filter((data) => {
       return data.id === id;
     });
     setActiveLeague(activeLeagueFilter);
-    console.log(activeLeagueFilter, activeLeague, "roar");
     axios
       .get
       // `http://eapi.enetpulse.com/tournament_stage/participants/?id=${id}&includeProperties=yes&includeParticipantProperties=yes&includeCountries=yes&includeCountryCodes=yes&tz=Africa/Lagos&username=${enetPulseUsername}&token=${enetPulseTokenId}`
       // `http://eapi.enetpulse.com/event/list/?includeEventProperties=yes&tournament_stageFK=${id}&username=${enetPulseUsername}&token=${enetPulseTokenId}`
       ()
       .then((res) => {
-        console.log(res.data, "Gra gra");
         setLeagueParticipant(
           Object.values(res.data.tournament_stages[id].participants)
         );
@@ -706,8 +659,6 @@ const MatchesContextProvider = (props) => {
         `http://eapi.enetpulse.com/event/list/?date=2023-01-19&live=no&includeVenue=yes&status_type=notstarted&includeEventProperties=yes&includeCountryCodes=no&includeFirstLastName=yes&includeDeleted=yes&tf=Y-m-dH:i:s&tz=Africa/Accra&tournament_stageFK=17664&username=${enetPulseUsername}&token=${enetPulseTokenId}`
       )
       .then((res) => {
-        console.log(res, 5000);
-
         setLeagueMatches(
           Object.values(res.data.events)
             .map((data) => {
@@ -717,11 +668,9 @@ const MatchesContextProvider = (props) => {
               return data.startdate.slice(0, 10) === formattedDate;
             })
         );
-        console.log(leagueMatches, "1234");
       })
       .catch((err) => {
         console.log(err);
-        // console.log(2345, id);
       });
   };
 
@@ -786,7 +735,6 @@ const MatchesContextProvider = (props) => {
         eventsDetails,
         eventProperties,
         eventParticipants,
-        participants,
         firstParticipantLineup,
         secondParticipantLineup,
         fetchMatchStatistics,
@@ -805,6 +753,12 @@ const MatchesContextProvider = (props) => {
         getEventDescriptionType,
         getTeamImageAndLogo,
         formattedDate,
+        setSpecificmatchData,
+        setEventParticipants,
+        setStadium,
+        setFirstParticipantResults,
+        setSecondParticipantResults,
+        setIsSendingRequest,
       }}
     >
       {props.children}

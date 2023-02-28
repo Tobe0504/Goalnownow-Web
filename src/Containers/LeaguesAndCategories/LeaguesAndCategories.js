@@ -15,15 +15,12 @@ const LeaguesAndCategories = () => {
     tournamentsTemplate,
     setTournamentsTemplate,
     fetchTournamentYear,
-    tournaments,
     leagues,
     setLeagues,
     fetchTournamentStage,
     leagueLoading,
     setCountryNameFlag,
     countryAbbreviation,
-    fetchLeagueEvents,
-    fetchLeagueMatchesDataAndEvents,
   } = useContext(MatchesContext);
 
   // navigate
@@ -32,11 +29,7 @@ const LeaguesAndCategories = () => {
   useEffect(() => {
     fetchTournaents();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // fetchCompetitions();
   }, []);
-
-  // Test data
-  // setLeagueAndCategory, leaguecategpry
 
   return (
     <div className={classes.container}>
@@ -59,12 +52,11 @@ const LeaguesAndCategories = () => {
                       tournamentsTemplate,
                       setTournamentsTemplate
                     );
-                    setLeagues();
                     if (data.isActive === false) {
-                      fetchTournamentYear(data.id);
-                      setCountryNameFlag(data.name.split(" ")[0]);
-                    } else {
                       setLeagues([]);
+                      fetchTournamentYear(data.id);
+                      fetchTournamentStage(data.id);
+                      setCountryNameFlag(data.name.split(" ")[0]);
                     }
                   }}
                 >
@@ -92,12 +84,12 @@ const LeaguesAndCategories = () => {
                   className={classes.categoryOptions}
                   style={
                     data?.isActive
-                      ? { maxHeight: "154vh" }
+                      ? { maxHeight: "54vh" }
                       : { maxHeight: "0vh" }
                   }
                   // { height: "4rem" } : { height: "0rem" }
                 >
-                  {!leagueLoading ? (
+                  {!leagueLoading && leagues.length > 0 ? (
                     <>
                       {leagues?.map((datum) => {
                         return (
@@ -106,9 +98,7 @@ const LeaguesAndCategories = () => {
                             className={classes.categoryOption}
                             id="categoryOption"
                             onClick={() => {
-                              console.log(datum.id, 77777);
-                              fetchTournamentStage(datum.id);
-                              fetchLeagueMatchesDataAndEvents(datum.id);
+                              // fetchLeagueMatchesDataAndEvents(datum.id);
                               // fetchLeagueEvents(datum.tournament_templateFK);
                               navigate(`/scores/${datum.id}/events`);
                             }}
@@ -125,6 +115,8 @@ const LeaguesAndCategories = () => {
                         );
                       })}
                     </>
+                  ) : leagues?.length < 1 && !leagueLoading ? (
+                    <div className={classes.progress}>No league available</div>
                   ) : (
                     <div className={classes.progress}>
                       <CircularProgress

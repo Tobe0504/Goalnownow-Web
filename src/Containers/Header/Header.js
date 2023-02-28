@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import classes from "./Header.module.css";
 import goalNowNowLogo from "../../Assets/Images/goalNowNowLogo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

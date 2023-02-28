@@ -1,45 +1,41 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import classes from "./LiveTables.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
-import { leaguesTable } from "../../Utilities/leagueTable";
 import { SocialIcon } from "react-social-icons";
 import { useEffect } from "react";
 import { TablesContext } from "../../Context/TablesContext";
 
 const LiveTables = () => {
-  let [tableState, setTableState] = useState(0);
+  // let [tableState, setTableState] = useState(0);
 
   const { premierLeagueTable, fetchAllLeagueTables } =
     useContext(TablesContext);
 
   useEffect(() => {
     fetchAllLeagueTables();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const [table, setTable] = useState(premierLeagueTable?.slice(0, 4));
+  // const [table, setTable] = useState(premierLeagueTable?.slice(0, 4));
 
-  useEffect(() => {
-    console.log(premierLeagueTable);
-  }, [premierLeagueTable]);
+  // const tableStateIncrease = () => {
+  //   setTableState(tableState + 1);
+  //   console.log(tableState);
+  //   setTable(leaguesTable[tableState].leagueTable.slice(0, 4));
+  //   if (tableState === leaguesTable.length - 1) {
+  //     setTableState(0);
+  //   }
+  // };
 
-  const tableStateIncrease = () => {
-    setTableState(tableState + 1);
-    console.log(tableState);
-    setTable(leaguesTable[tableState].leagueTable.slice(0, 4));
-    if (tableState === leaguesTable.length - 1) {
-      setTableState(0);
-    }
-  };
-
-  const tableStateDecrease = () => {
-    setTableState(tableState - 1);
-    console.log(tableState);
-    setTable(leaguesTable[tableState].leagueTable.slice(0, 4));
-    if (tableState === 0) {
-      setTableState(0);
-    }
-  };
+  // const tableStateDecrease = () => {
+  //   setTableState(tableState - 1);
+  //   console.log(tableState);
+  //   setTable(leaguesTable[tableState].leagueTable.slice(0, 4));
+  //   if (tableState === 0) {
+  //     setTableState(0);
+  //   }
+  // };
 
   return (
     <div className={classes.container}>
@@ -47,21 +43,21 @@ const LiveTables = () => {
         <div>Live Table</div>
         <div>
           <i
-            // onClick={tableStateDecrease}
-            style={
-              tableState <= 0 ? { cursor: "disable" } : { cursor: "pointer" }
-            }
+          // onClick={tableStateDecrease}
+          // style={
+          //   tableState <= 0 ? { cursor: "disable" } : { cursor: "pointer" }
+          // }
           >
             <FontAwesomeIcon icon={faAngleLeft} />
           </i>
           <span>Premier League</span>
           <i
-            // onClick={tableStateIncrease}
-            style={
-              tableState >= leaguesTable.length
-                ? { pointerEvents: "none" }
-                : undefined
-            }
+          // onClick={tableStateIncrease}
+          // style={
+          //   tableState >= leaguesTable.length
+          //     ? { pointerEvents: "none" }
+          //     : undefined
+          // }
           >
             <FontAwesomeIcon icon={faAngleRight} />
           </i>

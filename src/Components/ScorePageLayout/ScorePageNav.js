@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import classes from "./ScorePageNav.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
@@ -16,7 +16,6 @@ const ScorePageNav = (props) => {
   // State
   const { showOdds, setShowOdds, setRequiredDate, requiredDate } =
     useContext(MatchesContext);
-  const [dateCounter, setDateCounter] = useState(0);
 
   const { leagueIdforFetch } = useContext(FixturesContext);
 

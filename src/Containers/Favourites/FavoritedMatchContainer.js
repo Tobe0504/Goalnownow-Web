@@ -6,7 +6,6 @@ import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 import barcelona from "../../Assets/Images/barcelona.svg";
 import realMadrid from "../../Assets/Images/realmadrid.svg";
-import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 
 const FavoritedMatchContainer = (props) => {
@@ -22,9 +21,6 @@ const FavoritedMatchContainer = (props) => {
     }
   };
 
-  //   navigate
-  const navigate = useNavigate();
-
   const favoritedMatch = props?.leagueEvent?.filter((data) => {
     return data.isFavourited;
   });
@@ -37,8 +33,8 @@ const FavoritedMatchContainer = (props) => {
             <div className={classes.leagueHeaderdata}>
               <div>
                 <img
-                  alt={null}
                   src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/${null}.svg`}
+                  alt="Favorite"
                   className={classes.hmm}
                 />
               </div>

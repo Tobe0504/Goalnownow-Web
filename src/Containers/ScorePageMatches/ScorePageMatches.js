@@ -1,12 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import ScorePageLayout from "../../Components/ScorePageLayout/ScorePageLayout";
-import { matches } from "../../Utilities/matches";
 import classes from "./ScorePageMatches.module.css";
-
-import barcelona from "../../Assets/Images/barcelona.svg";
-import realMadrid from "../../Assets/Images/realmadrid.svg";
 import { MatchesContext } from "../../Context/MatchesContext";
-import { useNavigate } from "react-router";
 import LeagueMatchContainer from "./LeagueMatchContainer";
 import { LinearProgress } from "@mui/material";
 
@@ -14,8 +9,6 @@ const ScorePageMatches = () => {
   // context
   const {
     fetchTournamentEvents,
-    showOdds,
-    leagueMatches,
     premierLeagueevents,
     frenchLeague,
     germanLeague,
@@ -42,22 +35,11 @@ const ScorePageMatches = () => {
     setFaCup,
   } = useContext(MatchesContext);
 
-  const clubLogoHandler = (club) => {
-    if (club === "Barcelona") {
-      return barcelona;
-    }
-    if (club === "Real Madrid") {
-      return realMadrid;
-    }
-  };
-
-  //   navigate
-  const navigate = useNavigate();
-
   // utils
 
   useEffect(() => {
     fetchTournamentEvents();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

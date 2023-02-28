@@ -1,7 +1,5 @@
 import React, { useContext } from "react";
 import { MatchesContext } from "../../Context/MatchesContext";
-import { Helmet } from "react-helmet";
-import Layout from "../../Components/Layout/Layout";
 import ScorePageLayout from "../../Components/ScorePageLayout/ScorePageLayout";
 import classes from "./Favourites.module.css";
 import FavoritedMatchContainer from "./FavoritedMatchContainer";
@@ -9,25 +7,14 @@ import FavoritedMatchContainer from "./FavoritedMatchContainer";
 const Favourites = () => {
   // context
   const {
-    fetchTournamentEvents,
-    showOdds,
-    leagueMatches,
     premierLeagueevents,
     frenchLeague,
     germanLeague,
-    premierLeagueIsLoading,
-    germanLeagueIsLoading,
-    frenchLeagueIsLoading,
     italianLeague,
-    italianLeagueIsLoading,
     spanishLeague,
-    spanishLeagueIsLoading,
     championsLeague,
-    championsLeagueIsLoading,
     europaLeague,
-    europaLeagueIsLoading,
     faCup,
-    faCupIsLoading,
     setPremierLeagueEvents,
     setFrenchLeague,
     setGermanLeague,

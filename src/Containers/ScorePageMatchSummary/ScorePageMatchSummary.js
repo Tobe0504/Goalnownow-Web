@@ -1,7 +1,6 @@
-import React, { useRef, useState, useLayoutEffect, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import ScorePageMatchLayout from "../../Components/ScorePageMatchLayout/ScorePageMatchLayout";
 import classes from "./ScorePageMatchSummary.module.css";
-import { matches } from "../../Utilities/matches";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFutbol } from "@fortawesome/free-regular-svg-icons";
@@ -16,32 +15,21 @@ const ScorePageMatchSummary = () => {
   // context
   const {
     fetchEventDetails,
-    eventsDetails,
-    eventParticipants,
-    getSummaryStatisEventType,
-    eventStaticDataType,
     fetchSpecificMatchEvents,
     eventIncidents,
     getEventDescriptionType,
-    firstParticipantIncidents,
-    secondParticipantIncidents,
   } = useContext(MatchesContext);
 
   // useEffect
   useEffect(() => {
     fetchEventDetails(matchId);
-    getSummaryStatisEventType();
-    console.log(eventStaticDataType, eventIncidents, "static data type");
-    console.log(eventsDetails);
     fetchSpecificMatchEvents(matchId);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    console.log(eventStaticDataType, eventIncidents, "static data type");
-  }, [eventStaticDataType]);
-
   const iconHandler = (event) => {
-    if (event === "Regular Ggal") {
+    if (event === "Regular goal") {
       return (
         <i>
           <FontAwesomeIcon icon={faFutbol} />

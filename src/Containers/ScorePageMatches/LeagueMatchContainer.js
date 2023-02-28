@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import classes from "./ScorePageMatches.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
-import barcelona from "../../Assets/Images/barcelona.svg";
-import realMadrid from "../../Assets/Images/realmadrid.svg";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { MatchesContext } from "../../Context/MatchesContext";
@@ -14,22 +12,8 @@ const LeagueMatchContainer = (props) => {
   // Context
   const { showOdds } = useContext(MatchesContext);
 
-  const clubLogoHandler = (club) => {
-    if (club === "Barcelona") {
-      return barcelona;
-    }
-    if (club === "Real Madrid") {
-      return realMadrid;
-    }
-  };
-
   //   navigate
   const navigate = useNavigate();
-
-  // utils
-  useEffect(() => {
-    console.log(props.leagueEvent, "leagueEvent");
-  }, [props.leagueEvent]);
 
   const getUserResults = (umbrellaArray) => {
     let firstParticipantResult = [];
@@ -97,8 +81,21 @@ const LeagueMatchContainer = (props) => {
                   }}
                 >
                   <div className={classes.leagueGame}>
-                    <div className={classes.time}>
-                      {datum.startdate.slice(11, 16)}
+                    <div className={classes.time} style={{ width: "40px" }}>
+                      {datum.status_type === "finished" &&
+                      Object.values(datum.elapsed)[0].elapsed === "90" ? (
+                        "FT"
+                      ) : datum.status_type === "inprogress" ? (
+                        <div className={classes.timeLeft}>
+                          {`${Object.values(datum.elapsed)[0].elapsed}'`}
+                        </div>
+                      ) : datum.status_type === "halftime" ? (
+                        "HT"
+                      ) : (
+                        <div className={classes.matchTime}>
+                          {datum.startdate.slice(11, 16)}
+                        </div>
+                      )}
                     </div>
                     <div className={classes.clubNameSection}>
                       <div>

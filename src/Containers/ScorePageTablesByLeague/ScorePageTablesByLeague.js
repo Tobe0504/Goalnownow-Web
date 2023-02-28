@@ -1,14 +1,7 @@
 import React, { useEffect } from "react";
 import ScorePageLayout from "../../Components/ScorePageLayout/ScorePageLayout";
-import classes from "./ScorePageTablesByLeague.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
-import { faAngleDown, faCaretDown } from "@fortawesome/free-solid-svg-icons";
-import { activeTogglerNoFalse } from "../../HelperFunctions/ActiveToggler";
-import { LeagueAndcategoriesContext } from "../../Context/LeagueAndCategoryContext";
-import { MatchesContext } from "../../Context/MatchesContext";
 import { LinearProgress } from "@mui/material";
-import { TablesContext } from "../../Context/TablesContext";
 import ScorePageTablesContainer from "../ScorePageTables/ScorePageTablesContainer";
 import { FixturesContext } from "../../Context/FixturesContext";
 import { useParams } from "react-router-dom";
@@ -28,7 +21,7 @@ const ScorePageTablesByLeague = () => {
   useEffect(() => {
     fetchSinglyLeagueTable(leagueId);
     setLeagueIdForFetch(leagueId);
-    console.log(leagueDetails);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

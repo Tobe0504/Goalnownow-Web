@@ -1,10 +1,6 @@
 import axios from "axios";
-import React, { createContext, useEffect, useState } from "react";
-import {
-  apiAltKey,
-  enetPulseTokenId,
-  enetPulseUsername,
-} from "../Utilities/global";
+import React, { createContext, useState } from "react";
+import { enetPulseTokenId, enetPulseUsername } from "../Utilities/global";
 
 export const TablesContext = createContext();
 
@@ -111,7 +107,6 @@ const TablesContextProvider = (props) => {
         `https://eapi.enetpulse.com//standing/liveleaguetable/?object=tournament_stage&objectFK=880067&limit=20&offset=0&includeStandingParticipants=yes&includeStandingParticipantsProperties=yes&includeStandingData=yes&includeCountryCodes=no&username=${enetPulseUsername}&token=${enetPulseTokenId}`
       )
       .then((res) => {
-        console.log(res, "tables");
         setItalianLeagueTable(
           Object.values(res.data.standings[394010].standing_participants)
         );
@@ -127,23 +122,6 @@ const TablesContextProvider = (props) => {
         `https://eapi.enetpulse.com//standing/liveleaguetable/?object=tournament_stage&objectFK=880067&limit=20&offset=0&includeStandingParticipants=yes&includeStandingParticipantsProperties=yes&includeStandingData=yes&includeCountryCodes=no&username=${enetPulseUsername}&token=${enetPulseTokenId}`
       )
       .then((res) => {
-        console.log(res, "tables");
-        setItalianLeagueTable(
-          Object.values(res.data.standings[394010].standing_participants)
-        );
-        setItalianLeagueIsLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    // Champions League
-    axios
-      .get(
-        ` http://eapi.enetpulse.com/image/team_logo/?teamFK=8564&username=${enetPulseUsername}&token=${enetPulseTokenId}`
-      )
-      .then((res) => {
-        console.log(res, "logo");
         setItalianLeagueTable(
           Object.values(res.data.standings[394010].standing_participants)
         );

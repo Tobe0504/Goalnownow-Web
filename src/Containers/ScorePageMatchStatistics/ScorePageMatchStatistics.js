@@ -2,9 +2,6 @@ import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ScorePageMatchLayout from "../../Components/ScorePageMatchLayout/ScorePageMatchLayout";
 import classes from "./ScorePageMatchStatistics.module.css";
-import { matches } from "../../Utilities/matches";
-import barcelona from "../../Assets/Images/barcelona.svg";
-import realMadrid from "../../Assets/Images/realmadrid.svg";
 import { MatchesContext } from "../../Context/MatchesContext";
 import { LinearProgress } from "@mui/material";
 import TeamLogo from "../../Components/TeamLogo/TeamLogo";
@@ -23,16 +20,8 @@ const ScorePageMatchStatistics = () => {
   // utils
   useEffect(() => {
     fetchMatchStatistics(matchId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const clubLogoHandler = (club) => {
-    if (club === "Barcelona") {
-      return barcelona;
-    }
-    if (club === "Real Madrid") {
-      return realMadrid;
-    }
-  };
 
   return (
     <ScorePageMatchLayout>

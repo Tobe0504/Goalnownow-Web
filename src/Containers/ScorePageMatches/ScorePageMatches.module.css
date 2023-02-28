@@ -67,6 +67,9 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 18px;
+}
+
+.matchTime {
   opacity: 0.5;
 }
 
@@ -93,7 +96,6 @@
   font-size: 12px;
   line-height: 18px;
   animation: appear 0.3s ease-in-out;
-  border: 2px solid green;
 }
 
 .oddsSection > div {
@@ -170,6 +172,11 @@
   opacity: 1;
   padding: 1px 8px;
   margin-top: 8px;
+}
+
+.timeLeft {
+  color: #ffd91b;
+  opacity: 1;
 }
 
 @media screen and (max-width: 767px) {

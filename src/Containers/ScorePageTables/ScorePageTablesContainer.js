@@ -1,8 +1,7 @@
 import React from "react";
 import classes from "./ScorePageTables.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown, faCaretDown } from "@fortawesome/free-solid-svg-icons";
-import { activeTogglerNoFalse } from "../../HelperFunctions/ActiveToggler";
+import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 const ScorePageTablesContainer = (props) => {
   // utils

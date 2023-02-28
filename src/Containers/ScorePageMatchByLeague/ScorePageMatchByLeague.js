@@ -1,25 +1,21 @@
 import React, { useContext, useEffect } from "react";
-import { useNavigate, useParams } from "react-router";
 import ScorePageLayout from "../../Components/ScorePageLayout/ScorePageLayout";
-import { matches } from "../../Utilities/matches";
+
 import classes from "./ScorePageMatchByLeague.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
-import { faStar } from "@fortawesome/free-regular-svg-icons";
-import barcelona from "../../Assets/Images/barcelona.svg";
-import realMadrid from "../../Assets/Images/realmadrid.svg";
+
 import { MatchesContext } from "../../Context/MatchesContext";
 import { FixturesContext } from "../../Context/FixturesContext";
 import LeagueMatchContainer from "../ScorePageMatches/LeagueMatchContainer";
 import { LinearProgress } from "@mui/material";
 import moment from "moment/moment";
+import { useParams } from "react-router-dom";
 
 const ScorePageMatchByLeague = () => {
   // params
   const { leagueId } = useParams();
 
   // context
-  const { showOdds, formattedDate, currentTime } = useContext(MatchesContext);
+  const { formattedDate, currentTime } = useContext(MatchesContext);
   const {
     fetchTournamentsEventsAndFixturesBasedOnLeague,
     isSendingRequest,
@@ -30,10 +26,12 @@ const ScorePageMatchByLeague = () => {
 
   useEffect(() => {
     fetchTournamentsEventsAndFixturesBasedOnLeague(leagueId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [leagueId, formattedDate, currentTime]);
 
   useEffect(() => {
     setLeagueIdForFetch(leagueId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [leagueId]);
 
   return (

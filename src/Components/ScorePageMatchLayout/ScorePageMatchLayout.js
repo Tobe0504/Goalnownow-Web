@@ -1,19 +1,15 @@
 import React, { useContext, useEffect } from "react";
 import classes from "./ScorePageMatchLayout.module.css";
 import ScorePageLayout from "../../Components/ScorePageLayout/ScorePageLayout";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { matches } from "../../Utilities/matches";
-import barcelona from "../../Assets/Images/barcelona.svg";
-import realMadrid from "../../Assets/Images/realmadrid.svg";
+import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFutbol } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
 import { v4 } from "uuid";
 import { MatchesContext } from "../../Context/MatchesContext";
-import { useState } from "react";
-import { LinearProgress } from "@mui/material";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import TeamLogo from "../TeamLogo/TeamLogo";
+import { MatchesContextAlt } from "../../Context/MatchesContextAlt";
 
 const ScorePageMatchLayout = (props) => {
   // params
@@ -21,33 +17,29 @@ const ScorePageMatchLayout = (props) => {
 
   // context
   const {
-    fetchSpecificMatchEvents,
     specificMatchData,
-    eventParticipants,
-    isSendingRequest,
     firstParticipantResults,
     secondParticipantResults,
     stadium,
     eventIncidents,
-    setEventIncidents,
-    getTeamImageAndLogo,
   } = useContext(MatchesContext);
+
+  const { fetchSpecificMatchEventsAlt } = useContext(MatchesContextAlt);
 
   // utils
 
-  useEffect(
-    () => {
-      // console.log(specificMatchData, "specific match data in the layout");
-      getTeamImageAndLogo("8586");
-      // fetchSpecificMatchEvents(matchId);
-      console.log(getTeamImageAndLogo("8586"), "Imagesss");
-      console.log(specificMatchData, "resultsss");
-    },
-    [specificMatchData],
-    getTeamImageAndLogo
-  );
+  useEffect(() => {
+    const users = setInterval(() => {
+      fetchSpecificMatchEventsAlt(matchId);
+      console.log("fetched!");
+    }, 20000);
 
-  //   utils
+    return () => {
+      clearInterval(users);
+    };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const scorePageMatchNavItems = [
     {
@@ -81,27 +73,6 @@ const ScorePageMatchLayout = (props) => {
 
   // Navigate
   const navigate = useNavigate();
-
-  useEffect(() => {
-    console.log(eventIncidents, "incidentssss haaaaa");
-  }, [eventIncidents]);
-
-  useEffect(() => {
-    setEventIncidents((prevState) => {
-      const filteredIncidents = [];
-      prevState.forEach((incident) => {
-        const foundIncident = filteredIncidents.find(
-          (filtered) => filtered.incident_id === incident.incident_id
-        );
-        if (!foundIncident) {
-          incident.tag = "home";
-          incident.newFrontendId = v4();
-          filteredIncidents.push(incident);
-        }
-      });
-      return filteredIncidents;
-    });
-  }, []);
 
   return (
     <ScorePageLayout>
@@ -143,13 +114,15 @@ const ScorePageMatchLayout = (props) => {
                   {specificMatchData?.status_type === "finished" && "FT"}
                 </div>
               )}
-              {!specificMatchData?.status_type === "finished" &&
-                Object.values(specificMatchData?.elapsed)[0]?.elapsed !==
-                  "90" && (
-                  <div>
-                    {Object.values(specificMatchData?.elapsed)[0]?.elapsed}
-                  </div>
-                )}
+              {specificMatchData?.status_type === "inprogress" ? (
+                <div>
+                  {`${Object.values(specificMatchData?.elapsed)[0]?.elapsed}'`}
+                </div>
+              ) : (
+                <div>
+                  {/* {Object.values(specificMatchData?.elapsed)[0]?.elapsed} */}
+                </div>
+              )}
               <div className={classes.lineDecoration}>
                 <div>
                   <div></div>
