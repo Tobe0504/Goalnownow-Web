@@ -10,6 +10,7 @@ import ScorePageMatchOdds from "./Containers/ScorePageMatchOdds/ScorePageMatchOd
 import ScorePageMatchLineUp from "./Containers/ScorePageMatchLineUp/ScorePageMatchLineUp";
 import ScorePageMatchSummary from "./Containers/ScorePageMatchSummary/ScorePageMatchSummary";
 import Favourites from "./Containers/Favourites/Favourites";
+import ScorePageTablesByLeague from "./Containers/ScorePageTablesByLeague/ScorePageTablesByLeague";
 function App() {
   // const navigate = useNavigate();
 
@@ -26,6 +27,7 @@ function App() {
       <Route path="/news" element={<Layout />} />
       <Route path="/get-the-app" element={<Layout />} />
       <Route path="/scores" element={<ScorePageMatches />} />
+
       <Route
         path="/scores/:matchId/statistics"
         element={<ScorePageMatchStatistics />}
@@ -40,7 +42,14 @@ function App() {
         element={<ScorePageMatchSummary />}
       />
 
-      <Route path="/scores/:league" element={<ScorePageMatchByLeague />} />
+      <Route
+        path="/scores/:leagueId/events"
+        element={<ScorePageMatchByLeague />}
+      />
+      <Route
+        path="/scores/:leagueId/events/standings"
+        element={<ScorePageTablesByLeague />}
+      />
     </Routes>
   );
 }

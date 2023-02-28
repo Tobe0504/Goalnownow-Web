@@ -53,3 +53,18 @@ export const scorePageNavItems = [
     route: "/scores/tables",
   },
 ];
+
+export const scorePageNavItems2 = [
+  {
+    id: v4(),
+    title: "Matches",
+    isActive: false,
+    route: "/scores/:leagueId/events",
+  },
+  {
+    id: v4(),
+    title: "Tables",
+    isActive: false,
+    route: "/scores/:leagueId/events/standings",
+  },
+];

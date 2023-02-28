@@ -177,6 +177,14 @@
   margin-top: 8px;
 }
 
+.noMatches {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40vh;
+  opacity: 0.5;
+}
+
 @media screen and (max-width: 767px) {
   .oddsSection {
     display: none;

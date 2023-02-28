@@ -2,20 +2,27 @@ import React, { useContext, useState } from "react";
 import classes from "./ScorePageNav.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
-import { scorePageNavItems } from "../../Utilities/navItems";
+import {
+  scorePageNavItems,
+  scorePageNavItems2,
+} from "../../Utilities/navItems";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { MatchesContext } from "../../Context/MatchesContext";
 import moment from "moment";
+import { FixturesContext } from "../../Context/FixturesContext";
 
-const ScorePageNav = () => {
+const ScorePageNav = (props) => {
   // State
   const { showOdds, setShowOdds, setRequiredDate, requiredDate } =
     useContext(MatchesContext);
   const [dateCounter, setDateCounter] = useState(0);
 
+  const { leagueIdforFetch } = useContext(FixturesContext);
+
   // navigation
   const location = useLocation();
+  const { leagueId } = useParams();
 
   let dateArr = requiredDate?.split("-");
   let month = dateArr[1];
@@ -108,26 +115,64 @@ const ScorePageNav = () => {
         </div>
         <div>
           <div>Live</div>
-          {scorePageNavItems.map((data) => {
-            return (
+          {!props.showLeagueBasedNav ? (
+            scorePageNavItems.map((data) => {
+              return (
+                <Link
+                  key={data.id}
+                  to={data.route}
+                  className={
+                    location.pathname === data.route
+                      ? `${classes.activeNav}`
+                      : undefined
+                  }
+                >
+                  {location.pathname === data.route && (
+                    <div className={classes.activeIndicator}></div>
+                  )}
+                  <div className={classes.navItem}>
+                    <div>{data.title}</div>
+                  </div>
+                </Link>
+              );
+            })
+          ) : (
+            <>
               <Link
-                key={data.id}
-                to={data.route}
+                to={`/scores/${leagueId}/events`}
                 className={
-                  location.pathname === data.route
+                  location.pathname === `/scores/${leagueId}/events`
                     ? `${classes.activeNav}`
                     : undefined
                 }
               >
-                {location.pathname === data.route && (
+                {location.pathname === `/scores/${leagueIdforFetch}/events` && (
                   <div className={classes.activeIndicator}></div>
                 )}
                 <div className={classes.navItem}>
-                  <div>{data.title}</div>
+                  <div>Matches</div>
                 </div>
               </Link>
-            );
-          })}
+
+              <Link
+                to={`/scores/${leagueIdforFetch}/events/standings`}
+                className={
+                  location.pathname ===
+                  `/scores/${leagueIdforFetch}/events/standings`
+                    ? `${classes.activeNav}`
+                    : undefined
+                }
+              >
+                {location.pathname ===
+                  `/scores/${leagueIdforFetch}/events/standings` && (
+                  <div className={classes.activeIndicator}></div>
+                )}
+                <div className={classes.navItem}>
+                  <div>Tables</div>
+                </div>
+              </Link>
+            </>
+          )}
         </div>
         <div>
           <span>Show Odds</span>
@@ -144,26 +189,54 @@ const ScorePageNav = () => {
       <div className={classes.mobileDiv}>
         <div>
           <div>Live</div>
-          {scorePageNavItems.map((data) => {
-            return (
-              <Link
-                key={data.id}
-                to={data.route}
-                className={
-                  location.pathname === data.route
-                    ? `${classes.activeNav}`
-                    : undefined
-                }
-              >
-                {location.pathname === data.route && (
-                  <div className={classes.activeIndicator}></div>
-                )}
-                <div className={classes.navItem}>
-                  <div>{data.title}</div>
-                </div>
-              </Link>
-            );
-          })}
+          {!props.showLeagueBasedNav && (
+            <>
+              {scorePageNavItems.map((data) => {
+                return (
+                  <Link
+                    key={data.id}
+                    to={data.route}
+                    className={
+                      location.pathname === data.route
+                        ? `${classes.activeNav}`
+                        : undefined
+                    }
+                  >
+                    {location.pathname === data.route && (
+                      <div className={classes.activeIndicator}></div>
+                    )}
+                    <div className={classes.navItem}>
+                      <div>{data.title}</div>
+                    </div>
+                  </Link>
+                );
+              })}{" "}
+            </>
+          )}
+          {props.showLeagueBasedNav && (
+            <>
+              {scorePageNavItems2.map((data) => {
+                return (
+                  <Link
+                    key={data.id}
+                    to={data.route}
+                    className={
+                      location.pathname === data.route
+                        ? `${classes.activeNav}`
+                        : undefined
+                    }
+                  >
+                    {location.pathname === data.route && (
+                      <div className={classes.activeIndicator}></div>
+                    )}
+                    <div className={classes.navItem}>
+                      <div>{data.title}</div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </>
+          )}
         </div>
         <div>
           <span>Show Odds</span>

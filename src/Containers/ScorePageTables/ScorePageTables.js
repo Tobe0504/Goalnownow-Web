@@ -31,14 +31,6 @@ const ScorePageTables = () => {
     fetchAllLeagueTables();
   }, []);
 
-  const {
-    leagueParticipant,
-    setLeagueParticipant,
-    activeLeague,
-    countryAbbreviation,
-    leagueTableLoading,
-  } = useContext(MatchesContext);
-
   return (
     <ScorePageLayout showNavSection={true}>
       {premierLeagueTableIsLoading &&

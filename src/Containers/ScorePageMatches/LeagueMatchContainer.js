@@ -87,7 +87,6 @@ const LeagueMatchContainer = (props) => {
           </div>
           <div className={classes.leagueGames}>
             {props.leagueEvent?.map((datum, i) => {
-              console.log(props.leagueEvent);
               const results = getUserResults(datum);
               return (
                 <div

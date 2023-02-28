@@ -14,7 +14,7 @@ const ScorePageLayout = (props) => {
         </div>
         {props.showNavSection && (
           <div className={classes.navSection}>
-            <ScorePageNav />
+            <ScorePageNav showLeagueBasedNav={props.showLeagueBasedNav} />
           </div>
         )}
         <div className={classes.mobileAdSection}>

@@ -703,7 +703,7 @@ const MatchesContextProvider = (props) => {
   const fetchLeagueMatchesDataAndEvents = (id) => {
     axios
       .get(
-        `http://eapi.enetpulse.com//event/list/?date=2023-01-19&live=no&includeVenue=yes&status_type=notstarted&includeEventProperties=yes&includeCountryCodes=no&includeFirstLastName=yes&includeDeleted=yes&tf=Y-m-dH:i:s&tz=Africa/Accra&tournament_stageFK=17664&username=${enetPulseUsername}&token=${enetPulseTokenId}`
+        `http://eapi.enetpulse.com/event/list/?date=2023-01-19&live=no&includeVenue=yes&status_type=notstarted&includeEventProperties=yes&includeCountryCodes=no&includeFirstLastName=yes&includeDeleted=yes&tf=Y-m-dH:i:s&tz=Africa/Accra&tournament_stageFK=17664&username=${enetPulseUsername}&token=${enetPulseTokenId}`
       )
       .then((res) => {
         console.log(res, 5000);
@@ -804,6 +804,7 @@ const MatchesContextProvider = (props) => {
         eventStaticDataType,
         getEventDescriptionType,
         getTeamImageAndLogo,
+        formattedDate,
       }}
     >
       {props.children}

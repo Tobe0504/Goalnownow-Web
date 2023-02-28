@@ -106,10 +106,11 @@ const LeaguesAndCategories = () => {
                             className={classes.categoryOption}
                             id="categoryOption"
                             onClick={() => {
+                              console.log(datum.id, 77777);
                               fetchTournamentStage(datum.id);
-                              // fetchLeagueMatchesDataAndEvents(datum.id);
+                              fetchLeagueMatchesDataAndEvents(datum.id);
                               // fetchLeagueEvents(datum.tournament_templateFK);
-                              // navigate("/scores/tables");
+                              navigate(`/scores/${datum.id}/events`);
                             }}
                           >
                             <span>

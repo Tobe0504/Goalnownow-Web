@@ -25,13 +25,13 @@
   width: 21px;
 }
 
-.leagueDataHeaderText > span:nth-child(1) {
+.leagueHeaderdata > div:nth-child(2) > span:nth-child(1) {
   font-weight: 500;
   font-size: 12px;
   line-height: 18px;
 }
 
-.leagueDataHeaderText > span:nth-child(2) {
+.leagueHeaderdata > div:nth-child(2) > span:nth-child(2) {
   font-weight: 400;
   font-size: 8px;
   line-height: 12px;
