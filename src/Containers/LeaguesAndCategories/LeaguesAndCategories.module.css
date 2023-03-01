@@ -2,6 +2,7 @@
   height: 100vh;
   user-select: none;
   overflow-y: auto;
+  padding-bottom: 2rem;
 }
 
 .searchSection {

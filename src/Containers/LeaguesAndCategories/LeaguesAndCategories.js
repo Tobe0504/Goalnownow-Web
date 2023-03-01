@@ -9,7 +9,7 @@ import { CircularProgress, LinearProgress } from "@mui/material";
 import { useNavigate } from "react-router";
 import euFlag from "../../Assets/Images/eu.png";
 
-const LeaguesAndCategories = () => {
+const LeaguesAndCategories = (props) => {
   // Context
   const {
     fetchTournaents,
@@ -34,12 +34,14 @@ const LeaguesAndCategories = () => {
 
   return (
     <div className={classes.container}>
-      <div className={classes.searchSection}>
-        <input type="text" placeholder="Search" />
-        <i>
-          <FontAwesomeIcon icon={faSearch} />
-        </i>
-      </div>
+      {!props.notDisplaySearch && (
+        <div className={classes.searchSection}>
+          <input type="text" placeholder="Search" />
+          <i>
+            <FontAwesomeIcon icon={faSearch} />
+          </i>
+        </div>
+      )}
       {tournamentsTemplate.length > 0 ? (
         <div className={classes.categorySection}>
           {tournamentsTemplate.map((data, i) => {

@@ -10,6 +10,7 @@ import { countries } from "../../Utilities/countries";
 import { navItems } from "../../Utilities/navItems";
 import { MatchesContext } from "../../Context/MatchesContext";
 import { timezones } from "../../Utilities/timezones";
+import LeaguesAndCategories from "../LeaguesAndCategories/LeaguesAndCategories";
 
 // Description
 // This component basically houses the top section nav of the web app
@@ -23,10 +24,18 @@ const Header = () => {
 
   const { fetchTournaents } = useContext(MatchesContext);
 
+  const openSideMenu = () => {
+    document.getElementById("sideMenu").style.width = "100%";
+  };
+
+  const closeSideMenu = () => {
+    document.getElementById("sideMenu").style.width = "0%";
+  };
+
   return (
     <div className={classes.container}>
       <div className={classes.responsivemenu}>
-        <FontAwesomeIcon icon={faBars} />
+        <FontAwesomeIcon icon={faBars} onClick={openSideMenu} />
       </div>
       <div className={classes.logosection}>
         <img src={goalNowNowLogo} alt="GoalNowNow Logo" />
@@ -89,6 +98,20 @@ const Header = () => {
       </div>
       <div className={classes.searchSection}>
         <FontAwesomeIcon icon={faSearch} />
+      </div>
+
+      <div id="sideMenu" className={classes.sideNav}>
+        <div className={classes.sideNavInner}>
+          <button className={classes.btnClose} onClick={closeSideMenu}>
+            &times;
+          </button>
+          <div className={classes.sideContainer}>
+            <img src={goalNowNowLogo} alt="YSP Logo" />
+          </div>
+          {/* <div className={classes.scontainer}> */}
+          <LeaguesAndCategories notDisplaySearch={true} />
+          {/* </div> */}
+        </div>
       </div>
     </div>
   );

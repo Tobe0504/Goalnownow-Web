@@ -109,6 +109,43 @@
   display: none;
 }
 
+.sideNav {
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  overflow: hidden;
+  width: 0;
+  background: var(--foregroundBlack);
+  transition: 0.3s;
+  box-sizing: border-box;
+}
+
+.sideNavInner {
+  min-width: 100vw;
+  height: 100%;
+}
+
+.sideContainer {
+  padding: 0 1rem;
+}
+
+.sideNav .btnClose {
+  border: none;
+  display: flex;
+  margin-left: auto;
+  margin-right: 1rem;
+  font-size: 36px;
+  background: transparent;
+  color: #ffffff;
+  text-align: right;
+}
+
+.navItemResponsive {
+  margin: 1rem 0;
+}
+
 @media screen and (min-width: 767px) and (max-width: 1023px) {
   .navItemSection,
   .dropdownSection {
