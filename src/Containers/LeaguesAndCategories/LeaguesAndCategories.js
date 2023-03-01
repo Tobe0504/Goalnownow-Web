@@ -7,6 +7,7 @@ import { activeToggler } from "../../HelperFunctions/ActiveToggler";
 import { MatchesContext } from "../../Context/MatchesContext";
 import { CircularProgress, LinearProgress } from "@mui/material";
 import { useNavigate } from "react-router";
+import euFlag from "../../Assets/Images/eu.png";
 
 const LeaguesAndCategories = () => {
   // Context
@@ -106,7 +107,11 @@ const LeaguesAndCategories = () => {
                             <span>
                               <img
                                 alt={datum.subCategoryTitle}
-                                src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/${countryAbbreviation}.svg`}
+                                src={
+                                  countryAbbreviation
+                                    ? `http://purecatamphetamine.github.io/country-flag-icons/3x2/${countryAbbreviation}.svg`
+                                    : euFlag
+                                }
                                 className={classes.hmm}
                               />
                             </span>

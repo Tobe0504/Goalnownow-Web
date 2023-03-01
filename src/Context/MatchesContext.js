@@ -37,6 +37,7 @@ const MatchesContextProvider = (props) => {
 
   const [eventIncidents, setEventIncidents] = useState([]);
   const [isSendingRequest, setIsSendingRequest] = useState(false);
+  const [statusType, setStatusType] = useState(false);
 
   // Major leaguue events and fixtures
   const [premierLeagueevents, setPremierLeagueEvents] = useState([]);
@@ -98,6 +99,7 @@ const MatchesContextProvider = (props) => {
     // at the start of the function, leagues is set to an empty array, this is for better user experience
     // setLeagues([]);
     // we fetch the 22/23 season by theur respective ids
+
     axios
       .get(
         `https://eapi.enetpulse.com/tournament/list/?tournament_templateFK=${id}&username=${enetPulseUsername}&token=${enetPulseTokenId}&tz=${currentTime}`
@@ -133,11 +135,16 @@ const MatchesContextProvider = (props) => {
     setEuropaLeague([]);
     setFaCup([]);
     // Premier league
+
+    const premierLeagueLink = `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tz=${currentTime}&tournament_templateFK=47&username=${enetPulseUsername}&token=${enetPulseTokenId}&tz=${currentTime}`;
+    if (statusType) {
+      premierLeagueLink.concat("&statusType=inprogress");
+    }
+
     axios
-      .get(
-        `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tz=${currentTime}&tournament_templateFK=47&username=${enetPulseUsername}&token=${enetPulseTokenId}&tz=${currentTime}`
-      )
+      .get(premierLeagueLink)
       .then((res) => {
+        console.log(res);
         setPremierLeagueEvents(
           Object.values(res.data.events).map((data) => {
             return { ...data, isFavourited: false };
@@ -253,7 +260,7 @@ const MatchesContextProvider = (props) => {
   useEffect(() => {
     fetchTournamentEvents();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formattedDate]);
+  }, [formattedDate, statusType]);
 
   //State
 
@@ -759,6 +766,8 @@ const MatchesContextProvider = (props) => {
         setFirstParticipantResults,
         setSecondParticipantResults,
         setIsSendingRequest,
+        statusType,
+        setStatusType,
       }}
     >
       {props.children}

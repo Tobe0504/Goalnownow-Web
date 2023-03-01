@@ -43,7 +43,10 @@ const ScorePageMatchByLeague = () => {
         />
       ) : !isSendingRequest && leagueDetails.length < 1 ? (
         <div className={classes.noMatches}>
-          No matches available for {moment(formattedDate).calendar()}
+          No matches available for{" "}
+          {moment(formattedDate)
+            .calendar()
+            .replace(/at 12:00 AM/g, "")}
         </div>
       ) : (
         <LeagueMatchContainer

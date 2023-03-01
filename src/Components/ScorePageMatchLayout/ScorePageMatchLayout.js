@@ -97,8 +97,6 @@ const ScorePageMatchLayout = (props) => {
                     Object.values(specificMatchData?.event_participants)[0]
                       ?.participantFK
                   }
-                  width="80px"
-                  height="80px"
                 />
               )}
 

@@ -67,6 +67,7 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 18px;
+  width: 40px;
 }
 
 .matchTime {
@@ -180,6 +181,9 @@
 }
 
 @media screen and (max-width: 767px) {
+  .leagueHeader {
+    padding: 1rem 1rem;
+  }
   .oddsSection {
     display: none;
   }

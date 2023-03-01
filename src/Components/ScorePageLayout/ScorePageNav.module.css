@@ -80,7 +80,7 @@
   margin-left: auto;
 }
 
-.container > div:nth-child(3) > div:nth-child(1) {
+.container > div:nth-child(3) > .liveButton {
   font-weight: 800;
   font-size: 14px;
   line-height: 21px;
@@ -89,6 +89,21 @@
   background: #ffffff;
   border-radius: 6px;
   color: var(--foregroundBlack);
+  user-select: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.container > div:nth-child(3) > .altLiveButton {
+  background: #ffd91b;
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 21px;
+  padding: 0.25rem 0.75rem;
+  text-align: center;
+  border-radius: 6px;
+  color: var(--foregroundBlack);
+  user-select: none;
+  transition: all 0.3s ease-in-out;
 }
 
 .container > div:nth-child(3) {

@@ -226,20 +226,31 @@
 
   .logoAndScoreSection > div:nth-child(1),
   .logoAndScoreSection > div:nth-child(3) {
-    width: 20%;
+    width: 80px;
   }
 
   .logoAndScoreSection > div:nth-child(2) {
-    width: 50%;
-  }
-
-  .logoAndScoreSection > div > div:nth-child(1) > img {
-    height: 32px;
-    width: 32px;
+    width: 150px;
   }
 
   .lineDecoration > div {
-    height: 5px;
-    width: 48px;
+    height: 3px;
+    width: 38px;
+  }
+
+  .matchEvent {
+    font-size: 10px;
+    line-height: 18px;
+    gap: 24px;
+    width: 90%;
+  }
+
+  .matchEventAway {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 18px;
+
+    gap: 24px;
+    width: 90%;
   }
 }

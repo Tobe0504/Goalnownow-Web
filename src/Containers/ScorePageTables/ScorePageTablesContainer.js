@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./ScorePageTables.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import TeamLogo from "../../Components/TeamLogo/TeamLogo";
 
 const ScorePageTablesContainer = (props) => {
   // utils
@@ -23,6 +24,8 @@ const ScorePageTablesContainer = (props) => {
         visibility: "hidden",
       };
   };
+
+  const [display, setDisplay] = useState(true);
   return (
     <>
       {!props?.league.length < 1 && (
@@ -30,13 +33,9 @@ const ScorePageTablesContainer = (props) => {
           <div className={classes.leagueData}>
             <div
               className={classes.leagueHeader}
-              // onClick={() => {
-              //   activeTogglerNoFalse(
-              //     j,
-              //     leagueTablesByLeague,
-              //     setLeagueTablesByLeague
-              //   );
-              // }}
+              onClick={() => {
+                setDisplay(!display);
+              }}
             >
               <div className={classes.leagueHeaderdata}>
                 <div className={classes.leagueDataHeaderText}>
@@ -44,29 +43,39 @@ const ScorePageTablesContainer = (props) => {
                   <span>{props.country_name}</span>
                 </div>
               </div>
-              {/* <div
-            className={classes.leagueRouter}
-            style={
-              data.isActive
-                ? {
-                    transform: "rotate(-90deg)",
-                    transition: "all .3s ease-in-out",
-                  }
-                : {
-                    transform: "rotate(0deg)",
-                    transition: "all .3s ease-in-out",
-                  }
-            }
-          >
-            <FontAwesomeIcon icon={faAngleDown} />
-          </div> */}
+              <div
+                className={classes.leagueRouter}
+                style={
+                  display
+                    ? {
+                        transform: "rotate(-90deg)",
+                        transition: "all .3s ease-in-out",
+                      }
+                    : {
+                        transform: "rotate(0deg)",
+                        transition: "all .3s ease-in-out",
+                      }
+                }
+              >
+                <FontAwesomeIcon icon={faAngleDown} />
+              </div>
             </div>
             <div
               className={classes.leagueTableOuter}
               id="leagueTableOuter"
-              // style={
-              //   data.isActive ? { maxHeight: "250vh" } : { maxHeight: "0vh" }
-              // }
+              style={
+                display
+                  ? {
+                      maxHeight: "500vh",
+                      overflowY: "hidden",
+                      transition: "all .3s ease-in-out",
+                    }
+                  : {
+                      maxHeight: "0vh",
+                      overflowY: "hidden",
+                      transition: "all .3s ease-in-out",
+                    }
+              }
             >
               <div className={classes.leagueTableHead}>
                 <div>#.</div>
@@ -98,7 +107,14 @@ const ScorePageTablesContainer = (props) => {
                               : { visibility: "hidden" }
                           }
                         >
-                          <FontAwesomeIcon icon={faCaretDown} />
+                          {/* <FontAwesomeIcon icon={faCaretDown} /> */}
+                        </span>
+                        <span>
+                          <TeamLogo
+                            id={datum?.participantFK}
+                            width="16px"
+                            height="16px"
+                          />
                         </span>
                         <span>{datum.participant?.name}</span>
                       </div>

@@ -14,8 +14,14 @@ import { FixturesContext } from "../../Context/FixturesContext";
 
 const ScorePageNav = (props) => {
   // State
-  const { showOdds, setShowOdds, setRequiredDate, requiredDate } =
-    useContext(MatchesContext);
+  const {
+    showOdds,
+    setShowOdds,
+    setRequiredDate,
+    requiredDate,
+    setStatusType,
+    statusType,
+  } = useContext(MatchesContext);
 
   const { leagueIdforFetch } = useContext(FixturesContext);
 
@@ -108,12 +114,34 @@ const ScorePageNav = (props) => {
             />
           </label>
           <div>
-            <span>{moment(requiredDate).calendar()}</span>
+            <span>
+              {moment(requiredDate)
+                .calendar()
+                .replace(/at 12:00 AM/g, "")}
+            </span>
             <span>{`${day} ${wordMonth}`}</span>
           </div>
         </div>
         <div>
-          <div>Live</div>
+          {statusType === false ? (
+            <div
+              onClick={() => {
+                setStatusType(true);
+              }}
+              className={classes.liveButton}
+            >
+              Live
+            </div>
+          ) : (
+            <div
+              onClick={() => {
+                setStatusType(false);
+              }}
+              className={classes.altLiveButton}
+            >
+              Live
+            </div>
+          )}
           {!props.showLeagueBasedNav ? (
             scorePageNavItems.map((data) => {
               return (

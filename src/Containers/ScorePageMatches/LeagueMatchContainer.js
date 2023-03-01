@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./ScorePageMatches.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
@@ -46,11 +46,18 @@ const LeagueMatchContainer = (props) => {
     }
   };
 
+  const [display, setDisplay] = useState(true);
+
   return (
     <>
       {props?.leagueEvent?.length > 0 && (
         <div className={classes.leagueData}>
-          <div className={classes.leagueHeader}>
+          <div
+            className={classes.leagueHeader}
+            onClick={() => {
+              setDisplay(!display);
+            }}
+          >
             <div className={classes.leagueHeaderdata}>
               <div>
                 <img
@@ -65,11 +72,39 @@ const LeagueMatchContainer = (props) => {
                 <span>{props?.leagueEvent[0]?.tournament_template_name}</span>
               </div>
             </div>
-            <div className={classes.leagueRouter}>
+            <div
+              className={classes.leagueRouter}
+              style={
+                display
+                  ? {
+                      transform: "rotate(0deg)",
+                      transition: "all .3s ease-in-out",
+                    }
+                  : {
+                      transform: "rotate(90deg)",
+                      transition: "all .3s ease-in-out",
+                    }
+              }
+            >
               <FontAwesomeIcon icon={faAngleRight} />
             </div>
           </div>
-          <div className={classes.leagueGames}>
+          <div
+            className={classes.leagueGames}
+            style={
+              display
+                ? {
+                    maxHeight: "100vh",
+                    overflowY: "hidden",
+                    transition: "all .3s ease-in-out",
+                  }
+                : {
+                    maxHeight: "0vh",
+                    overflowY: "hidden",
+                    transition: "all .3s ease-in-out",
+                  }
+            }
+          >
             {props.leagueEvent?.map((datum, i) => {
               const results = getUserResults(datum);
               return (
@@ -81,7 +116,7 @@ const LeagueMatchContainer = (props) => {
                   }}
                 >
                   <div className={classes.leagueGame}>
-                    <div className={classes.time} style={{ width: "40px" }}>
+                    <div className={classes.time}>
                       {datum.status_type === "finished" &&
                       Object.values(datum.elapsed)[0].elapsed === "90" ? (
                         "FT"
