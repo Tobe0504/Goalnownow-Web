@@ -1,11 +1,10 @@
 {
   "files": {
-    "main.css": "/static/css/main.46e3228d.css",
-    "main.js": "/static/js/main.e0a7da4d.js",
+    "main.css": "/static/css/main.3c3314ef.css",
+    "main.js": "/static/js/main.15a077fc.js",
     "static/js/787.5e2fbcf4.chunk.js": "/static/js/787.5e2fbcf4.chunk.js",
     "static/media/scoresSectionAdBall2.svg": "/static/media/scoresSectionAdBall2.14406a279686e7b6a8b53128e04ea3cf.svg",
     "static/media/scoresSectionAdBall.svg": "/static/media/scoresSectionAdBall.97eefad2a24b26513db014cb59bb24ba.svg",
-    "static/media/formation.svg": "/static/media/formation.76913ac2fb9d209e8ec12ddb8c56fd2d.svg",
     "static/media/realmadrid.svg": "/static/media/realmadrid.b4edc229ca45a5f7b202675734583178.svg",
     "static/media/leicesterCityLogo.svg": "/static/media/leicesterCityLogo.8223480cdcadc952b951adcac8d2c99f.svg",
     "static/media/chelseaLogo.svg": "/static/media/chelseaLogo.1f581c124d0f1d5895030b9e84b8b0f3.svg",
@@ -16,12 +15,12 @@
     "static/media/sportybet.svg": "/static/media/sportybet.e3c56847c488856cf185698775e67248.svg",
     "index.html": "/index.html",
     "static/media/scoresSectionAdBackground.svg": "/static/media/scoresSectionAdBackground.6417819135f5b181b10e.svg",
-    "main.46e3228d.css.map": "/static/css/main.46e3228d.css.map",
-    "main.e0a7da4d.js.map": "/static/js/main.e0a7da4d.js.map",
+    "main.3c3314ef.css.map": "/static/css/main.3c3314ef.css.map",
+    "main.15a077fc.js.map": "/static/js/main.15a077fc.js.map",
     "787.5e2fbcf4.chunk.js.map": "/static/js/787.5e2fbcf4.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.46e3228d.css",
-    "static/js/main.e0a7da4d.js"
+    "static/css/main.3c3314ef.css",
+    "static/js/main.15a077fc.js"
   ]
 }
