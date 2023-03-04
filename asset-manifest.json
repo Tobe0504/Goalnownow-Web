@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.ce0d49ba.css",
-    "main.js": "/static/js/main.67959112.js",
+    "main.css": "/static/css/main.beeb9312.css",
+    "main.js": "/static/js/main.d4af21f5.js",
     "static/js/787.5e2fbcf4.chunk.js": "/static/js/787.5e2fbcf4.chunk.js",
     "static/media/scoresSectionAdBall2.svg": "/static/media/scoresSectionAdBall2.14406a279686e7b6a8b53128e04ea3cf.svg",
     "static/media/scoresSectionAdBall.svg": "/static/media/scoresSectionAdBall.97eefad2a24b26513db014cb59bb24ba.svg",
@@ -15,12 +15,12 @@
     "static/media/sportybet.svg": "/static/media/sportybet.e3c56847c488856cf185698775e67248.svg",
     "index.html": "/index.html",
     "static/media/scoresSectionAdBackground.svg": "/static/media/scoresSectionAdBackground.6417819135f5b181b10e.svg",
-    "main.ce0d49ba.css.map": "/static/css/main.ce0d49ba.css.map",
-    "main.67959112.js.map": "/static/js/main.67959112.js.map",
+    "main.beeb9312.css.map": "/static/css/main.beeb9312.css.map",
+    "main.d4af21f5.js.map": "/static/js/main.d4af21f5.js.map",
     "787.5e2fbcf4.chunk.js.map": "/static/js/787.5e2fbcf4.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ce0d49ba.css",
-    "static/js/main.67959112.js"
+    "static/css/main.beeb9312.css",
+    "static/js/main.d4af21f5.js"
   ]
 }
