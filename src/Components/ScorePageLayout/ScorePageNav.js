@@ -19,8 +19,7 @@ const ScorePageNav = (props) => {
     setShowOdds,
     setRequiredDate,
     requiredDate,
-    setStatusType,
-    statusType,
+
     includeLive,
     setIncludeLive,
   } = useContext(MatchesContext);

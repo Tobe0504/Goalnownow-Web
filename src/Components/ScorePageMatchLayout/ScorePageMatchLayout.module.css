@@ -223,6 +223,11 @@
   animation: appear 0.3s ease-in-out;
 }
 
+.timeCounter {
+  width: 200px;
+  text-align: center;
+}
+
 @media screen and (max-width: 767px) {
   .navSection {
     padding: 0px 16px;

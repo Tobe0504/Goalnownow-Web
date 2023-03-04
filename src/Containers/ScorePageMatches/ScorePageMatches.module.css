@@ -180,6 +180,14 @@
   opacity: 1;
 }
 
+.noMatches {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40vh;
+  opacity: 0.5;
+}
+
 @media screen and (max-width: 767px) {
   .leagueHeader {
     padding: 1rem 1rem;

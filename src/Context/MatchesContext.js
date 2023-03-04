@@ -26,7 +26,6 @@ const MatchesContextProvider = (props) => {
 
   const { timeZone } = Intl.DateTimeFormat().resolvedOptions();
 
-  console.log(timeZone, "Time zone");
   const [country, setCountry] = useState("");
   const [currentTime, setCurrentTime] = useState(timeZone);
   const [eventsDetails, setEventsDetails] = useState([]);
@@ -562,6 +561,7 @@ const MatchesContextProvider = (props) => {
 
   // get match commetary
   const fetchMatchCommentary = (id) => {
+    setMatchCommentary([]);
     axios
       .get(
         `http://eapi.enetpulse.com/event/commentaries/?id=${id}&limit=100&username=${enetPulseUsername}&token=${enetPulseTokenId}&tz=${currentTime}`

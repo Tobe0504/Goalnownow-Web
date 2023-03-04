@@ -14,6 +14,7 @@ const ScorePageMatchCommentary = () => {
   //   Effects
   useEffect(() => {
     fetchMatchCommentary(matchId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <ScorePageMatchLayout>

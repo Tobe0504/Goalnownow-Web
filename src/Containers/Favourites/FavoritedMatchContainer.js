@@ -3,8 +3,6 @@ import classes from "../ScorePageMatches/ScorePageMatches.module.css";
 import { MatchesContext } from "../../Context/MatchesContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight, faStar } from "@fortawesome/free-solid-svg-icons";
-import barcelona from "../../Assets/Images/barcelona.svg";
-import realMadrid from "../../Assets/Images/realmadrid.svg";
 import { useContext } from "react";
 import TeamLogo from "../../Components/TeamLogo/TeamLogo";
 import { useNavigate } from "react-router-dom";
@@ -51,7 +49,7 @@ const FavoritedMatchContainer = (props) => {
 
   return (
     <>
-      {props?.leagueEvent?.length > 0 && (
+      {props?.leagueEvent?.length > 0 ? (
         <div className={classes.leagueData}>
           <div
             className={classes.leagueHeader}
@@ -229,6 +227,8 @@ const FavoritedMatchContainer = (props) => {
             })}
           </div>
         </div>
+      ) : (
+        <div className={classes.noMatches}>No favorited matches</div>
       )}
     </>
   );

@@ -7,9 +7,10 @@ import { faFutbol } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
 import { v4 } from "uuid";
 import { MatchesContext } from "../../Context/MatchesContext";
-import { faAngleLeft, faGolfBall } from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import TeamLogo from "../TeamLogo/TeamLogo";
 import { MatchesContextAlt } from "../../Context/MatchesContextAlt";
+import TimerComponent from "../../Containers/TimerComponent/TimerComponent";
 
 const ScorePageMatchLayout = (props) => {
   // params
@@ -137,6 +138,12 @@ const ScorePageMatchLayout = (props) => {
               ) : (
                 <div>
                   {/* {Object.values(specificMatchData?.elapsed)[0]?.elapsed} */}
+                </div>
+              )}
+
+              {specificMatchData?.status_type === "notstarted" && (
+                <div className={classes.timeCounter}>
+                  <TimerComponent date={specificMatchData?.startdate} />
                 </div>
               )}
               <div className={classes.lineDecoration}>
