@@ -109,12 +109,8 @@ const ScorePageTablesContainer = (props) => {
                         >
                           {/* <FontAwesomeIcon icon={faCaretDown} /> */}
                         </span>
-                        <span>
-                          <TeamLogo
-                            id={datum?.participantFK}
-                            width="16px"
-                            height="16px"
-                          />
+                        <span style={{ width: "16px", height: "16px" }}>
+                          <TeamLogo id={datum?.participantFK} />
                         </span>
                         <span>{datum.participant?.name}</span>
                       </div>

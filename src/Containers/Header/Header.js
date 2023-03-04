@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import classes from "./Header.module.css";
 import goalNowNowLogo from "../../Assets/Images/goalNowNowLogo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import Dropdown from "../../Components/Dropdown/Dropdown";
@@ -47,7 +46,7 @@ const Header = () => {
               key={data.id}
               to={data.route}
               className={
-                window.location.href.includes(data.route)
+                window.location.hash.includes(data.route)
                   ? `${classes.activeNav}`
                   : undefined
               }
@@ -55,7 +54,7 @@ const Header = () => {
                 fetchTournaents();
               }}
             >
-              {window.location.href.includes(data.route) && (
+              {window.location.hash.includes(data.route) && (
                 <div className={classes.activeIndicator}></div>
               )}
               <div className={classes.navItem}>
@@ -90,9 +89,7 @@ const Header = () => {
           <Dropdown
             selected={currentTime}
             setSelected={setCurrentTime}
-            options={timezones.map((data) => {
-              return data.name;
-            })}
+            options={timezones.sort()}
           />
         </div>
       </div>
