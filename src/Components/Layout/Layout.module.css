@@ -22,6 +22,8 @@
 
 .middleSection {
   width: 100%;
+  height: 90vh;
+  overflow-y: auto;
 }
 
 .rightSection {

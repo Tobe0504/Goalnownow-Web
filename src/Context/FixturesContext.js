@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { enetPulseUsername, enetPulseTokenId } from "../Utilities/global";
 import { MatchesContext } from "./MatchesContext";
@@ -13,14 +13,16 @@ const FixturesContextProvider = (props) => {
   const [leagueTable, setLegueTable] = useState([]);
 
   // Utils
-  const { formattedDate, currentTime } = useContext(MatchesContext);
+  const { formattedDate, currentTime, includeLive } =
+    useContext(MatchesContext);
 
   // Fetch fixtures and events
   const fetchTournamentsEventsAndFixturesBasedOnLeague = (id) => {
     setIsSendingRequest(true);
+    const includeLiveQueryParam = includeLive ? "&status_type=inprogress" : "";
     axios
       .get(
-        `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tz=${currentTime}&tournament_stageFK=${id}&username=${enetPulseUsername}&token=${enetPulseTokenId}`
+        `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}${includeLiveQueryParam}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tz=${currentTime}&tournament_stageFK=${id}&username=${enetPulseUsername}&token=${enetPulseTokenId}`
       )
       .then((res) => {
         setIsSendingRequest(false);

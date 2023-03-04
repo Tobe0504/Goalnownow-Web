@@ -15,7 +15,8 @@ const ScorePageMatchByLeague = () => {
   const { leagueId } = useParams();
 
   // context
-  const { formattedDate, currentTime } = useContext(MatchesContext);
+  const { formattedDate, currentTime, includeLive } =
+    useContext(MatchesContext);
   const {
     fetchTournamentsEventsAndFixturesBasedOnLeague,
     isSendingRequest,
@@ -26,8 +27,9 @@ const ScorePageMatchByLeague = () => {
 
   useEffect(() => {
     fetchTournamentsEventsAndFixturesBasedOnLeague(leagueId);
+    console.log("goinggg");
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [leagueId, formattedDate, currentTime]);
+  }, [leagueId, formattedDate, currentTime, includeLive]);
 
   useEffect(() => {
     setLeagueIdForFetch(leagueId);

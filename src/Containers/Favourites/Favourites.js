@@ -6,60 +6,16 @@ import FavoritedMatchContainer from "./FavoritedMatchContainer";
 
 const Favourites = () => {
   // context
-  const {
-    premierLeagueevents,
-    frenchLeague,
-    germanLeague,
-    italianLeague,
-    spanishLeague,
-    championsLeague,
-    europaLeague,
-    faCup,
-    setPremierLeagueEvents,
-    setFrenchLeague,
-    setGermanLeague,
-    setItalianLeague,
-    setSpanishLeague,
-    setChampionsLeague,
-    setEuropaLeague,
-    setFaCup,
-  } = useContext(MatchesContext);
+  const { favouritedMatches, setFavouritedMatches } =
+    useContext(MatchesContext);
   return (
     <ScorePageLayout showNavSection={true}>
       <div className={classes.container}>
         <div className={classes.container}>
           <FavoritedMatchContainer
-            leagueEvent={championsLeague}
-            setLegueEvent={setChampionsLeague}
-          />
-          <FavoritedMatchContainer
-            leagueEvent={europaLeague}
-            setLegueEvent={setEuropaLeague}
-          />
-          <FavoritedMatchContainer
-            leagueEvent={premierLeagueevents}
-            setLegueEvent={setPremierLeagueEvents}
-          />
-
-          <FavoritedMatchContainer
-            leagueEvent={spanishLeague}
-            setLegueEvent={setSpanishLeague}
-          />
-          <FavoritedMatchContainer
-            leagueEvent={frenchLeague}
-            setLegueEvent={setFrenchLeague}
-          />
-          <FavoritedMatchContainer
-            leagueEvent={germanLeague}
-            setLegueEvent={setGermanLeague}
-          />
-          <FavoritedMatchContainer
-            leagueEvent={italianLeague}
-            setLegueEvent={setItalianLeague}
-          />
-          <FavoritedMatchContainer
-            leagueEvent={faCup}
-            setLegueEvent={setFaCup}
+            leagueEvent={favouritedMatches}
+            setLegueEvent={setFavouritedMatches}
+            leagueAbbv={"GB"}
           />
         </div>
       </div>

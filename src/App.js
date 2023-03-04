@@ -10,6 +10,7 @@ import ScorePageMatchLineUp from "./Containers/ScorePageMatchLineUp/ScorePageMat
 import ScorePageMatchSummary from "./Containers/ScorePageMatchSummary/ScorePageMatchSummary";
 import Favourites from "./Containers/Favourites/Favourites";
 import ScorePageTablesByLeague from "./Containers/ScorePageTablesByLeague/ScorePageTablesByLeague";
+import ScorePageMatchCommentary from "./Containers/ScorePageMatchCommentary/ScorePageMatchCommentary";
 function App() {
   // const navigate = useNavigate();
 
@@ -39,6 +40,11 @@ function App() {
       <Route
         path="/scores/:matchId/summary"
         element={<ScorePageMatchSummary />}
+      />
+
+      <Route
+        path="/scores/:matchId/commentary"
+        element={<ScorePageMatchCommentary />}
       />
 
       <Route

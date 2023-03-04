@@ -18,6 +18,7 @@
   line-height: 21px;
   border-bottom: 2px solid #ffd91b;
   background: var(--backgroundBlack);
+  position: relative;
 }
 
 .container > div {
@@ -35,6 +36,12 @@
   justify-content: space-between;
   gap: 2rem;
   align-items: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 492px;
+  height: 100%;
 }
 
 .navItemSection > a {

@@ -27,7 +27,8 @@
 
 .logoAndScoreSection > div:nth-child(1),
 .logoAndScoreSection > div:nth-child(3) {
-  width: 200px;
+  width: 80px;
+  height: 80px;
 }
 
 .logoAndScoreSection > div:nth-child(2) {
@@ -173,6 +174,18 @@
   justify-content: space-between;
   margin-top: 2rem;
   background: var(--foregroundBlack);
+  overflow-x: scroll;
+  width: 100%;
+}
+
+.navSection::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.navSection {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .navSection > a {
@@ -226,11 +239,17 @@
 
   .logoAndScoreSection > div:nth-child(1),
   .logoAndScoreSection > div:nth-child(3) {
-    width: 80px;
+    width: 70px;
+    height: 70px;
   }
 
   .logoAndScoreSection > div:nth-child(2) {
     width: 150px;
+  }
+
+  .logoAndScoreSection > div > div:nth-child(2) {
+    font-size: 14px;
+    line-height: 21px;
   }
 
   .lineDecoration > div {
@@ -252,5 +271,21 @@
 
     gap: 24px;
     width: 90%;
+  }
+
+  .navSection > a {
+    width: 30%;
+    flex-basis: 30%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .navItem {
+    text-align: center;
+    /* border: 2px solid red; */
   }
 }

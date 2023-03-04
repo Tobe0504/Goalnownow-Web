@@ -44,7 +44,7 @@ const ScorePageMatchLineUp = () => {
           <div className={classes.lineUpTable}>
             <div className={classes.homeLineup}>
               <div className={classes.tableHeader}>
-                <span>
+                <span style={{ width: "16px", height: "16px" }}>
                   {specificMatchData && (
                     <TeamLogo
                       id={
@@ -85,7 +85,7 @@ const ScorePageMatchLineUp = () => {
             </div>
             <div className={classes.homeLineup}>
               <div className={classes.tableHeader}>
-                <span>
+                <span style={{ width: "16px", height: "16px" }}>
                   {specificMatchData && (
                     <TeamLogo
                       id={
@@ -127,13 +127,13 @@ const ScorePageMatchLineUp = () => {
           </div>
         </div>
         {!matchStartedState[0]?.value === "no" ||
-          (specificMatchData.status_type === "finished" && (
+          (specificMatchData?.status_type === "finished" && (
             <div className={classes.substitutes}>
               <div className={classes.header}>Substitutes</div>
               <div className={classes.lineUpTable}>
                 <div className={classes.homeLineup}>
                   <div className={classes.tableHeader}>
-                    <span>
+                    <span style={{ width: "16px", height: "16px" }}>
                       <TeamLogo
                         id={
                           Object.values(
@@ -168,7 +168,7 @@ const ScorePageMatchLineUp = () => {
 
                 <div className={classes.homeLineup}>
                   <div className={classes.tableHeader}>
-                    <span>
+                    <span style={{ width: "16px", height: "16px" }}>
                       <TeamLogo
                         id={
                           Object.values(

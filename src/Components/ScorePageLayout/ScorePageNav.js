@@ -21,6 +21,8 @@ const ScorePageNav = (props) => {
     requiredDate,
     setStatusType,
     statusType,
+    includeLive,
+    setIncludeLive,
   } = useContext(MatchesContext);
 
   const { leagueIdforFetch } = useContext(FixturesContext);
@@ -123,10 +125,10 @@ const ScorePageNav = (props) => {
           </div>
         </div>
         <div>
-          {statusType === false ? (
+          {includeLive === false ? (
             <div
               onClick={() => {
-                setStatusType(true);
+                setIncludeLive(true);
               }}
               className={classes.liveButton}
             >
@@ -135,7 +137,7 @@ const ScorePageNav = (props) => {
           ) : (
             <div
               onClick={() => {
-                setStatusType(false);
+                setIncludeLive(false);
               }}
               className={classes.altLiveButton}
             >
@@ -215,7 +217,25 @@ const ScorePageNav = (props) => {
       </div>
       <div className={classes.mobileDiv}>
         <div>
-          <div>Live</div>
+          {includeLive === false ? (
+            <div
+              onClick={() => {
+                setIncludeLive(true);
+              }}
+              className={classes.liveButton}
+            >
+              Live
+            </div>
+          ) : (
+            <div
+              onClick={() => {
+                setIncludeLive(false);
+              }}
+              className={classes.altLiveButton}
+            >
+              Live
+            </div>
+          )}
           {!props.showLeagueBasedNav && (
             <>
               {scorePageNavItems.map((data) => {

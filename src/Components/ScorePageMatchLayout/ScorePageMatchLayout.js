@@ -7,7 +7,7 @@ import { faFutbol } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
 import { v4 } from "uuid";
 import { MatchesContext } from "../../Context/MatchesContext";
-import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft, faGolfBall } from "@fortawesome/free-solid-svg-icons";
 import TeamLogo from "../TeamLogo/TeamLogo";
 import { MatchesContextAlt } from "../../Context/MatchesContextAlt";
 
@@ -22,6 +22,7 @@ const ScorePageMatchLayout = (props) => {
     secondParticipantResults,
     stadium,
     eventIncidents,
+    fetchMatchCommentary,
   } = useContext(MatchesContext);
 
   const { fetchSpecificMatchEventsAlt } = useContext(MatchesContextAlt);
@@ -31,6 +32,7 @@ const ScorePageMatchLayout = (props) => {
   useEffect(() => {
     const users = setInterval(() => {
       fetchSpecificMatchEventsAlt(matchId);
+      fetchMatchCommentary(matchId);
       console.log("fetched!");
     }, 20000);
 
@@ -68,6 +70,12 @@ const ScorePageMatchLayout = (props) => {
       title: "Odds",
       isActive: false,
       route: `/scores/${matchId}/odds`,
+    },
+    {
+      id: v4(),
+      title: "Commentary",
+      isActive: false,
+      route: `/scores/${matchId}/commentary`,
     },
   ];
 
@@ -114,7 +122,17 @@ const ScorePageMatchLayout = (props) => {
               )}
               {specificMatchData?.status_type === "inprogress" ? (
                 <div>
-                  {`${Object.values(specificMatchData?.elapsed)[0]?.elapsed}'`}
+                  {/* {`${Object.values(specificMatchData?.elapsed)[0]?.elapsed}'`} */}
+
+                  {`${Object.values(specificMatchData?.elapsed)[0]?.elapsed}${
+                    Object.values(specificMatchData?.elapsed)[0]
+                      ?.injury_time_elapsed > 0
+                      ? `+${
+                          Object.values(specificMatchData?.elapsed)[0]
+                            ?.injury_time_elapsed
+                        } `
+                      : ""
+                  }'`}
                 </div>
               ) : (
                 <div>
@@ -140,8 +158,6 @@ const ScorePageMatchLayout = (props) => {
                     Object.values(specificMatchData?.event_participants)[1]
                       ?.participantFK
                   }
-                  width="80px"
-                  height="80px"
                 />
               )}
 
@@ -156,7 +172,9 @@ const ScorePageMatchLayout = (props) => {
           <div className={classes.matchEvents}>
             {eventIncidents
               ?.filter((data) => {
-                return data.incident_typeFK === "7";
+                return (
+                  data.incident_typeFK === "7" || data.incident_typeFK === "8"
+                );
               })
               ?.map((event) => {
                 return (
@@ -174,7 +192,9 @@ const ScorePageMatchLayout = (props) => {
                         fontSize="1.5rem"
                       />
                     </div>
-                    <div>{`${event?.elapsed} ${event.participant.name}`}</div>
+                    <div>{`${event?.elapsed}' ${event?.participant?.name} ${
+                      event.incident_typeFK === "8" ? "(Penalty)" : ""
+                    }`}</div>
                   </div>
                 );
               })}

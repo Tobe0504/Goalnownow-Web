@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import classes from "./ScorePageMatches.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAngleRight,
+  faStar as starr,
+} from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
@@ -10,7 +13,8 @@ import TeamLogo from "../../Components/TeamLogo/TeamLogo";
 
 const LeagueMatchContainer = (props) => {
   // Context
-  const { showOdds } = useContext(MatchesContext);
+  const { showOdds, setFavouritedMatches, favouritedMatches } =
+    useContext(MatchesContext);
 
   //   navigate
   const navigate = useNavigate();
@@ -108,15 +112,14 @@ const LeagueMatchContainer = (props) => {
             {props.leagueEvent?.map((datum, i) => {
               const results = getUserResults(datum);
               return (
-                <div
-                  className={classes.leagueGamesOuter}
-                  key={datum.id}
-                  onClick={() => {
-                    navigate(`/scores/${datum.id}/summary`);
-                  }}
-                >
+                <div className={classes.leagueGamesOuter} key={datum.id}>
                   <div className={classes.leagueGame}>
-                    <div className={classes.time}>
+                    <div
+                      className={classes.time}
+                      onClick={() => {
+                        navigate(`/scores/${datum.id}/summary`);
+                      }}
+                    >
                       {datum.status_type === "finished" &&
                       Object.values(datum.elapsed)[0].elapsed === "90" ? (
                         "FT"
@@ -132,7 +135,13 @@ const LeagueMatchContainer = (props) => {
                         </div>
                       )}
                     </div>
-                    <div className={classes.clubNameSection}>
+                    <div
+                      className={classes.clubNameSection}
+                      onClick={() => {
+                        navigate(`/scores/${datum.id}/summary`);
+                      }}
+                      style={{ width: "100%" }}
+                    >
                       <div>
                         <span>
                           <TeamLogo
@@ -185,22 +194,34 @@ const LeagueMatchContainer = (props) => {
                       )}
 
                       <div>
-                        <FontAwesomeIcon
-                          icon={faStar}
-                          onClick={() => {
-                            const modifiedLEagueEvent = props.leagueEvent.map(
-                              (data, j) => {
-                                if (i === j) {
-                                  return { ...data, isFavourited: true };
+                        {favouritedMatches?.find((data) => {
+                          return data.id === datum.id;
+                        }) ? (
+                          <FontAwesomeIcon
+                            icon={starr}
+                            onClick={() => {
+                              const newFeatured = favouritedMatches?.filter(
+                                (data) => {
+                                  return data.id !== datum.id;
                                 }
-                                return { ...data, isFavourited: false };
-                              }
-                            );
-                            props.setLegueEvent(modifiedLEagueEvent);
-
-                            console.log(props.leagueEvent);
-                          }}
-                        />
+                              );
+                              setFavouritedMatches(newFeatured);
+                            }}
+                            style={{ color: "#ffd91b", cursor: "pointer" }}
+                          />
+                        ) : (
+                          <FontAwesomeIcon
+                            icon={faStar}
+                            onClick={() => {
+                              setFavouritedMatches((prevState) => [
+                                ...prevState,
+                                datum,
+                              ]);
+                              console.log(favouritedMatches, "fav");
+                            }}
+                            style={{ color: "#ffd91b", cursor: "pointer" }}
+                          />
+                        )}
                       </div>
                     </div>
                   </div>

@@ -1,0 +1,36 @@
+.container {
+  /* border: 2px solid red; */
+  padding: 1rem 0;
+}
+
+.comment {
+  padding: 0.75rem 1rem;
+  background: var(--foregroundBlack);
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.comment > div:nth-child(1) {
+  /* border: 2px solid red; */
+  width: 50px;
+}
+
+@media screen and (max-width: 767px) {
+  .comment > div:nth-child(1) {
+    width: 70px;
+  }
+
+  .comment > div:nth-child(2) {
+    width: 100%;
+  }
+
+  .comment {
+    align-items: flex-start;
+  }
+}

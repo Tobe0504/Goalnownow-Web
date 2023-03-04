@@ -34,9 +34,7 @@ const TeamLogo = (props) => {
     );
   }
 
-  return (
-    <img width={props.width} height={props.height} src={logo} alt="Logo" />
-  );
+  return <img width={"100%"} height={"100%"} src={logo} alt="Logo" />;
 };
 
 export default TeamLogo;
