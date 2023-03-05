@@ -81,4 +81,8 @@
   .statistic {
     padding: 1rem 24px;
   }
+
+  .nameAndBarSection > div:nth-child(2) {
+    height: 10px;
+  }
 }

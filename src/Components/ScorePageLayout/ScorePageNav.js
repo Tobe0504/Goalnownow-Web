@@ -261,7 +261,7 @@ const ScorePageNav = (props) => {
           )}
           {props.showLeagueBasedNav && (
             <>
-              {scorePageNavItems2.map((data) => {
+              {scorePageNavItems2?.map((data) => {
                 return (
                   <Link
                     key={data.id}

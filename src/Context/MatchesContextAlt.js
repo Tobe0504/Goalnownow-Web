@@ -16,6 +16,7 @@ const MatchesContextAltProvider = (props) => {
     currentTime,
     setSpecificmatchData,
     setStadium,
+    setMatchCommentary,
   } = useContext(MatchesContext);
 
   const fetchSpecificMatchEventsAlt = (id) => {
@@ -127,8 +128,25 @@ const MatchesContextAltProvider = (props) => {
         setIsSendingRequest(false);
       });
   };
+
+  const fetchMatchCommentaryAlt = (id) => {
+    axios
+      .get(
+        `http://eapi.enetpulse.com/event/commentaries/?id=${id}&limit=100&username=${enetPulseUsername}&token=${enetPulseTokenId}&tz=${currentTime}`
+      )
+      .then((res) => {
+        console.log(res, "commentary");
+        setMatchCommentary(Object.values(res.data.event)[0].event_incident);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
-    <MatchesContextAlt.Provider value={{ fetchSpecificMatchEventsAlt }}>
+    <MatchesContextAlt.Provider
+      value={{ fetchSpecificMatchEventsAlt, fetchMatchCommentaryAlt }}
+    >
       {props.children}
     </MatchesContextAlt.Provider>
   );

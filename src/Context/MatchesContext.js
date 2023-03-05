@@ -23,6 +23,7 @@ const MatchesContextProvider = (props) => {
   const [requiredDate, setRequiredDate] = useState(
     moment().format(moment.HTML5_FMT.DATE)
   );
+  const [isFetchingCommentary, setIsFetchingCommentary] = useState(false);
 
   const { timeZone } = Intl.DateTimeFormat().resolvedOptions();
 
@@ -561,6 +562,7 @@ const MatchesContextProvider = (props) => {
 
   // get match commetary
   const fetchMatchCommentary = (id) => {
+    setIsFetchingCommentary(true);
     setMatchCommentary([]);
     axios
       .get(
@@ -569,9 +571,11 @@ const MatchesContextProvider = (props) => {
       .then((res) => {
         console.log(res, "commentary");
         setMatchCommentary(Object.values(res.data.event)[0].event_incident);
+        setIsFetchingCommentary(false);
       })
       .catch((err) => {
         console.log(err);
+        setIsFetchingCommentary(false);
       });
   };
 
@@ -790,6 +794,7 @@ const MatchesContextProvider = (props) => {
         setFavouritedMatches,
         includeLive,
         setIncludeLive,
+        isFetchingCommentary,
       }}
     >
       {props.children}

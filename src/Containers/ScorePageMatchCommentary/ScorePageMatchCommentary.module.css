@@ -23,7 +23,7 @@
 
 @media screen and (max-width: 767px) {
   .comment > div:nth-child(1) {
-    width: 70px;
+    width: 50px;
   }
 
   .comment > div:nth-child(2) {

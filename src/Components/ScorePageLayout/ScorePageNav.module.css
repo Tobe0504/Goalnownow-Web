@@ -166,7 +166,7 @@
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.mobileDiv > div:nth-child(1) > div:nth-child(1) {
+.mobileDiv > div > .liveButton {
   font-weight: 800;
   font-size: 14px;
   line-height: 21px;
@@ -176,6 +176,21 @@
   border-radius: 6px;
   color: var(--foregroundBlack);
   margin: 0.7rem 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.mobileDiv > div > .altLiveButton {
+  background: #ffd91b;
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 21px;
+  padding: 0.25rem 0.75rem;
+  text-align: center;
+  border-radius: 6px;
+  margin: 0.7rem 0;
+  color: var(--foregroundBlack);
+  user-select: none;
+  transition: all 0.3s ease-in-out;
 }
 
 .mobileDiv > div:nth-child(1) {

@@ -23,17 +23,19 @@ const ScorePageMatchLayout = (props) => {
     secondParticipantResults,
     stadium,
     eventIncidents,
-    fetchMatchCommentary,
   } = useContext(MatchesContext);
 
-  const { fetchSpecificMatchEventsAlt } = useContext(MatchesContextAlt);
+  const { fetchSpecificMatchEventsAlt, fetchMatchCommentaryAlt } =
+    useContext(MatchesContextAlt);
 
   // utils
 
   useEffect(() => {
+    fetchSpecificMatchEventsAlt(matchId);
+
     const users = setInterval(() => {
       fetchSpecificMatchEventsAlt(matchId);
-      fetchMatchCommentary(matchId);
+      fetchMatchCommentaryAlt(matchId);
       console.log("fetched!");
     }, 20000);
 
@@ -196,7 +198,7 @@ const ScorePageMatchLayout = (props) => {
                       <FontAwesomeIcon
                         icon={faFutbol}
                         color="#FFD91B"
-                        fontSize="1.5rem"
+                        fontSize="1.2rem"
                       />
                     </div>
                     <div>{`${event?.elapsed}' ${event?.participant?.name} ${
