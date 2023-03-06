@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import classes from "./ScorePageNav.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
@@ -11,6 +11,7 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import { MatchesContext } from "../../Context/MatchesContext";
 import moment from "moment";
 import { FixturesContext } from "../../Context/FixturesContext";
+import ScorePageDatePicker from "./ScorePageDatePicker";
 
 const ScorePageNav = (props) => {
   // State
@@ -19,7 +20,6 @@ const ScorePageNav = (props) => {
     setShowOdds,
     setRequiredDate,
     requiredDate,
-
     includeLive,
     setIncludeLive,
   } = useContext(MatchesContext);
@@ -30,48 +30,78 @@ const ScorePageNav = (props) => {
   const location = useLocation();
   const { leagueId } = useParams();
 
-  let dateArr = requiredDate?.split("-");
-  let month = dateArr[1];
-  let day = dateArr[2];
+  // let dateArr = requiredDate?.split("-");
+  // let month = dateArr[1];
+  // let day = dateArr[2];
 
-  let wordMonth;
+  // let wordMonth;
 
-  if (month === "01") {
-    wordMonth = "Jan";
+  // if (month === "01") {
+  //   wordMonth = "Jan";
+  // }
+  // if (month === "02") {
+  //   wordMonth = "Feb";
+  // }
+  // if (month === "03") {
+  //   wordMonth = "Mar";
+  // }
+  // if (month === "04") {
+  //   wordMonth = "Apr";
+  // }
+  // if (month === "05") {
+  //   wordMonth = "May";
+  // }
+  // if (month === "06") {
+  //   wordMonth = "Jun";
+  // }
+  // if (month === "07") {
+  //   wordMonth = "Jul";
+  // }
+  // if (month === "08") {
+  //   wordMonth = "Aug";
+  // }
+  // if (month === "09") {
+  //   wordMonth = "Sep";
+  // }
+  // if (month === "10") {
+  //   wordMonth = "Oct";
+  // }
+  // if (month === "11") {
+  //   wordMonth = "Nov";
+  // }
+  // if (month === "12") {
+  //   wordMonth = "Dec";
+  // }
+
+  // ref
+
+  // utils
+  function getAllDatesOfMonth(date) {
+    const mDate = moment(date, "YYYY-MM");
+    const daysCount = mDate.daysInMonth();
+    return Array(daysCount)
+      .fill(null)
+      .map((v, index) => {
+        const addDays = index === 0 ? 0 : 1;
+        return mDate.add(addDays, "days").format("YYYY-MM-DD");
+      });
   }
-  if (month === "02") {
-    wordMonth = "Feb";
-  }
-  if (month === "03") {
-    wordMonth = "Mar";
-  }
-  if (month === "04") {
-    wordMonth = "Apr";
-  }
-  if (month === "05") {
-    wordMonth = "May";
-  }
-  if (month === "06") {
-    wordMonth = "Jun";
-  }
-  if (month === "07") {
-    wordMonth = "Jul";
-  }
-  if (month === "08") {
-    wordMonth = "Aug";
-  }
-  if (month === "09") {
-    wordMonth = "Sep";
-  }
-  if (month === "10") {
-    wordMonth = "Oct";
-  }
-  if (month === "11") {
-    wordMonth = "Nov";
-  }
-  if (month === "12") {
-    wordMonth = "Dec";
-  }
+
+  const date = new Date();
+  const currentMonthDates = getAllDatesOfMonth(date);
+
+  const containerRef = useRef(null);
+
+  const handleSetActiveDate = (date) => {
+    // get the active date element
+    const activeDateElement = containerRef.current.querySelector(
+      `[data-date="${date}"]`
+    );
+
+    // scroll the active date element into view and center it in the visible container
+    activeDateElement.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
+
   return (
     <div className={classes.outerContainer}>
       <div className={classes.container}>
@@ -84,6 +114,11 @@ const ScorePageNav = (props) => {
                   .format(moment.HTML5_FMT.DATE),
                 "formattt"
               );
+              handleSetActiveDate(
+                moment(requiredDate)
+                  .subtract(1, "days")
+                  .format(moment.HTML5_FMT.DATE)
+              );
             }}
           >
             <FontAwesomeIcon icon={faAngleLeft} />
@@ -95,6 +130,11 @@ const ScorePageNav = (props) => {
                   .add(1, "days")
                   .format(moment.HTML5_FMT.DATE),
                 "formattt"
+              );
+              handleSetActiveDate(
+                moment(requiredDate)
+                  .add(1, "days")
+                  .format(moment.HTML5_FMT.DATE)
               );
             }}
           >
@@ -109,21 +149,28 @@ const ScorePageNav = (props) => {
               id="date"
               value={requiredDate}
               onChange={(e) => {
-                // setDate(e.target.value);
                 setRequiredDate(e.target.value);
+                handleSetActiveDate(e.target.value);
               }}
             />
           </label>
-          <div>
+          {/* <div>
             <span>
               {moment(requiredDate)
                 .calendar()
                 .replace(/at 12:00 AM/g, "")}
             </span>
             <span>{`${day} ${wordMonth}`}</span>
-          </div>
+          </div> */}
         </div>
-        <div>
+        <div className={classes.datePicker}>
+          <ScorePageDatePicker
+            currentMonthDates={currentMonthDates}
+            handleSetActiveDate={handleSetActiveDate}
+            containerRef={containerRef}
+          />
+        </div>
+        <div className={classes.actionSection}>
           {includeLive === false ? (
             <div
               onClick={() => {
@@ -202,7 +249,7 @@ const ScorePageNav = (props) => {
             </>
           )}
         </div>
-        <div>
+        <div className={classes.oddsSection}>
           <span>Show Odds</span>
           <span>
             <ToggleSwitch

@@ -11,6 +11,7 @@ import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import TeamLogo from "../TeamLogo/TeamLogo";
 import { MatchesContextAlt } from "../../Context/MatchesContextAlt";
 import TimerComponent from "../../Containers/TimerComponent/TimerComponent";
+import { HeadToHeadContext } from "../../Context/HeadToHeadContext";
 
 const ScorePageMatchLayout = (props) => {
   // params
@@ -27,6 +28,8 @@ const ScorePageMatchLayout = (props) => {
 
   const { fetchSpecificMatchEventsAlt, fetchMatchCommentaryAlt } =
     useContext(MatchesContextAlt);
+
+  const { fetchHeadToHeadData } = useContext(HeadToHeadContext);
 
   // utils
 
@@ -45,6 +48,29 @@ const ScorePageMatchLayout = (props) => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  let firstParticipantId, secondParticipantId;
+
+  if (specificMatchData) {
+    firstParticipantId = Object.values(specificMatchData?.event_participants)[0]
+      ?.participantFK;
+    secondParticipantId = Object.values(
+      specificMatchData?.event_participants
+    )[1]?.participantFK;
+  }
+
+  useEffect(() => {
+    if (specificMatchData) {
+      fetchHeadToHeadData(
+        Object.values(specificMatchData?.event_participants)[0]?.participantFK,
+        Object.values(specificMatchData?.event_participants)[1]?.participantFK
+      );
+    }
+
+    console.log("This is gotham");
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [firstParticipantId, secondParticipantId]);
 
   const scorePageMatchNavItems = [
     {
@@ -80,6 +106,12 @@ const ScorePageMatchLayout = (props) => {
       isActive: false,
       route: `/scores/${matchId}/commentary`,
     },
+    {
+      id: v4(),
+      title: "Head to head",
+      isActive: false,
+      route: `/scores/${matchId}/h2h`,
+    },
   ];
 
   // Navigate
@@ -92,7 +124,7 @@ const ScorePageMatchLayout = (props) => {
           <div
             className={classes.titleContainer}
             onClick={() => {
-              navigate("/scores");
+              navigate(-1);
             }}
           >
             <span>
@@ -133,7 +165,7 @@ const ScorePageMatchLayout = (props) => {
                       ? `+${
                           Object.values(specificMatchData?.elapsed)[0]
                             ?.injury_time_elapsed
-                        } `
+                        }`
                       : ""
                   }'`}
                 </div>
@@ -215,6 +247,7 @@ const ScorePageMatchLayout = (props) => {
               <Link
                 key={data.id}
                 to={data.route}
+                replace
                 className={
                   window.location.href.includes(data.route)
                     ? `${classes.activeNav}`
@@ -231,7 +264,7 @@ const ScorePageMatchLayout = (props) => {
             );
           })}
         </div>
-        <div>{props.children}</div>
+        <div className={classes.children}>{props.children}</div>
       </div>
     </ScorePageLayout>
   );

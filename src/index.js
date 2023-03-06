@@ -9,6 +9,7 @@ import MatchesContextProvider from "./Context/MatchesContext";
 import TablesContextProvider from "./Context/TablesContext";
 import FixturesContextProvider from "./Context/FixturesContext";
 import MatchesContextAltProvider from "./Context/MatchesContextAlt";
+import HeadToHeadContextProvider from "./Context/HeadToHeadContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <HashRouter>
@@ -16,11 +17,13 @@ root.render(
       <MatchesContextAltProvider>
         <TablesContextProvider>
           <LeagueAndCategoryContextprovider>
-            <FixturesContextProvider>
-              <React.StrictMode>
-                <App />
-              </React.StrictMode>
-            </FixturesContextProvider>
+            <HeadToHeadContextProvider>
+              <FixturesContextProvider>
+                <React.StrictMode>
+                  <App />
+                </React.StrictMode>
+              </FixturesContextProvider>
+            </HeadToHeadContextProvider>
           </LeagueAndCategoryContextprovider>
         </TablesContextProvider>
       </MatchesContextAltProvider>

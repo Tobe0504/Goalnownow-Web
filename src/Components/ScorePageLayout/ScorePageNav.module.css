@@ -76,11 +76,11 @@
   display: none;
 }
 
-.container > div:nth-child(3) {
+.actionSection {
   margin-left: auto;
 }
 
-.container > div:nth-child(3) > .liveButton {
+.actionSection > .liveButton {
   font-weight: 800;
   font-size: 14px;
   line-height: 21px;
@@ -93,7 +93,7 @@
   transition: all 0.3s ease-in-out;
 }
 
-.container > div:nth-child(3) > .altLiveButton {
+.actionSection > .altLiveButton {
   background: #ffd91b;
   font-weight: 800;
   font-size: 14px;
@@ -106,14 +106,14 @@
   transition: all 0.3s ease-in-out;
 }
 
-.container > div:nth-child(3) {
+.actionSection {
   display: flex;
   align-items: center;
   gap: 2rem;
   align-items: center;
 }
 
-.container > div:nth-child(3) > a {
+.actionSection > a {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -147,7 +147,7 @@
   animation: appear 0.3s ease-in-out;
 }
 
-.container > div:nth-child(4) {
+.oddsSection {
   border-left: 1px solid rgba(255, 255, 255, 0.1);
   padding: 0.625rem 0 0.625rem 1.5rem;
   align-self: center;
@@ -227,6 +227,14 @@
   width: 25%;
 }
 
+.datePicker {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media screen and (min-width: 767px) and (max-width: 1023px) {
   .outerContainer {
     padding: 0 1.1rem;
@@ -236,8 +244,8 @@
     justify-content: space-between;
   }
 
-  .container > div:nth-child(3),
-  .container > div:nth-child(4) {
+  .actionSection,
+  .oddsSection {
     display: none;
   }
 
@@ -259,8 +267,8 @@
     justify-content: space-between;
   }
 
-  .container > div:nth-child(3),
-  .container > div:nth-child(4) {
+  .actionSection,
+  .oddsSection {
     display: none;
   }
 

@@ -135,7 +135,7 @@ const MatchesContextAltProvider = (props) => {
         `http://eapi.enetpulse.com/event/commentaries/?id=${id}&limit=100&username=${enetPulseUsername}&token=${enetPulseTokenId}&tz=${currentTime}`
       )
       .then((res) => {
-        console.log(res, "commentary");
+        console.log(res, "commentary alt");
         setMatchCommentary(Object.values(res.data.event)[0].event_incident);
       })
       .catch((err) => {
