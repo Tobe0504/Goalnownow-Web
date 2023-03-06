@@ -18,13 +18,8 @@ const ScorePageMatchLayout = (props) => {
   const { matchId } = useParams();
 
   // context
-  const {
-    specificMatchData,
-    firstParticipantResults,
-    secondParticipantResults,
-    stadium,
-    eventIncidents,
-  } = useContext(MatchesContext);
+  const { specificMatchData, stadium, eventIncidents } =
+    useContext(MatchesContext);
 
   const { fetchSpecificMatchEventsAlt, fetchMatchCommentaryAlt } =
     useContext(MatchesContextAlt);
@@ -117,6 +112,8 @@ const ScorePageMatchLayout = (props) => {
   // Navigate
   const navigate = useNavigate();
 
+  // console.log(specificMatchData);
+
   return (
     <ScorePageLayout>
       <div className={classes.container}>
@@ -147,9 +144,19 @@ const ScorePageMatchLayout = (props) => {
             </div>
 
             <div className={classes.scoreSection}>
-              <div>{`${firstParticipantResults[1]?.value || "-"} : ${
-                secondParticipantResults[1]?.value || "-"
-              }`}</div>
+              {specificMatchData && (
+                <div>{`${
+                  Object.values(
+                    Object.values(specificMatchData?.event_participants)[0]
+                      ?.result
+                  )[1]?.value || "-"
+                } : ${
+                  Object.values(
+                    Object.values(specificMatchData?.event_participants)[1]
+                      ?.result
+                  )[1]?.value || "-"
+                }`}</div>
+              )}
               {specificMatchData?.status_type && (
                 <div>
                   {specificMatchData?.status_type === "finished" && "FT"}

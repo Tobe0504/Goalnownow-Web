@@ -6,7 +6,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFutbol } from "@fortawesome/free-regular-svg-icons";
 import { useContext } from "react";
 import { MatchesContext } from "../../Context/MatchesContext";
-import { faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowDown,
+  faArrowUp,
+  faHandshakeAngle,
+} from "@fortawesome/free-solid-svg-icons";
 
 const ScorePageMatchSummary = () => {
   // params
@@ -33,6 +37,13 @@ const ScorePageMatchSummary = () => {
       return (
         <i>
           <FontAwesomeIcon icon={faFutbol} />
+        </i>
+      );
+    }
+    if (event === "Assist") {
+      return (
+        <i>
+          <FontAwesomeIcon icon={faHandshakeAngle} />
         </i>
       );
     }

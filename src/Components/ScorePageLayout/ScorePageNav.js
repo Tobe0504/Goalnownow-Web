@@ -94,12 +94,12 @@ const ScorePageNav = (props) => {
 
   const handleSetActiveDate = (date) => {
     // get the active date element
-    const activeDateElement = containerRef.current.querySelector(
+    const activeDateElement = containerRef?.current.querySelector(
       `[data-date="${date}"]`
     );
 
     // scroll the active date element into view and center it in the visible container
-    activeDateElement.scrollIntoView({ behavior: "smooth", block: "center" });
+    activeDateElement?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
   return (

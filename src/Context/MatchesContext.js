@@ -795,6 +795,7 @@ const MatchesContextProvider = (props) => {
         includeLive,
         setIncludeLive,
         isFetchingCommentary,
+        setMatchCommentary,
       }}
     >
       {props.children}

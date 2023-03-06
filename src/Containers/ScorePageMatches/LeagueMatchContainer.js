@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { MatchesContext } from "../../Context/MatchesContext";
 import TeamLogo from "../../Components/TeamLogo/TeamLogo";
+import euFlag from "../../Assets/Images/eu.png";
 
 const LeagueMatchContainer = (props) => {
   // Context
@@ -66,7 +67,11 @@ const LeagueMatchContainer = (props) => {
               <div>
                 <img
                   alt={props?.leagueEvent[0]?.tournament_stage_name}
-                  src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/${props.leagueAbbv}.svg`}
+                  src={
+                    props.leagueAbbv
+                      ? `http://purecatamphetamine.github.io/country-flag-icons/3x2/${props.leagueAbbv}.svg`
+                      : euFlag
+                  }
                   className={classes.hmm}
                 />
               </div>
