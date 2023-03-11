@@ -1,4 +1,5 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useState } from "react";
+import moment from "moment/moment";
 import { v4 } from "uuid";
 import { MatchesContext } from "./MatchesContext";
 import axios from "axios";
@@ -18,6 +19,41 @@ const MatchesContextAltProvider = (props) => {
     setStadium,
     setMatchCommentary,
   } = useContext(MatchesContext);
+
+  // Major leaguue events and fixtures
+  const [premierLeagueevents, setPremierLeagueEvents] = useState([]);
+  const [premierLeagueIsLoading, setPremierLeagueIsLoading] = useState(false);
+
+  const [spanishLeague, setSpanishLeague] = useState([]);
+  const [spanishLeagueIsLoading, setSpanishLeagueIsLoading] = useState(false);
+
+  const [germanLeague, setGermanLeague] = useState([]);
+  const [germanLeagueIsLoading, setGermanLeagueIsLoading] = useState(false);
+
+  const [frenchLeague, setFrenchLeague] = useState([]);
+  const [frenchLeagueIsLoading, setFrenchLeagueIsLoading] = useState(false);
+
+  const [italianLeague, setItalianLeague] = useState([]);
+  const [italianLeagueIsLoading, setItalianLeagueIsLoading] = useState(false);
+
+  const [europaLeague, setEuropaLeague] = useState([]);
+  const [europaLeagueIsLoading, setEuropaLeagueIsLoading] = useState(false);
+
+  const [championsLeague, setChampionsLeague] = useState([]);
+  const [championsLeagueIsLoading, setChampionsLeagueIsLoading] =
+    useState(false);
+
+  const [faCup, setFaCup] = useState([]);
+  const [faCupIsLoading, setFaCupIsLoading] = useState(false);
+
+  const [includeLive] = useState(false);
+  const [requiredDate, setRequiredDate] = useState(
+    moment().format(moment.HTML5_FMT.DATE)
+  );
+  const { timeZone } = Intl.DateTimeFormat().resolvedOptions();
+  const formattedDate = moment(requiredDate).format(moment.HTML5_FMT.DATE);
+
+  console.log(requiredDate, "Date");
 
   const fetchSpecificMatchEventsAlt = (id) => {
     let firstParticipantIncidents = [];
@@ -143,9 +179,172 @@ const MatchesContextAltProvider = (props) => {
       });
   };
 
+  // Fetch festured match for the day
+  const fetchTournamentEvents = () => {
+    setPremierLeagueIsLoading(true);
+    setSpanishLeagueIsLoading(true);
+    setFrenchLeagueIsLoading(true);
+    setGermanLeagueIsLoading(true);
+    setItalianLeagueIsLoading(true);
+    setChampionsLeagueIsLoading(true);
+    setEuropaLeagueIsLoading(true);
+    setFaCupIsLoading(true);
+    setPremierLeagueEvents([]);
+    setSpanishLeague([]);
+    setFrenchLeague([]);
+    setGermanLeague([]);
+    setItalianLeague([]);
+    setChampionsLeague([]);
+    setEuropaLeague([]);
+    setFaCup([]);
+    // Premier league
+
+    const includeLiveQueryParam = includeLive ? "&status_type=inprogress" : "";
+
+    const premierLeagueLink = `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}${includeLiveQueryParam}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tz=${currentTime}&tournament_templateFK=47&username=${enetPulseUsername}&token=${enetPulseTokenId}&tz=${currentTime}`;
+
+    axios
+      .get(premierLeagueLink)
+      .then((res) => {
+        setPremierLeagueEvents(Object.values(res.data.events));
+
+        setPremierLeagueIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err, "error from events");
+        setPremierLeagueIsLoading(false);
+      });
+
+    // Spanish league
+    axios
+      .get(
+        `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}${includeLiveQueryParam}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tournament_templateFK=87&username=${enetPulseUsername}&token=${enetPulseTokenId}&tz=${currentTime}`
+      )
+      .then((res) => {
+        setSpanishLeague(Object.values(res.data.events));
+        setSpanishLeagueIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err, "error from events");
+        setSpanishLeagueIsLoading(false);
+      });
+
+    // French Leagues
+    axios
+      .get(
+        `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}${includeLiveQueryParam}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tournament_templateFK=53&username=${enetPulseUsername}&token=${enetPulseTokenId}&tz=${currentTime}`
+      )
+      .then((res) => {
+        setFrenchLeague(Object.values(res.data.events));
+        setFrenchLeagueIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err, "error from events");
+        setFrenchLeagueIsLoading(false);
+      });
+
+    // German Leagues
+    axios
+      .get(
+        `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}${includeLiveQueryParam}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tournament_templateFK=54&username=${enetPulseUsername}&token=${enetPulseTokenId}&tz=${currentTime}`
+      )
+      .then((res) => {
+        setGermanLeague(Object.values(res.data.events));
+        setGermanLeagueIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err, "error from events");
+        setGermanLeagueIsLoading(false);
+      });
+
+    // italian league
+    axios
+      .get(
+        `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}${includeLiveQueryParam}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tournament_templateFK=55&username=${enetPulseUsername}&token=${enetPulseTokenId}&tz=${currentTime}`
+      )
+      .then((res) => {
+        setItalianLeague(Object.values(res.data.events));
+        setItalianLeagueIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err, "italian");
+        setItalianLeagueIsLoading(false);
+      });
+
+    // champions league
+    axios
+      .get(
+        `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}${includeLiveQueryParam}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tournament_templateFK=42&username=${enetPulseUsername}&token=${enetPulseTokenId}&tz=${currentTime}`
+      )
+      .then((res) => {
+        setChampionsLeague(Object.values(res.data.events));
+        setChampionsLeagueIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err, "champions");
+        setChampionsLeagueIsLoading(false);
+      });
+
+    // europa league
+    axios
+      .get(
+        `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}${includeLiveQueryParam}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tournament_templateFK=73&username=${enetPulseUsername}&token=${enetPulseTokenId}&tz=${currentTime}`
+      )
+      .then((res) => {
+        setEuropaLeague(Object.values(res.data.events));
+        setEuropaLeagueIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err, "italian");
+        setEuropaLeagueIsLoading(false);
+      });
+
+    // fa cup
+    axios
+      .get(
+        `https://eapi.enetpulse.com/event/daily/?date=${formattedDate}${includeLiveQueryParam}&live=yes&includeVenue=yes&includeEventProperties=yes&includeCountryCodes=no&tournament_templateFK=132&username=${enetPulseUsername}&token=${enetPulseTokenId}&tz=${currentTime}`
+      )
+      .then((res) => {
+        setFaCup(Object.values(res.data.events));
+        setFaCupIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err, "italian");
+        setFaCupIsLoading(false);
+      });
+  };
+
   return (
     <MatchesContextAlt.Provider
-      value={{ fetchSpecificMatchEventsAlt, fetchMatchCommentaryAlt }}
+      value={{
+        fetchSpecificMatchEventsAlt,
+        fetchMatchCommentaryAlt,
+        fetchTournamentEvents,
+        premierLeagueevents,
+        setPremierLeagueEvents,
+        frenchLeague,
+        setFrenchLeague,
+        germanLeague,
+        setGermanLeague,
+        premierLeagueIsLoading,
+        germanLeagueIsLoading,
+        frenchLeagueIsLoading,
+        italianLeagueIsLoading,
+        italianLeague,
+        setItalianLeague,
+        spanishLeague,
+        setSpanishLeague,
+        spanishLeagueIsLoading,
+        championsLeague,
+        setChampionsLeague,
+        championsLeagueIsLoading,
+        europaLeague,
+        setEuropaLeague,
+        europaLeagueIsLoading,
+        faCup,
+        faCupIsLoading,
+        setFaCup,
+      }}
     >
       {props.children}
     </MatchesContextAlt.Provider>
