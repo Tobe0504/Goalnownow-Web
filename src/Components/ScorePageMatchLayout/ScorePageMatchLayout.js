@@ -107,6 +107,12 @@ const ScorePageMatchLayout = (props) => {
       isActive: false,
       route: `/scores/${matchId}/h2h`,
     },
+    {
+      id: v4(),
+      title: "News",
+      isActive: false,
+      route: `/scores/${matchId}/h2h`,
+    },
   ];
 
   // Navigate

@@ -1,16 +1,25 @@
 import React from "react";
 import classes from "./BreakingNews.module.css";
-import breakingImage from "../../Assets/Images/breaking.svg";
+import { useContext } from "react";
+import { NewsContext } from "../../Context/NewsContext";
 
 const BreakingNews = () => {
+  // context
+  const { featuresNews } = useContext(NewsContext);
+
   return (
     <div className={classes.container}>
-      <img src={breakingImage} alt="Breaking News" />
+      <img
+        src={
+          featuresNews[0]?.associations?.featureimage?.renditions["1x1"]?.href
+        }
+        alt="Breaking News"
+      />
       <div className={classes.textSection}>
-        <span className={classes.category}>Soccer</span>
-        <span className={classes.text}>
-          Transfer Talk: Barca making deadline-day Pogba push
+        <span className={classes.category}>
+          {featuresNews[0]?.subject[1]?.name}
         </span>
+        <span className={classes.text}>{featuresNews[0]?.headline}</span>
       </div>
     </div>
   );

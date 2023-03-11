@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import classes from "./Headlines.module.css";
+import { NewsContext } from "../../Context/NewsContext";
 
 const Headlines = () => {
+  // context
+  const { featuresNews } = useContext(NewsContext);
   return (
     <div className={classes.container}>
       <div>
-        <span>Soccer</span>
-        <span>Transfer Talk: Barca making deadline-day Pogba push</span>
+        <span>{featuresNews[1]?.subject[1]?.name}</span>
+        <span>{featuresNews[1]?.headline}</span>
       </div>
       <div>
-        <span>Tennis</span>
-        <span>You just survived grueling heat at the US Open, now what?</span>
+        <span>{featuresNews[2]?.subject[1]?.name}</span>
+        <span>{featuresNews[2]?.headline}</span>
       </div>
     </div>
   );

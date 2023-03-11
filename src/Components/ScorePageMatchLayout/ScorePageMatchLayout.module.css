@@ -182,10 +182,9 @@
   display: none;
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
 .navSection {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .navSection > a {
@@ -194,6 +193,7 @@
   height: 100%;
   display: block;
   text-align: center;
+  /* border: 2px solid red; */
 }
 
 .navItem {

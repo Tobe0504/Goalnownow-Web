@@ -10,24 +10,27 @@ import TablesContextProvider from "./Context/TablesContext";
 import FixturesContextProvider from "./Context/FixturesContext";
 import MatchesContextAltProvider from "./Context/MatchesContextAlt";
 import HeadToHeadContextProvider from "./Context/HeadToHeadContext";
+import NewsContextProvider from "./Context/NewsContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <HashRouter>
-    <MatchesContextProvider>
-      <MatchesContextAltProvider>
-        <TablesContextProvider>
-          <LeagueAndCategoryContextprovider>
-            <HeadToHeadContextProvider>
-              <FixturesContextProvider>
-                <React.StrictMode>
-                  <App />
-                </React.StrictMode>
-              </FixturesContextProvider>
-            </HeadToHeadContextProvider>
-          </LeagueAndCategoryContextprovider>
-        </TablesContextProvider>
-      </MatchesContextAltProvider>
-    </MatchesContextProvider>
+    <NewsContextProvider>
+      <MatchesContextProvider>
+        <MatchesContextAltProvider>
+          <TablesContextProvider>
+            <LeagueAndCategoryContextprovider>
+              <HeadToHeadContextProvider>
+                <FixturesContextProvider>
+                  <React.StrictMode>
+                    <App />
+                  </React.StrictMode>
+                </FixturesContextProvider>
+              </HeadToHeadContextProvider>
+            </LeagueAndCategoryContextprovider>
+          </TablesContextProvider>
+        </MatchesContextAltProvider>
+      </MatchesContextProvider>
+    </NewsContextProvider>
   </HashRouter>
 );
 
