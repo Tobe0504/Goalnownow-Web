@@ -47,10 +47,7 @@ const MatchesContextAltProvider = (props) => {
   const [faCupIsLoading, setFaCupIsLoading] = useState(false);
 
   const [includeLive] = useState(false);
-  const [requiredDate, setRequiredDate] = useState(
-    moment().format(moment.HTML5_FMT.DATE)
-  );
-  const { timeZone } = Intl.DateTimeFormat().resolvedOptions();
+  const [requiredDate] = useState(moment().format(moment.HTML5_FMT.DATE));
   const formattedDate = moment(requiredDate).format(moment.HTML5_FMT.DATE);
 
   console.log(requiredDate, "Date");

@@ -12,6 +12,7 @@ import Favourites from "./Containers/Favourites/Favourites";
 import ScorePageTablesByLeague from "./Containers/ScorePageTablesByLeague/ScorePageTablesByLeague";
 import ScorePageMatchCommentary from "./Containers/ScorePageMatchCommentary/ScorePageMatchCommentary";
 import ScorePageMatchHeadToHead from "./Containers/ScorePageMatchHeadToHead/ScorePageMatchHeadToHead";
+import ScorePageMatchNews from "./Containers/ScorePageMatchNews/ScorePageMatchNews";
 function App() {
   // const navigate = useNavigate();
 
@@ -51,6 +52,11 @@ function App() {
       <Route
         path="/scores/:matchId/h2h"
         element={<ScorePageMatchHeadToHead />}
+      />
+
+      <Route
+        path="/scores/:matchId/news/:team"
+        element={<ScorePageMatchNews />}
       />
 
       <Route

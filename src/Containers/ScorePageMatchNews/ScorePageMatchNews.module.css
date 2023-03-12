@@ -1,0 +1,22 @@
+.clubNameNavOuter {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 40px;
+  padding: 4px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  background: #0b0809;
+  padding: 0.5rem 10px;
+  cursor: pointer;
+}
+
+.clubNameNav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 1rem 10px;
+}
+
+.active {
+  border: 1px solid #ffd91b;
+}

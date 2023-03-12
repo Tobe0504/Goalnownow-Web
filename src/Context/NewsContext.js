@@ -31,9 +31,35 @@ const NewsContextProvider = (props) => {
       });
   };
 
+  const fetchTeamSpecificNews = (team) => {
+    axios
+      .get(
+        `${process.env.REACT_APP_PA_API_DOMAIN}/v1/item?subject=tag:${team
+          .toLowerCase()
+          .replace(/\s/g, "-")}`,
+        {
+          headers: {
+            apikey: process.env.REACT_APP_PA_API_KEY,
+            Accept: "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res, "NEws haha");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <NewsContext.Provider
-      value={{ fetchFeaturedNews, isFetchingFeaturedNews, featuresNews }}
+      value={{
+        fetchFeaturedNews,
+        isFetchingFeaturedNews,
+        featuresNews,
+        fetchTeamSpecificNews,
+      }}
     >
       {props.children}
     </NewsContext.Provider>

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import classes from "./ScorePageMatchLayout.module.css";
 import ScorePageLayout from "../../Components/ScorePageLayout/ScorePageLayout";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFutbol } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
@@ -15,7 +15,7 @@ import { HeadToHeadContext } from "../../Context/HeadToHeadContext";
 
 const ScorePageMatchLayout = (props) => {
   // params
-  const { matchId } = useParams();
+  const { matchId, team } = useParams();
 
   // context
   const { specificMatchData, stadium, eventIncidents } =
@@ -61,8 +61,6 @@ const ScorePageMatchLayout = (props) => {
         Object.values(specificMatchData?.event_participants)[1]?.participantFK
       );
     }
-
-    console.log("This is gotham");
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [firstParticipantId, secondParticipantId]);
@@ -111,14 +109,17 @@ const ScorePageMatchLayout = (props) => {
       id: v4(),
       title: "News",
       isActive: false,
-      route: `/scores/${matchId}/h2h`,
+      route: `/scores/${matchId}/news/${specificMatchData?.name
+        ?.split("-")[0]
+        .replace(/\s/g, "-")}`,
     },
   ];
 
   // Navigate
   const navigate = useNavigate();
+  const location = useLocation();
 
-  // console.log(specificMatchData);
+  console.log(specificMatchData);
 
   return (
     <ScorePageLayout>
@@ -255,21 +256,27 @@ const ScorePageMatchLayout = (props) => {
           </div>
         </div>
         <div className={classes.navSection}>
-          {scorePageMatchNavItems.map((data) => {
+          {scorePageMatchNavItems.map((data, i) => {
             return (
               <Link
                 key={data.id}
                 to={data.route}
                 replace
                 className={
-                  window.location.href.includes(data.route)
+                  i !== 6
+                    ? location.pathname.includes(data.route)
+                      ? `${classes.activeNav}`
+                      : undefined
+                    : location.pathname.includes("news")
                     ? `${classes.activeNav}`
                     : undefined
                 }
               >
-                {window.location.href.includes(data.route) && (
-                  <div className={classes.activeIndicator}></div>
-                )}
+                {i !== 6
+                  ? location.pathname.includes(data.route)
+                  : location.pathname.includes("news") && (
+                      <div className={classes.activeIndicator}></div>
+                    )}
                 <div className={classes.navItem}>
                   <div>{data.title}</div>
                 </div>

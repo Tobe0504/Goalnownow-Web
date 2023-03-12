@@ -44,10 +44,6 @@
   width: 70px;
 }
 
-.scoreSection > div:nth-child(2) {
-  /* border: 2px solid red; */
-}
-
 .scoreSection > div:nth-child(2) > div:nth-child(1) {
   font-weight: 400;
   font-size: 10px;

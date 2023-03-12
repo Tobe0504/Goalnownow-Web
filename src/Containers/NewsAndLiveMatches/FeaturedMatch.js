@@ -1,41 +1,29 @@
 import React, { useContext, useEffect } from "react";
 import classes from "./FeaturedMatch.module.css";
-import chelseaLogo from "../../Assets/Images/chelseaLogo.svg";
-import leicesterLogo from "../../Assets/Images/leicesterCityLogo.svg";
 import TeamLogo from "../../Components/TeamLogo/TeamLogo";
 import { MatchesContextAlt } from "../../Context/MatchesContextAlt";
 
 const FeaturedMatch = () => {
-  useEffect(() => {
-    fetchTournamentEvents();
-  }, []);
+  // Context
   const {
     premierLeagueevents,
     frenchLeague,
     germanLeague,
-    premierLeagueIsLoading,
-    germanLeagueIsLoading,
-    frenchLeagueIsLoading,
     italianLeague,
-    italianLeagueIsLoading,
     spanishLeague,
-    spanishLeagueIsLoading,
     championsLeague,
-    championsLeagueIsLoading,
     europaLeague,
-    europaLeagueIsLoading,
     faCup,
-    faCupIsLoading,
-    setPremierLeagueEvents,
-    setFrenchLeague,
-    setGermanLeague,
-    setItalianLeague,
-    setSpanishLeague,
-    setChampionsLeague,
-    setEuropaLeague,
-    setFaCup,
     fetchTournamentEvents,
   } = useContext(MatchesContextAlt);
+
+  // Effects
+  useEffect(() => {
+    fetchTournamentEvents();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Featured match conditionals
 
   let featuredMatch = [];
 
