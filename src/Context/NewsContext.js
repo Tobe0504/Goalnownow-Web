@@ -6,6 +6,14 @@ const NewsContextProvider = (props) => {
   // States
   const [featuresNews, setFeaturedNews] = useState([]);
   const [isFetchingFeaturedNews, setIsFetchingFeaturedNews] = useState(false);
+  const [offsetValue, setOffsetValue] = useState(0);
+  const [teamSpecificNews, setTeamSpecificNews] = useState([]);
+  const [isSendingRequest, setIsSendingRequest] = useState(false);
+
+  // Utilities
+  if (offsetValue > 100) {
+    setOffsetValue(0);
+  }
 
   // API Calls
   const fetchFeaturedNews = () => {
@@ -32,11 +40,16 @@ const NewsContextProvider = (props) => {
   };
 
   const fetchTeamSpecificNews = (team) => {
+    setTeamSpecificNews([]);
+    setIsSendingRequest(true);
     axios
       .get(
         `${process.env.REACT_APP_PA_API_DOMAIN}/v1/item?subject=tag:${team
           .toLowerCase()
-          .replace(/\s/g, "-")}`,
+          .replace(
+            /\s/g,
+            "-"
+          )}&offset=${offsetValue}&fields=total,limit,offset,item(uri,headline,subject,associations,description_text,subject,body_text,byline,firstcreated)`,
         {
           headers: {
             apikey: process.env.REACT_APP_PA_API_KEY,
@@ -45,10 +58,14 @@ const NewsContextProvider = (props) => {
         }
       )
       .then((res) => {
-        console.log(res, "NEws haha");
+        setIsSendingRequest(false);
+        console.log(res, "News//");
+
+        setTeamSpecificNews(res.data.item);
       })
       .catch((err) => {
         console.log(err);
+        setIsSendingRequest(false);
       });
   };
 
@@ -59,6 +76,11 @@ const NewsContextProvider = (props) => {
         isFetchingFeaturedNews,
         featuresNews,
         fetchTeamSpecificNews,
+        setOffsetValue,
+        teamSpecificNews,
+        isSendingRequest,
+        setOffsetValue,
+        offsetValue,
       }}
     >
       {props.children}

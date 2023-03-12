@@ -31,11 +31,16 @@ const ScorePageMatchLayout = (props) => {
   useEffect(() => {
     fetchSpecificMatchEventsAlt(matchId);
 
-    const users = setInterval(() => {
-      fetchSpecificMatchEventsAlt(matchId);
-      fetchMatchCommentaryAlt(matchId);
-      console.log("fetched!");
-    }, 20000);
+    let users;
+    if (specificMatchData?.status_type === "inprogress") {
+      users = setInterval(() => {
+        fetchSpecificMatchEventsAlt(matchId);
+        fetchMatchCommentaryAlt(matchId);
+        console.log("fetched!");
+      }, 20000);
+    } else {
+      clearInterval(users);
+    }
 
     return () => {
       clearInterval(users);
@@ -118,8 +123,6 @@ const ScorePageMatchLayout = (props) => {
   // Navigate
   const navigate = useNavigate();
   const location = useLocation();
-
-  console.log(specificMatchData);
 
   return (
     <ScorePageLayout>
@@ -272,11 +275,13 @@ const ScorePageMatchLayout = (props) => {
                     : undefined
                 }
               >
-                {i !== 6
-                  ? location.pathname.includes(data.route)
-                  : location.pathname.includes("news") && (
-                      <div className={classes.activeIndicator}></div>
-                    )}
+                {i !== 6 ? (
+                  location.pathname.includes(data.route) ? (
+                    <div className={classes.activeIndicator}></div>
+                  ) : undefined
+                ) : location.pathname.includes("news") ? (
+                  <div className={classes.activeIndicator}></div>
+                ) : undefined}
                 <div className={classes.navItem}>
                   <div>{data.title}</div>
                 </div>

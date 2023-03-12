@@ -26,7 +26,7 @@ function App() {
 
       <Route path="/scores/tables" element={<ScorePageTables />} />
       <Route path="/favourites" element={<Favourites />} />
-      <Route path="/news" element={<Layout />} />
+      <Route path="/sport-news" element={<Layout />} />
       <Route path="/get-the-app" element={<Layout />} />
       <Route path="/scores" element={<ScorePageMatches />} />
 

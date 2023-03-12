@@ -10,6 +10,13 @@
   cursor: pointer;
 }
 
+.loadingContainer {
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .clubNameNav {
   display: flex;
   align-items: center;
@@ -19,4 +26,105 @@
 
 .active {
   border: 1px solid #ffd91b;
+}
+
+.newsContainer {
+  margin-top: 1.5rem;
+}
+
+.news {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.news:hover {
+  background: var(--foregroundBlack);
+}
+
+.news > div:nth-child(1) {
+  height: 144px;
+  width: 224px;
+  border-radius: 3px;
+}
+
+.news > div:nth-child(1) > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.newsTextCenter {
+  width: 100%;
+}
+
+.newsTextCenter > div:nth-child(1) {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 18px;
+  text-transform: uppercase;
+  color: #ffd91b;
+  margin-bottom: 0.5rem;
+}
+
+.newsTextCenter > div:nth-child(2) {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+  margin-bottom: 0.4rem;
+}
+
+.newsTextCenter > div:nth-child(3) {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 15px;
+  color: #adabab;
+  /* color: #ffffff; */
+}
+
+.readMore {
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  margin: 2rem 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.readMore:hover {
+  color: #ffd91b;
+}
+
+@media screen and (max-width: 767px) {
+  .news > div:nth-child(1) {
+    height: 100px;
+    width: 150px;
+    border-radius: 3px;
+  }
+
+  .newsTextCenter > div:nth-child(1) {
+    font-size: 8px;
+    line-height: 10px;
+
+    margin-bottom: 1rem;
+  }
+
+  .newsTextCenter > div:nth-child(2) {
+    font-size: 10px;
+    line-height: 16px;
+    margin-bottom: 0.2rem;
+  }
+
+  .newsTextCenter > div:nth-child(3) {
+    font-size: 8px;
+    line-height: 12px;
+  }
+
+  .news {
+    gap: 15px;
+  }
 }

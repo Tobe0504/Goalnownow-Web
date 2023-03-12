@@ -28,7 +28,7 @@ export const navItems = [
     title: "Sports News",
     icon: <FontAwesomeIcon icon={faNewspaper} />,
     isActive: false,
-    route: "/news",
+    route: "/sport-news",
   },
   {
     id: v4(),
