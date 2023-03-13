@@ -17,13 +17,11 @@ const TeamPagePlayers = () => {
   useEffect(() => {
     if (teamData) {
       setTeamPlayers(
-        Object.values(teamData?.participants).map((data) => {
+        Object.values(teamData?.participants)?.map((data) => {
           return { ...data, isActive: false };
         })
       );
     }
-
-    console.log(teamPlayers, "team Players");
   }, [teamData]);
 
   return (

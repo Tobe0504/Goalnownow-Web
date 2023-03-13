@@ -10,6 +10,7 @@ const TeamContextProvider = (props) => {
   const [teamData, setTeamData] = useState();
 
   const fetchTeamData = (teamID) => {
+    setTeamData();
     axios
       .get(
         `http://demo.eapi.enetpulse.com/team/details/?id=${teamID}&includeTeamProperties=yes&includeSquad=yes&includeSquadProperties=yes&includeSquadDetails=yes&includeLeagues=yes&includeLeaguesProperties=yes&includeVenue=yes&username=${enetPulseUsername}&token=${enetPulseTokenId}&tz=${currentTime}`

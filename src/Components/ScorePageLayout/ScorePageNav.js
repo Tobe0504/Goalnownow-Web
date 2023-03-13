@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import classes from "./ScorePageNav.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
@@ -88,7 +88,9 @@ const ScorePageNav = (props) => {
   }
 
   const date = new Date();
-  const currentMonthDates = getAllDatesOfMonth(date);
+  const currentMonthDates = getAllDatesOfMonth(
+    moment(date - 10).format("YYYY-MM-DD")
+  );
 
   const containerRef = useRef(null);
 
@@ -101,6 +103,10 @@ const ScorePageNav = (props) => {
     // scroll the active date element into view and center it in the visible container
     activeDateElement?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
+
+  useEffect(() => {
+    handleSetActiveDate(moment(date - 7).format("YYYY-MM-DD"));
+  }, []);
 
   return (
     <div className={classes.outerContainer}>

@@ -13,8 +13,6 @@ const TeamPageTournaments = () => {
   useEffect(() => {
     if (teamData) {
       setTeamTournaments(Object.values(teamData?.tournament_stages));
-
-      console.log(teamTournaments, "Tournaments", 77777);
     }
   }, [teamData]);
 
@@ -23,9 +21,9 @@ const TeamPageTournaments = () => {
       <div className={classes.container}>
         {teamTournaments?.map((tournament) => {
           return (
-            <div key={tournament.id} className={classes.clubNameSection}>
+            <div key={tournament?.id} className={classes.clubNameSection}>
               <span>
-                <TeamLogo id={teamData.id} />
+                <TeamLogo id={teamData?.id} />
               </span>
               {tournament?.tournament_stage && (
                 <span>

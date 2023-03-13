@@ -16,6 +16,7 @@ import ScorePageMatchNews from "./Containers/ScorePageMatchNews/ScorePageMatchNe
 import TeamPageLayout from "./Components/TeamPageLayout/TeamPageLayout";
 import TeamPagePlayers from "./Containers/TeamPagePlayers/TeamPagePlayers";
 import TeamPageTournaments from "./Containers/TeamPageTournaments/TeamPageTournaments";
+import TeamPageNews from "./Containers/TeamPageNews/TeamPageNews";
 function App() {
   // const navigate = useNavigate();
 
@@ -76,6 +77,8 @@ function App() {
         path="/team/:teamId/tournaments"
         element={<TeamPageTournaments />}
       />
+
+      <Route path="/team/:teamId/news/:newsTeam" element={<TeamPageNews />} />
     </Routes>
   );
 }
