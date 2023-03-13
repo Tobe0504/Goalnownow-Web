@@ -1,0 +1,21 @@
+.container {
+  padding: 2rem 0;
+}
+
+.clubNameSection {
+  padding: 0.75rem 1rem;
+  background: var(--foregroundBlack);
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 21px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.clubNameSection > span:nth-child(1) {
+  width: 42px;
+  height: 42px;
+}
