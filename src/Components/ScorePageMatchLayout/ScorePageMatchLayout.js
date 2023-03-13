@@ -15,7 +15,7 @@ import { HeadToHeadContext } from "../../Context/HeadToHeadContext";
 
 const ScorePageMatchLayout = (props) => {
   // params
-  const { matchId, team } = useParams();
+  const { matchId } = useParams();
 
   // context
   const { specificMatchData, stadium, eventIncidents } =

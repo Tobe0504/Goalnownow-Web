@@ -13,6 +13,8 @@ import ScorePageTablesByLeague from "./Containers/ScorePageTablesByLeague/ScoreP
 import ScorePageMatchCommentary from "./Containers/ScorePageMatchCommentary/ScorePageMatchCommentary";
 import ScorePageMatchHeadToHead from "./Containers/ScorePageMatchHeadToHead/ScorePageMatchHeadToHead";
 import ScorePageMatchNews from "./Containers/ScorePageMatchNews/ScorePageMatchNews";
+import TeamPageLayout from "./Components/TeamPageLayout/TeamPageLayout";
+import TeamPagePlayers from "./Containers/TeamPagePlayers/TeamPagePlayers";
 function App() {
   // const navigate = useNavigate();
 
@@ -67,6 +69,8 @@ function App() {
         path="/scores/:leagueId/events/standings"
         element={<ScorePageTablesByLeague />}
       />
+
+      <Route path="/team/:teamId/players" element={<TeamPagePlayers />} />
     </Routes>
   );
 }

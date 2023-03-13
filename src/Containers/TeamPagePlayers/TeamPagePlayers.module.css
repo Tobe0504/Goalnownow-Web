@@ -1,0 +1,161 @@
+.formationSection {
+  padding: 1rem;
+}
+
+.formationSection > img {
+  width: 100%;
+}
+
+.header {
+  padding: 1.2rem 2rem;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.lineUpTable {
+  display: flex;
+  align-items: stretch;
+}
+
+.homeLineup {
+  width: 100%;
+}
+
+.tableHeader {
+  display: flex;
+  align-items: stretch;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  background: var(--foregroundBlack);
+  border: 1px solid #1c1c1c;
+}
+
+.players {
+  border: 1px solid #1c1c1c;
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  font-weight: 400;
+  font-size: 11.5631px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+}
+
+.detailsIcon {
+  margin-left: auto;
+  opacity: 0.5;
+  color: #ffd91b;
+  transition: all 0.3s ease-in-out;
+}
+
+.player {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.time {
+  /* border: 2px solid red; */
+  width: 30px;
+}
+
+.playersSub {
+  border: 1px solid #1c1c1c;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  font-weight: 400;
+  font-size: 11.5631px;
+  line-height: 17px;
+}
+
+.leavingPlayer,
+.enteringPlayer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  border-bottom: 1px solid #1c1c1c;
+  background: var(--foregroundBlack);
+}
+
+.additionalInformation > div:nth-child(2) {
+  border-top: 1px solid #1c1c1c;
+}
+
+.additionalInformation > div:last-child {
+  border-bottom: 1px solid #1c1c1c;
+}
+
+.playerInformation {
+  border: 1px solid #1c1c1c;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: 1rem 2rem;
+  font-weight: 400;
+  font-size: 11.5631px;
+  line-height: 17px;
+  overflow-y: hidden;
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+  padding: 0 2rem;
+}
+
+.playerInfo:first-child {
+  padding-top: 1rem;
+}
+.playerInfo:last-child {
+  padding-bottom: 1rem;
+}
+
+.playerInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.playerInfo > span:nth-child(1) {
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 767px) {
+  .tableHeader {
+    padding: 1rem 1rem;
+  }
+
+  .players {
+    padding: 1rem 1rem;
+  }
+
+  .playersSub {
+    flex-wrap: wrap;
+    padding: 1rem 1rem;
+  }
+
+  .info {
+    padding: 1rem 1rem;
+  }
+
+  .header {
+    padding: 1.2rem 1rem;
+  }
+}

@@ -1,0 +1,289 @@
+.firstSection {
+  background: var(--foregroundBlack);
+  overflow: auto;
+  margin-top: 1rem;
+  border-radius: 8px 8px 0px 0px;
+}
+
+.titleContainer {
+  border-bottom: 1px solid #1c1c1c;
+  padding: 1.5rem 2rem;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.logoAndName {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem 0;
+}
+
+.logo {
+  width: 80px;
+  height: 80px;
+}
+
+.logoAndScoreSection > div > div:nth-child(2) {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+}
+
+.name > div:nth-child(1) {
+  font-weight: 900;
+  font-size: 22px;
+  line-height: 33px;
+  text-align: center;
+}
+
+.name > div:nth-child(2) {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 15px;
+  opacity: 0.5;
+  text-align: center;
+}
+
+.scoreSection > div:nth-child(3) {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  color: #00f175;
+  margin-top: 0.5rem;
+}
+
+.lineDecoration {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-top: 1.5rem;
+}
+
+.lineDecoration > div {
+  height: 5px;
+  width: 128px;
+  display: flex;
+  align-items: center;
+}
+
+.lineDecoration > div:nth-child(1) > div:nth-child(1),
+.lineDecoration > div:nth-child(2) > div:nth-child(2) {
+  background: #1c75bc;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.lineDecoration > div:nth-child(1) > div:nth-child(2),
+.lineDecoration > div:nth-child(2) > div:nth-child(1) {
+  background: #ffffff;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.lineDecoration > div > div:first-child {
+  border-radius: 4px 0px 0px 0px;
+}
+
+.lineDecoration > div > div:last-child {
+  border-radius: 0px 4px 0px 0px;
+}
+
+.audioCommentry {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.audioCommentry > div:nth-child(3) {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  opacity: 0.7;
+}
+
+.matchEvents {
+  margin: 1.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.matchEvent {
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  margin-top: 0.8rem;
+  gap: 24px;
+  width: 750px;
+}
+
+.matchEventAway {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  margin-top: 0.8rem;
+  gap: 24px;
+  width: 750px;
+}
+
+.matchEventAway > div:nth-child(2) {
+  max-width: 150px;
+  text-align: right;
+}
+
+.matchEvent > div:nth-child(2) {
+  max-width: 150px;
+}
+
+.navSection {
+  display: flex;
+  align-items: stretch;
+  padding: 0px 77px;
+  justify-content: space-between;
+  margin-top: 2rem;
+  background: var(--foregroundBlack);
+  overflow-x: scroll;
+  width: 100%;
+}
+
+.navSection::-webkit-scrollbar {
+  display: none;
+}
+
+.navSection {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.navSection > a {
+  font-size: 14px;
+  line-height: 21px;
+  height: 100%;
+  display: block;
+  text-align: center;
+  /* border: 2px solid red; */
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  height: 100%;
+  transition: all 0.3s ease-in-out;
+  padding: 15px 0;
+}
+
+.activeNav {
+  color: #ffd91b;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.activeIndicator {
+  width: 100%;
+  background-color: #ffd91b;
+  height: 4px;
+  border-radius: 100px;
+  animation: appear 0.3s ease-in-out;
+}
+
+.timeCounter {
+  width: 200px;
+  text-align: center;
+}
+
+.children {
+  min-height: 70vh;
+}
+
+@media screen and (max-width: 767px) {
+  .navSection {
+    padding: 0px 16px;
+  }
+
+  .titleContainer {
+    padding: 1.5rem 1rem;
+  }
+
+  .logoAndScoreSection {
+    gap: 1rem;
+    padding: 1.5rem 1rem;
+  }
+
+  .logoAndScoreSection > div:nth-child(1),
+  .logoAndScoreSection > div:nth-child(3) {
+    width: 70px;
+    height: 70px;
+  }
+
+  .logoAndScoreSection > div:nth-child(2) {
+    width: 150px;
+  }
+
+  .logoAndScoreSection > div > div:nth-child(2) {
+    font-size: 14px;
+    line-height: 21px;
+  }
+
+  .lineDecoration > div {
+    height: 3px;
+    width: 38px;
+  }
+
+  .matchEvent {
+    font-size: 10px;
+    line-height: 18px;
+    gap: 24px;
+    width: 90%;
+  }
+
+  .matchEventAway {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 18px;
+    gap: 24px;
+    width: 90%;
+  }
+
+  .navSection {
+    padding: 0px 0px;
+  }
+
+  .navSection > a {
+    width: 33.3%;
+    flex-basis: 33.3%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .navItem {
+    text-align: center;
+    /* border: 2px solid red; */
+  }
+}
