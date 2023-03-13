@@ -50,8 +50,6 @@ const MatchesContextAltProvider = (props) => {
   const [requiredDate] = useState(moment().format(moment.HTML5_FMT.DATE));
   const formattedDate = moment(requiredDate).format(moment.HTML5_FMT.DATE);
 
-  console.log(requiredDate, "Date");
-
   const fetchSpecificMatchEventsAlt = (id) => {
     let firstParticipantIncidents = [];
     let secondParticipantIncidents = [];
@@ -63,7 +61,6 @@ const MatchesContextAltProvider = (props) => {
         `https://eapi.enetpulse.com/event/details/?id=${id}&includeLineups=yes&includeEventProperties=yes&includeTeamProperties=yes&includeIncidents=yes&includeExtendedResults=yes&includeProperties=yes&includeLivestats=yes&includeVenue=yes&includeCountryCodes=yes&includeFirstLastName=no&includeReference=yes&includeObjectParticipants=yes&includeEventIncidentRelation=yes&username=${enetPulseUsername}&token=${enetPulseTokenId}&tz=${currentTime}`
       )
       .then((res) => {
-        console.log(res, "specific match data");
         setSpecificmatchData(res.data.event[id]);
         setEventParticipants(
           Object.values(res.data.event[id].event_participants)
@@ -168,7 +165,6 @@ const MatchesContextAltProvider = (props) => {
         `http://eapi.enetpulse.com/event/commentaries/?id=${id}&limit=100&username=${enetPulseUsername}&token=${enetPulseTokenId}&tz=${currentTime}`
       )
       .then((res) => {
-        console.log(res, "commentary alt");
         setMatchCommentary(Object.values(res.data.event)[0].event_incident);
       })
       .catch((err) => {

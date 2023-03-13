@@ -51,7 +51,7 @@ const FeaturedMatch = () => {
     premierLeagueevents.length < 1 &&
     spanishLeague.length > 0
   ) {
-    featuredMatch = 0;
+    featuredMatch = spanishLeague;
   } else if (
     championsLeague.length < 1 &&
     europaLeague.length < 1 &&

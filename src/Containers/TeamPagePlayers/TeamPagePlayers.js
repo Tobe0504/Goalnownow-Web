@@ -46,6 +46,7 @@ const TeamPagePlayers = () => {
                     onClick={() => {
                       activeTogglerNoFalse(i, teamPlayers, setTeamPlayers);
                     }}
+                    key={player.id}
                   >
                     <div className={classes.players} key={player?.id}>
                       {player?.properties ? (

@@ -106,6 +106,8 @@ const ScorePageNav = (props) => {
 
   useEffect(() => {
     handleSetActiveDate(moment(date - 7).format("YYYY-MM-DD"));
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

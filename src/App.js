@@ -13,7 +13,6 @@ import ScorePageTablesByLeague from "./Containers/ScorePageTablesByLeague/ScoreP
 import ScorePageMatchCommentary from "./Containers/ScorePageMatchCommentary/ScorePageMatchCommentary";
 import ScorePageMatchHeadToHead from "./Containers/ScorePageMatchHeadToHead/ScorePageMatchHeadToHead";
 import ScorePageMatchNews from "./Containers/ScorePageMatchNews/ScorePageMatchNews";
-import TeamPageLayout from "./Components/TeamPageLayout/TeamPageLayout";
 import TeamPagePlayers from "./Containers/TeamPagePlayers/TeamPagePlayers";
 import TeamPageTournaments from "./Containers/TeamPageTournaments/TeamPageTournaments";
 import TeamPageNews from "./Containers/TeamPageNews/TeamPageNews";

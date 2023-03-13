@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import classes from "./ScorePageMatchNews.module.css";
 import ScorePageMatchLayout from "../../Components/ScorePageMatchLayout/ScorePageMatchLayout";
-import { activeToggler } from "../../HelperFunctions/ActiveToggler";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { NewsContext } from "../../Context/NewsContext";
 import { MatchesContext } from "../../Context/MatchesContext";
@@ -28,6 +27,7 @@ const ScorePageMatchNews = () => {
   //   effects
   useEffect(() => {
     fetchTeamSpecificNews(team);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [team, offsetValue]);
 
   return (

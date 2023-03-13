@@ -23,6 +23,8 @@ const TeamPageLayout = (props) => {
   //   effects
   useEffect(() => {
     fetchTeamData(teamId);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const scorePageMatchNavItems = [

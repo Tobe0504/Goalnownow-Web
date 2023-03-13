@@ -54,7 +54,7 @@ const ScorePageMatchHeadToHead = () => {
           const results = getUserResults(datum);
 
           return (
-            <div className={classes.leagueData}>
+            <div className={classes.leagueData} key={datum.id}>
               <div className={classes.leagueHeader}>
                 <div className={classes.leagueHeaderdata}>
                   <div>

@@ -29,7 +29,6 @@ const NewsContextProvider = (props) => {
         }
       )
       .then((res) => {
-        console.log(res, "News");
         setFeaturedNews(res.data.item);
         setIsFetchingFeaturedNews(false);
       })
@@ -59,7 +58,6 @@ const NewsContextProvider = (props) => {
       )
       .then((res) => {
         setIsSendingRequest(false);
-        console.log(res, "News//");
 
         setTeamSpecificNews(res.data.item);
       })
@@ -79,7 +77,6 @@ const NewsContextProvider = (props) => {
         setOffsetValue,
         teamSpecificNews,
         isSendingRequest,
-        setOffsetValue,
         offsetValue,
       }}
     >

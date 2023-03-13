@@ -16,7 +16,6 @@ const TeamContextProvider = (props) => {
         `http://demo.eapi.enetpulse.com/team/details/?id=${teamID}&includeTeamProperties=yes&includeSquad=yes&includeSquadProperties=yes&includeSquadDetails=yes&includeLeagues=yes&includeLeaguesProperties=yes&includeVenue=yes&username=${enetPulseUsername}&token=${enetPulseTokenId}&tz=${currentTime}`
       )
       .then((res) => {
-        console.log(res, "team stuff");
         setTeamData(res.data.team[teamID]);
       })
       .catch((err) => {

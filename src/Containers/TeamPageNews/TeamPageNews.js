@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useContext } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import TeamPageLayout from "../../Components/TeamPageLayout/TeamPageLayout";
 import { NewsContext } from "../../Context/NewsContext";
 import { TeamContext } from "../../Context/TeamContext";
@@ -11,7 +11,6 @@ import { Skeleton } from "@mui/material";
 const TeamPageNews = () => {
   // Params
   const { newsTeam } = useParams();
-  const location = useLocation();
 
   // context
   const {
@@ -19,16 +18,14 @@ const TeamPageNews = () => {
     isSendingRequest,
     teamSpecificNews,
     setOffsetValue,
-    offsetValue,
   } = useContext(NewsContext);
 
   const { teamData } = useContext(TeamContext);
 
-  //   navigate
-  const navigate = useNavigate();
-
   useEffect(() => {
     fetchTeamSpecificNews(newsTeam);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <TeamPageLayout>
