@@ -1,6 +1,6 @@
 {
   "name": "goalnownow-webapp",
-  "homepage": "http://goalnownow.net",
+  "homepage": "https://goalnownow.net",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
