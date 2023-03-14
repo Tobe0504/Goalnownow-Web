@@ -21,11 +21,7 @@ function App() {
 
   return (
     <Routes>
-      {/* <Route
-        path="/scores"
-        element={<ScorePageLayout showNavSection={true} />}
-      /> */}
-      <Route path="/" element={<Navigate replace to="/scores" />} />
+      <Route path="/" element={<Navigate to="/scores" />} />
 
       <Route path="/scores/tables" element={<ScorePageTables />} />
       <Route path="/favourites" element={<Favourites />} />
